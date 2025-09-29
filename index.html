@@ -287,10 +287,27 @@
             box-shadow: 0 4px 15px var(--shadow); 
             transition: all 0.3s ease;
             height: 100%;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         .addon:hover { 
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        .addon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--brand-600), var(--accent-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .addon:hover::before {
+            transform: scaleX(1);
         }
         .addon h3 { 
             margin: 0 0 10px; 
@@ -431,72 +448,32 @@
                     <i class="fas fa-puzzle-piece"></i> התקנת הרחבות (לחיצה אחת)
                 </h2>
                 <p class="muted" style="margin:0 0 24px; font-size:16px;">
-                    לחיצה תפתח את Stremio להתקנה. באנדרואיד נשתמש ב‑Intent במקרה שהדפדפן חוסם, וב‑iOS מוצגת הערה אם ההתקנה מוגבלת.
+                    לחיצה על הרחבה תפתח את Stremio להתקנה. באנדרואיד נשתמש ב‑Intent במקרה שהדפדפן חוסם, וב‑iOS מוצגת הערה אם ההתקנה מוגבלת.
                 </p>
                 <div class="addon-grid">
-                    <article class="addon">
+                    <article class="addon" data-addon="stremio://torrentio.strem.fun/easydebrid=n3cgfuzhg9ptzbss/manifest.json" data-copy="https://torrentio.strem.fun/easydebrid=n3cgfuzhg9ptzbss/manifest.json">
                         <h3><i class="fas fa-download"></i> Torrentio + Debrid</h3>
-                        <p>מקורות סטרים מהירים לסרטים וסדרות (מומלץ). <span class="kbd">movies & series</span></p>
-                        <div class="actions">
-                            <button class="btn primary" data-addon="stremio://torrentio.strem.fun/easydebrid=n3cgfuzhg9ptzbss/manifest.json">
-                                <i class="fas fa-download"></i> התקן
-                            </button>
-                            <button class="btn" data-copy="https://torrentio.strem.fun/easydebrid=n3cgfuzhg9ptzbss/manifest.json">
-                                <i class="fas fa-copy"></i> העתק קישור (לאייפון)
-                            </button>
-                        </div>
+                        <p>מקורות סטרים מהירים לסרטים וסדרות (מומלך). <span class="kbd">movies & series</span></p>
                     </article>
                     
-                    <article class="addon">
+                    <article class="addon" data-addon="stremio://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json" data-copy="https://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json">
                         <h3><i class="fas fa-closed-captioning"></i> Ktuvit (כתוביות)</h3>
                         <p>כתוביות בעברית מ‑Ktuvit. <span class="kbd">subtitles</span></p>
-                        <div class="actions">
-                            <button class="btn" data-addon="stremio://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json">
-                                <i class="fas fa-download"></i> התקן
-                            </button>
-                            <button class="btn" data-copy="https://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json">
-                                <i class="fas fa-copy"></i> העתק קישור (לאייפון)
-                            </button>
-                        </div>
                     </article>
                     
-                    <article class="addon">
+                    <article class="addon" data-addon="stremio://4b139a4b7f94-wizdom-stremio-v2.baby-beamup.club/manifest.json" data-copy="https://4b139a4b7f94-wizdom-stremio-v2.baby-beamup.club/manifest.json">
                         <h3><i class="fas fa-closed-captioning"></i> Wizdom (כתוביות)</h3>
                         <p>מנוע כתוביות משלים בעברית. <span class="kbd">subtitles</span></p>
-                        <div class="actions">
-                            <button class="btn" data-addon="stremio://4b139a4b7f94-wizdom-stremio-v2.baby-beamup.club/manifest.json">
-                                <i class="fas fa-download"></i> התקן
-                            </button>
-                            <button class="btn" data-copy="https://4b139a4b7f94-wizdom-stremio-v2.baby-beamup.club/manifest.json">
-                                <i class="fas fa-copy"></i> העתק קישור (לאייפון)
-                            </button>
-                        </div>
                     </article>
                     
-                    <article class="addon">
+                    <article class="addon" data-addon="stremio://stremio7rd-movies-online-dates.vercel.app/manifest.json" data-copy="https://stremio7rd-movies-online-dates.vercel.app/manifest.json">
                         <h3><i class="fas fa-calendar-alt"></i> סרטים שמגיעים לרשת</h3>
                         <p>קטלוג המציג מתי סרטים מגיעים לרשת באיכות טובה. <span class="kbd">fresh releases</span></p>
-                        <div class="actions">
-                            <button class="btn" data-addon="stremio://stremio7rd-movies-online-dates.vercel.app/manifest.json">
-                                <i class="fas fa-download"></i> התקן
-                            </button>
-                            <button class="btn" data-copy="https://stremio7rd-movies-online-dates.vercel.app/manifest.json">
-                                <i class="fas fa-copy"></i> העתק קישור (לאייפון)
-                            </button>
-                        </div>
                     </article>
                     
-                    <article class="addon">
+                    <article class="addon" data-addon="stremio://94c8cb9f702d-tmdb-addon.baby-beamup.club/N4IgNghgdg5grhGBTEAuEALJBaAkgGRABoQBnAFwCckIBbAS1jQG0BdEgYwnIjAHsYpFqHoATNCHK1RAIwB05PgAdikgJ5KU6WnwBu9FCSh0tIAArK4kSqtIY+Ad1xQAEn1paqcJAF8iI8XQpWQVlVXINU1IkSgMhIxMJCyUrCBsSO0dnNw80L19-EDEJYPk1GnT1TQkdfUMQY1z0AE0K23snV3dPSm8-AJLpMraSCOr0aNikeIbElpGyDuzuvN6CgaChuUhYBGRwyJq9A1VG03xoeER6zM6cnr7C4s2Qnav90cOJmLjTuZALrtru0sl0mvl+kVApItlQkFBRIwYAdxiBaicEk0QAAVagIpEgu4rVAQp7Q0oKPGIpifVGTX6Y0y4+HU5EZJZgh6+dggLgUADCfDgUHIaAArD4gA/manifest.json" data-copy="https://94c8cb9f702d-tmdb-addon.baby-beamup.club/N4IgNghgdg5grhGBTEAuEALJBaAkgGRABoQBnAFwCckIBbAS1jQG0BdEgYwnIjAHsYpFqHoATNCHK1RAIwB05PgAdikgJ5KU6WnwBu9FCSh0tIAArK4kSqtIY+Ad1xQAEn1paqcJAF8iI8XQpWQVlVXINU1IkSgMhIxMJCyUrCBsSO0dnNw80L19-EDEJYPk1GnT1TQkdfUMQY1z0AE0K23snV3dPSm8-AJLpMraSCOr0aNikeIbElpGyDuzuvN6CgaChuUhYBGRwyJq9A1VG03xoeER6zM6cnr7C4s2Qnav90cOJmLjTuZALrtru0sl0mvl+kVApItlQkFBRIwYAdxiBaicEk0QAAVagIpEgu4rVAQp7Q0oKPGIpifVGTX6Y0y4+HU5EZJZgh6+dggLgUADCfDgUHIaAArD4gA/manifest.json">
                         <h3><i class="fas fa-info-circle"></i> מידע בעברית (TMDB‑IL)</h3>
                         <p>פוסטרים, תיאורים וחיפוש תכנים בעברית. <span class="kbd">Hebrew metadata</span></p>
-                        <div class="actions">
-                            <button class="btn" data-addon="stremio://94c8cb9f702d-tmdb-addon.baby-beamup.club/N4IgNghgdg5grhGBTEAuEALJBaAkgGRABoQBnAFwCckIBbAS1jQG0BdEgYwnIjAHsYpFqHoATNCHK1RAIwB05PgAdikgJ5KU6WnwBu9FCSh0tIAArK4kSqtIY+Ad1xQAEn1paqcJAF8iI8XQpWQVlVXINU1IkSgMhIxMJCyUrCBsSO0dnNw80L19-EDEJYPk1GnT1TQkdfUMQY1z0AE0K23snV3dPSm8-AJLpMraSCOr0aNikeIbElpGyDuzuvN6CgaChuUhYBGRwyJq9A1VG03xoeER6zM6cnr7C4s2Qnav90cOJmLjTuZALrtru0sl0mvl+kVApItlQkFBRIwYAdxiBaicEk0QAAVagIpEgu4rVAQp7Q0oKPGIpifVGTX6Y0y4+HU5EZJZgh6+dggLgUADCfDgUHIaAArD4gA/manifest.json">
-                                <i class="fas fa-download"></i> התקן
-                            </button>
-                            <button class="btn" data-copy="https://94c8cb9f702d-tmdb-addon.baby-beamup.club/N4IgNghgdg5grhGBTEAuEALJBaAkgGRABoQBnAFwCckIBbAS1jQG0BdEgYwnIjAHsYpFqHoATNCHK1RAIwB05PgAdikgJ5KU6WnwBu9FCSh0tIAArK4kSqtIY+Ad1xQAEn1paqcJAF8iI8XQpWQVlVXINU1IkSgMhIxMJCyUrCBsSO0dnNw80L19-EDEJYPk1GnT1TQkdfUMQY1z0AE0K23snV3dPSm8-AJLpMraSCOr0aNikeIbElpGyDuzuvN6CgaChuUhYBGRwyJq9A1VG03xoeER6zM6cnr7C4s2Qnav90cOJmLjTuZALrtru0sl0mvl+kVApItlQkFBRIwYAdxiBaicEk0QAAVagIpEgu4rVAQp7Q0oKPGIpifVGTX6Y0y4+HU5EZJZgh6+dggLgUADCfDgUHIaAArD4gA/manifest.json">
-                                <i class="fas fa-copy"></i> העתק קישור (לאייפון)
-                            </button>
-                        </div>
                     </article>
                 </div>
                 <div class="muted" style="font-size:14px; margin-top:24px; padding:16px; background:var(--chip-bg); border-radius:12px;">
@@ -660,37 +637,24 @@
                 }, 3000); 
             }
 
-            // Addons Buttons
-            document.querySelectorAll('[data-addon]').forEach(btn => { 
-                btn.addEventListener('click', e => { 
-                    e.preventDefault(); 
-                    const link = btn.getAttribute('data-addon'); 
-                    const { ios } = getPlatform(); 
+            // Addons Click Handler
+            document.querySelectorAll('.addon').forEach(addon => {
+                addon.addEventListener('click', () => {
+                    const link = addon.getAttribute('data-addon');
+                    const copyLink = addon.getAttribute('data-copy');
+                    const { ios } = getPlatform();
                     
-                    if(ios){ 
-                        const httpsLink = link.replace('stremio://', 'https://'); 
-                        navigator.clipboard.writeText(httpsLink).then(() => { 
-                            showToast('הקישור HTTPS הועתק ללוח! פתח Stremio Web/דסקטופ והדבק להתקנה.'); 
-                        }).catch(() => { 
-                            showToast('לא ניתן להעתיק אוטומטית. נא להעתיק ידנית מהכפתור למטה.'); 
-                        }); 
-                        return; 
-                    } 
+                    if(ios){
+                        navigator.clipboard.writeText(copyLink).then(() => {
+                            showToast('הקישור HTTPS הועתק ללוח! פתח Stremio Web/דסקטופ והדבק להתקנה.');
+                        }).catch(() => {
+                            showToast('לא ניתן להעתיק אוטומטית. נא להעתיק ידנית מהכפתור למטה.');
+                        });
+                        return;
+                    }
                     
-                    openWithFallback(link); 
-                }); 
-            }); 
-            
-            document.querySelectorAll('[data-copy]').forEach(btn => { 
-                btn.addEventListener('click', async () => { 
-                    const url = btn.getAttribute('data-copy'); 
-                    try{ 
-                        await navigator.clipboard.writeText(url); 
-                        showToast('הקישור הועתק ללוח'); 
-                    } catch{ 
-                        showToast('לא ניתן להעתיק — נא להעתיק ידנית'); 
-                    } 
-                }); 
+                    openWithFallback(link);
+                });
             });
 
             // Card Creation
