@@ -25,6 +25,11 @@
             --accent-color: #ff6b6b; 
             --secondary-accent: #4ecdc4; 
             --spinner: #6f42c1;
+            /* Theme button colors */
+            --theme-btn-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --theme-btn-hover: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+            --theme-btn-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            --theme-btn-hover-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
         .dark { 
             --bg: #121212; 
@@ -38,6 +43,11 @@
             --btn-ghost: #e9ecef; 
             --shadow: rgba(0, 0, 0, 0.5); 
             --spinner: #ffffff;
+            /* Dark theme button colors */
+            --theme-btn-bg: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --theme-btn-hover: linear-gradient(135deg, #ee82ee 0%, #ff6b6b 100%);
+            --theme-btn-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+            --theme-btn-hover-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
         }
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: var(--topbar-h); }
@@ -69,6 +79,67 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+        
+        /* Modern Theme Toggle Button */
+        #themeBtn {
+            background: var(--theme-btn-bg);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--theme-btn-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Assistant', sans-serif;
+        }
+        
+        #themeBtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        #themeBtn:hover::before {
+            left: 100%;
+        }
+        
+        #themeBtn:hover {
+            background: var(--theme-btn-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--theme-btn-hover-shadow);
+        }
+        
+        #themeBtn:active {
+            transform: translateY(0);
+            box-shadow: var(--theme-btn-shadow);
+        }
+        
+        #themeBtn i {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        #themeBtn:hover i {
+            transform: rotate(180deg);
+        }
+        
+        /* Icon transitions */
+        .theme-icon {
+            transition: all 0.3s ease;
+            display: inline-block;
         }
         
         /* Filters */
@@ -351,8 +422,9 @@
         <div class="container">
             <div class="row">
                 <h1><i class="fas fa-film"></i> גלה המלצות חמות לסרטים וסדרות <i class="fas fa-tv"></i></h1>
-                <button aria-label="מצב כהה/בהיר" class="btn ghost" id="themeBtn">
-                    <i class="fas fa-sun"></i> מצב בהיר
+                <button aria-label="מצב כהה/בהיר" id="themeBtn">
+                    <i class="fas fa-sun theme-icon"></i>
+                    <span>מצב בהיר</span>
                 </button>
             </div>
         </div>
@@ -460,9 +532,16 @@
             // Theme Management
             function applyTheme(){ 
                 document.documentElement.classList.toggle('dark', state.theme === 'dark'); 
-                els.themeBtn.innerHTML = state.theme === 'dark' 
-                    ? '<i class="fas fa-moon"></i> מצב כהה' 
-                    : '<i class="fas fa-sun"></i> מצב בהיר'; 
+                const icon = els.themeBtn.querySelector('i');
+                const text = els.themeBtn.querySelector('span');
+                
+                if (state.theme === 'dark') {
+                    icon.className = 'fas fa-moon theme-icon';
+                    text.textContent = 'מצב כהה';
+                } else {
+                    icon.className = 'fas fa-sun theme-icon';
+                    text.textContent = 'מצב בהיר';
+                }
             }
             
             function toggleTheme(){ 
