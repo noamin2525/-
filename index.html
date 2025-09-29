@@ -1,4 +1,6 @@
-```html
+
+
+
 <!DOCTYPE html>
 <html dir="rtl" lang="he">
 <head>
@@ -79,7 +81,7 @@
 
     /* Hide addons by default */
     .addons { display: none; }
-  </style>
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -173,11 +175,30 @@
 <div class="toast" hidden="" id="toast">
 <div id="toastMsg"></div>
 </div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script> <!-- Telegram Web App API -->
 <script>
   ;(() => {
     const API_KEY = '93f0d2ee2e3e60d061d14d91cbb47b46'
     const state = { theme: localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), mediaType: localStorage.getItem('mediaType') || 'movie', sortBy: localStorage.getItem('sortBy') || 'popularity.desc', query: '', page: 1, totalPages: 1, favorites: new Set(JSON.parse(localStorage.getItem('favorites') || '[]')), loading: false, observer: null }
     const els = { themeBtn: document.getElementById('themeBtn'), search: document.getElementById('search'), typeChips: document.getElementById('typeChips'), sort: document.getElementById('sort'), grid: document.getElementById('grid'), sentinel: document.getElementById('sentinel'), status: document.getElementById('status'), toast: document.getElementById('toast'), toastMsg: document.getElementById('toastMsg'), mainContent: document.getElementById('mainContent'), addonsSection: document.getElementById('addonsSection') }
+
+    // Telegram Web App Integration
+    const isTelegram = window.Telegram && Telegram.WebApp;
+    if (isTelegram) {
+      Telegram.WebApp.ready(); // Signal that the app is ready
+      Telegram.WebApp.expand(); // Expand to full screen
+      const tgTheme = Telegram.WebApp.themeParams.bg_color ? (Telegram.WebApp.colorScheme === 'dark' ? 'dark' : 'light') : state.theme;
+      state.theme = tgTheme;
+      applyTheme(); // Apply Telegram's theme
+      
+      // Main Button (bottom button in Telegram)
+      Telegram.WebApp.MainButton.setText('חזור להתחלה').show().onClick(() => {
+        els.search.value = ''; state.query = ''; restartFeed(); // Example action: reset search
+      });
+      
+      // Hide theme button if in Telegram (use Telegram's theme)
+      els.themeBtn.style.display = 'none';
+    }
 
     function applyTheme(){ document.documentElement.classList.toggle('dark', state.theme === 'dark'); els.themeBtn.textContent = state.theme === 'dark' ? '🌙 מצב כהה' : '☀️ מצב בהיר' }
     function toggleTheme(){ state.theme = state.theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', state.theme); applyTheme() }
@@ -196,7 +217,31 @@
 
     function androidIntentFromDeeplink(deeplink, storeFallback){ const pp = deeplink.replace('stremio:///','').replace('stremio://',''); return `intent://${pp}#Intent;scheme=stremio;package=com.stremio.one;S.browser_fallback_url=${encodeURIComponent(storeFallback)};end` }
 
-    function openWithFallback(deeplink, webUrl){ const { ios, android } = getPlatform(); let hidden = false; const onHide = () => { hidden = true; cleanup() }; document.addEventListener('visibilitychange', onHide, { once:true }); const cleanup = () => { clearTimeout(timer); document.removeEventListener('visibilitychange', onHide) }; try { if(android){ const play = 'https://play.google.com/store/apps/details?id=com.stremio.one'; window.location.href = androidIntentFromDeeplink(deeplink, play) } else { window.location.href = deeplink } } catch{} const timer = setTimeout(() => { if(hidden) return; if(webUrl) window.open(webUrl, '_blank','noopener') }, 900) }
+    function openWithFallback(deeplink, webUrl){ 
+      const { ios, android } = getPlatform(); 
+      const httpsLink = deeplink.replace('stremio://', 'https://'); // HTTPS fallback for addons
+      let hidden = false; 
+      const onHide = () => { hidden = true; cleanup() }; 
+      document.addEventListener('visibilitychange', onHide, { once:true }); 
+      const cleanup = () => { clearTimeout(timer); document.removeEventListener('visibilitychange', onHide) }; 
+      try { 
+        if (isTelegram) {
+          // Special handling for Telegram: Open HTTPS link externally
+          Telegram.WebApp.openLink(httpsLink);
+          return;
+        } else if(android){ 
+          const play = 'https://play.google.com/store/apps/details?id=com.stremio.one'; 
+          window.location.href = androidIntentFromDeeplink(deeplink, play) 
+        } else { 
+          window.location.href = deeplink 
+        } 
+      } catch{} 
+      const timer = setTimeout(() => { 
+        if(hidden) return; 
+        if(webUrl) window.open(webUrl, '_blank','noopener') 
+        else window.open(httpsLink, '_blank','noopener'); // Fallback to HTTPS for addons
+      }, 900) 
+    }
 
     // Toast function (added for iOS alerts and copies)
     function showToast(msg) { els.toastMsg.textContent = msg; els.toast.hidden = false; setTimeout(() => els.toast.hidden = true, 3000); }
@@ -267,5 +312,5 @@
   </script>
 </body>
 </html>
-```
+
 
