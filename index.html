@@ -215,7 +215,7 @@
     function stremioDetailURL(type, imdb){ const t = (type==='tv'?'series':'movie'); return t==='movie' ? `stremio:///detail/${t}/${imdb}/${imdb}` : `stremio:///detail/${t}/${imdb}` }
     function stremioWebURL(type, imdb){ const t = (type==='tv'?'series':'movie'); return `https://web.stremio.com/#/detail/${t}/${imdb}` }
 
-    function androidIntentFromDeeplink(deeplink, storeFallback){ const pp = deeplink.replace('stremio:///','').replace('stremio://',''); return `intent://${pp}#Intent;scheme=stremio;package=com.stremio.one;S.browser_fallback_url=${encodeURIComponent(storeFallback)};end` }
+    function androidIntentFromDeeplink(deeplink, storeFallback){ const pp = deeplink.replace('stremio:///','').replace('stremio://',''); return `intent://${pp}#Intent;scheme=stremio;package=com.stremio.one;S.browser_fallback_url=${encodeURIComponent(storeFallback || 'https://web.stremio.com')};end` }
 
     function openWithFallback(deeplink, webUrl){ 
       const { ios, android } = getPlatform(); 
@@ -226,8 +226,14 @@
       const cleanup = () => { clearTimeout(timer); document.removeEventListener('visibilitychange', onHide) }; 
       try { 
         if (isTelegram) {
-          // Special handling for Telegram: Open HTTPS link externally
-          Telegram.WebApp.openLink(httpsLink);
+          if (android) {
+            // For Android in Telegram: Open Intent URL externally to trigger Stremio
+            const intentUrl = androidIntentFromDeeplink(deeplink, webUrl || 'https://web.stremio.com');
+            Telegram.WebApp.openLink(intentUrl);
+          } else {
+            // For iOS or others in Telegram: Fallback to HTTPS externally
+            Telegram.WebApp.openLink(httpsLink);
+          }
           return;
         } else if(android){ 
           const play = 'https://play.google.com/store/apps/details?id=com.stremio.one'; 
@@ -235,7 +241,10 @@
         } else { 
           window.location.href = deeplink 
         } 
-      } catch{} 
+      } catch(e) { 
+        showToast('שגיאה בפתיחה. נסה לפתוח בדפדפן חיצוני או התקן Stremio.'); 
+        console.error(e);
+      } 
       const timer = setTimeout(() => { 
         if(hidden) return; 
         if(webUrl) window.open(webUrl, '_blank','noopener') 
@@ -312,5 +321,3 @@
   </script>
 </body>
 </html>
-
-
