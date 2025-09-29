@@ -246,7 +246,7 @@
             transform: rotate(180deg);
         }
         
-        /* Color Picker Popup */
+        /* Color Picker Popup - Modern Design */
         .color-picker-popup {
             position: absolute;
             top: 100%;
@@ -254,52 +254,73 @@
             transform: translateX(-50%);
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 10px 30px var(--shadow);
-            padding: 20px;
-            margin-top: 10px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin-top: 15px;
             display: none;
             z-index: 200;
-            min-width: 280px;
+            min-width: 320px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .dark .color-picker-popup {
+            background: rgba(30, 30, 30, 0.95);
         }
         
         .color-picker-popup.active {
             display: block;
+            animation: popupFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes popupFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateX(-50%) translateY(-10px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(-50%) translateY(0) scale(1); 
+            }
         }
         
         .color-picker-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
-            margin: 0 0 15px 0;
+            margin: 0 0 20px 0;
             text-align: center;
             color: var(--text);
+            letter-spacing: -0.3px;
         }
         
         .color-options {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
         }
         
         .color-option {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 16px;
             cursor: pointer;
             border: 3px solid transparent;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .color-option:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
         .color-option.active {
             border-color: white;
-            box-shadow: 0 0 0 2px var(--brand-600);
+            box-shadow: 0 0 0 3px var(--brand-600);
+            transform: scale(1.05);
         }
         
         .color-option.active::after {
@@ -310,7 +331,27 @@
             transform: translate(-50%, -50%);
             color: white;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .color-option-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 6px 0;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .color-option:hover .color-option-label {
+            transform: translateY(0);
         }
         
         /* Color option backgrounds */
@@ -597,14 +638,6 @@
             gap: 10px; 
             flex-wrap: wrap; 
         }
-        .kbd { 
-            font-family: ui-monospace, monospace; 
-            background: rgba(0,0,0,0.1); 
-            padding: 3px 8px; 
-            border-radius: 6px; 
-            color: var(--secondary-accent);
-            font-size: 13px;
-        }
         
         /* Status Message */
         #status {
@@ -632,11 +665,21 @@
                     <div class="color-picker-popup" id="colorPickerPopup">
                         <h3 class="color-picker-title">בחר צבע לאתר</h3>
                         <div class="color-options">
-                            <div class="color-option color-purple active" data-theme="purple" title="סגול"></div>
-                            <div class="color-option color-blue" data-theme="blue" title="כחול"></div>
-                            <div class="color-option color-green" data-theme="green" title="ירוק"></div>
-                            <div class="color-option color-orange" data-theme="orange" title="כתום"></div>
-                            <div class="color-option color-pink" data-theme="pink" title="ורוד"></div>
+                            <div class="color-option color-purple active" data-theme="purple" title="סגול">
+                                <div class="color-option-label">סגול</div>
+                            </div>
+                            <div class="color-option color-blue" data-theme="blue" title="כחול">
+                                <div class="color-option-label">כחול</div>
+                            </div>
+                            <div class="color-option color-green" data-theme="green" title="ירוק">
+                                <div class="color-option-label">ירוק</div>
+                            </div>
+                            <div class="color-option color-orange" data-theme="orange" title="כתום">
+                                <div class="color-option-label">כתום</div>
+                            </div>
+                            <div class="color-option color-pink" data-theme="pink" title="ורוד">
+                                <div class="color-option-label">ורוד</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -690,27 +733,27 @@
                 <div class="addon-grid">
                     <article class="addon" data-addon="stremio://torrentio.strem.fun/easydebrid=n3cgfuzhg9ptzbss/manifest.json" data-copy="https://torrentio.strem.fun/easydebrid=n3cgfuzhg9ptzbss/manifest.json">
                         <h3><i class="fas fa-download"></i> Torrentio + Debrid</h3>
-                        <p>מקורות סטרים מהירים לסרטים וסדרות (מומלך). <span class="kbd">movies & series</span></p>
+                        <p>מקורות סטרים מהירים לסרטים וסדרות (מומלך).</p>
                     </article>
                     
                     <article class="addon" data-addon="stremio://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json" data-copy="https://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json">
                         <h3><i class="fas fa-closed-captioning"></i> Ktuvit (כתוביות)</h3>
-                        <p>כתוביות בעברית מ‑Ktuvit. <span class="kbd">subtitles</span></p>
+                        <p>כתוביות בעברית מ‑Ktuvit.</p>
                     </article>
                     
                     <article class="addon" data-addon="stremio://4b139a4b7f94-wizdom-stremio-v2.baby-beamup.club/manifest.json" data-copy="https://4b139a4b7f94-wizdom-stremio-v2.baby-beamup.club/manifest.json">
                         <h3><i class="fas fa-closed-captioning"></i> Wizdom (כתוביות)</h3>
-                        <p>מנוע כתוביות משלים בעברית. <span class="kbd">subtitles</span></p>
+                        <p>מנוע כתוביות משלים בעברית.</p>
                     </article>
                     
                     <article class="addon" data-addon="stremio://stremio7rd-movies-online-dates.vercel.app/manifest.json" data-copy="https://stremio7rd-movies-online-dates.vercel.app/manifest.json">
                         <h3><i class="fas fa-calendar-alt"></i> סרטים שמגיעים לרשת</h3>
-                        <p>קטלוג המציג מתי סרטים מגיעים לרשת באיכות טובה. <span class="kbd">fresh releases</span></p>
+                        <p>קטלוג המציג מתי סרטים מגיעים לרשת באיכות טובה.</p>
                     </article>
                     
                     <article class="addon" data-addon="stremio://94c8cb9f702d-tmdb-addon.baby-beamup.club/N4IgNghgdg5grhGBTEAuEALJBaAkgGRABoQBnAFwCckIBbAS1jQG0BdEgYwnIjAHsYpFqHoATNCHK1RAIwB05PgAdikgJ5KU6WnwBu9FCSh0tIAArK4kSqtIY+Ad1xQAEn1paqcJAF8iI8XQpWQVlVXINU1IkSgMhIxMJCyUrCBsSO0dnNw80L19-EDEJYPk1GnT1TQkdfUMQY1z0AE0K23snV3dPSm8-AJLpMraSCOr0aNikeIbElpGyDuzuvN6CgaChuUhYBGRwyJq9A1VG03xoeER6zM6cnr7C4s2Qnav90cOJmLjTuZALrtru0sl0mvl+kVApItlQkFBRIwYAdxiBaicEk0QAAVagIpEgu4rVAQp7Q0oKPGIpifVGTX6Y0y4+HU5EZJZgh6+dggLgUADCfDgUHIaAArD4gA/manifest.json" data-copy="https://94c8cb9f702d-tmdb-addon.baby-beamup.club/N4IgNghgdg5grhGBTEAuEALJBaAkgGRABoQBnAFwCckIBbAS1jQG0BdEgYwnIjAHsYpFqHoATNCHK1RAIwB05PgAdikgJ5KU6WnwBu9FCSh0tIAArK4kSqtIY+Ad1xQAEn1paqcJAF8iI8XQpWQVlVXINU1IkSgMhIxMJCyUrCBsSO0dnNw80L19-EDEJYPk1GnT1TQkdfUMQY1z0AE0K23snV3dPSm8-AJLpMraSCOr0aNikeIbElpGyDuzuvN6CgaChuUhYBGRwyJq9A1VG03xoeER6zM6cnr7C4s2Qnav90cOJmLjTuZALrtru0sl0mvl+kVApItlQkFBRIwYAdxiBaicEk0QAAVagIpEgu4rVAQp7Q0oKPGIpifVGTX6Y0y4+HU5EZJZgh6+dggLgUADCfDgUHIaAArD4gA/manifest.json">
                         <h3><i class="fas fa-info-circle"></i> מידע בעברית (TMDB‑IL)</h3>
-                        <p>פוסטרים, תיאורים וחיפוש תכנים בעברית. <span class="kbd">Hebrew metadata</span></p>
+                        <p>פוסטרים, תיאורים וחיפוש תכנים בעברית.</p>
                     </article>
                 </div>
             </div>
