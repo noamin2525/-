@@ -41,6 +41,11 @@
             --telegram-hover: linear-gradient(135deg, #0077b3, #0099d9);
             --telegram-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
             --telegram-hover-shadow: 0 6px 20px rgba(0, 136, 204, 0.6);
+            /* Sort button colors */
+            --sort-bg: linear-gradient(135deg, var(--brand-600), var(--secondary-accent));
+            --sort-hover: linear-gradient(135deg, var(--brand-700), var(--accent-color));
+            --sort-shadow: 0 4px 15px rgba(111, 66, 193, 0.4);
+            --sort-hover-shadow: 0 6px 20px rgba(111, 66, 193, 0.6);
         }
         .dark { 
             --bg: #121212; 
@@ -69,6 +74,11 @@
             --telegram-hover: linear-gradient(135deg, #0077b3, #0099d9);
             --telegram-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
             --telegram-hover-shadow: 0 6px 20px rgba(0, 136, 204, 0.6);
+            /* Dark sort button colors */
+            --sort-bg: linear-gradient(135deg, var(--brand-600), var(--secondary-accent));
+            --sort-hover: linear-gradient(135deg, var(--brand-700), var(--accent-color));
+            --sort-shadow: 0 4px 15px rgba(111, 66, 193, 0.4);
+            --sort-hover-shadow: 0 6px 20px rgba(111, 66, 193, 0.6);
         }
         
         /* Color Themes */
@@ -452,6 +462,73 @@
             font-weight: 600;
         }
         
+        /* Modern Sort Button */
+        .sort-wrapper {
+            position: relative;
+        }
+        
+        #sort {
+            appearance: none;
+            background: var(--sort-bg);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 40px 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--sort-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Assistant', sans-serif;
+        }
+        
+        #sort::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        #sort:hover::before {
+            left: 100%;
+        }
+        
+        #sort:hover {
+            background: var(--sort-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--sort-hover-shadow);
+        }
+        
+        #sort:active {
+            transform: translateY(0);
+            box-shadow: var(--sort-shadow);
+        }
+        
+        /* Custom dropdown arrow */
+        .sort-wrapper::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 16px;
+            pointer-events: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .sort-wrapper:hover::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        
         /* Grid and Cards */
         .grid { 
             display: grid; 
@@ -775,7 +852,7 @@
                         </button>
                     </div>
                 </div>
-                <div>
+                <div class="sort-wrapper">
                     <select id="sort">
                         <option value="popularity.desc">מיון: פופולריות</option>
                         <option value="vote_average.desc">מיון: דירוג</option>
@@ -883,6 +960,9 @@
                 
                 // Update color picker button gradient based on selected theme
                 updateColorPickerButtonGradient();
+                
+                // Update sort button gradient based on selected theme
+                updateSortButtonGradient();
             }
             
             function updateColorPickerButtonGradient() {
@@ -901,6 +981,27 @@
                 } else {
                     root.style.setProperty('--color-picker-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
                     root.style.setProperty('--color-picker-hover-shadow', `0 6px 20px ${hexToRgba(brand600, 0.6)}`);
+                }
+            }
+            
+            function updateSortButtonGradient() {
+                const root = document.documentElement;
+                const brand600 = getComputedStyle(root).getPropertyValue('--brand-600').trim();
+                const secondaryAccent = getComputedStyle(root).getPropertyValue('--secondary-accent').trim();
+                const brand700 = getComputedStyle(root).getPropertyValue('--brand-700').trim();
+                const accentColor = getComputedStyle(root).getPropertyValue('--accent-color').trim();
+                
+                // Update CSS custom properties for the sort button
+                root.style.setProperty('--sort-bg', `linear-gradient(135deg, ${brand600}, ${secondaryAccent})`);
+                root.style.setProperty('--sort-hover', `linear-gradient(135deg, ${brand700}, ${accentColor})`);
+                
+                // Update shadow colors
+                if (state.theme === 'dark') {
+                    root.style.setProperty('--sort-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
+                    root.style.setProperty('--sort-hover-shadow', `0 6px 20px ${hexToRgba(brand600, 0.6)}`);
+                } else {
+                    root.style.setProperty('--sort-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
+                    root.style.setProperty('--sort-hover-shadow', `0 6px 20px ${hexToRgba(brand600, 0.6)}`);
                 }
             }
             
@@ -937,6 +1038,8 @@
                 updateThemeButtonGradient();
                 // Update color picker button gradient
                 updateColorPickerButtonGradient();
+                // Update sort button gradient
+                updateSortButtonGradient();
             }
             
             function updateThemeButtonGradient() {
