@@ -7,83 +7,122 @@
   <title>המלצות לסרטים וסדרות</title>
   <meta name="color-scheme" content="light dark">
   <style>
-    /* ---- ערכות צבעים עם ניגודיות משופרת ---- */
     :root {
-      --bg:#ffffff;              /* רקע לבן מלא כדי למנוע שקיפות דהויה */
-      --text:#0b1220;            /* טקסט כהה יותר לשיפור קריאות */
-      --muted:#334155;           /* טקסט משני עם ניגודיות מספיקה */
-      --card:#ffffff;            /* כרטיסים לבנים במצב בהיר */
-      --border:#d1d5db;          /* מסגרת בהירה */
-      --brand-600:#4f46e5;       /* צבע מותג */
-      --chip-bg:#f8fafc;         /* צ'יפים אפורים בהירים (ניגודיות מול לבן) */
-      --chip-border:#cbd5e1;     /* מסגרת צ'יפים */
-      --chip-active:#eef2ff;     /* רקע קל לצ'יף פעיל */
-      --btn-ghost:#0b1220;       /* כפתור שקוף במצב בהיר */
+      --bg:#ffffff; --text:#0b1220; --muted:#334155; --card:#ffffff; --border:#d1d5db; --brand-600:#4f46e5;
+      --chip-bg:#f8fafc; --chip-border:#cbd5e1; --chip-active:#eef2ff; --btn-ghost:#0b1220;
+      --screen:#0f172a; --screen-deco:#0ea5e9; --tv-body:#e5e7eb; --shadow: rgba(2,6,23,.08);
+      --topbar-h:56px;
     }
     .dark {
-      --bg:#0b1020;
-      --text:#e5edf6;
-      --muted:#94a3b8;
-      --card:rgba(2,6,23,.85);
-      --border:#334155;
-      --chip-bg:rgba(2,6,23,.6);
-      --chip-border:#475569;
-      --chip-active:#1e293b;
-      --btn-ghost:#e5edf6;
+      --bg:#0b1020; --text:#e5edf6; --muted:#94a3b8; --card:rgba(2,6,23,.85); --border:#334155;
+      --chip-bg:rgba(2,6,23,.6); --chip-border:#475569; --chip-active:#1e293b; --btn-ghost:#e5edf6;
+      --screen:#030712; --screen-deco:#22d3ee; --tv-body:#0f172a; --shadow: rgba(0,0,0,.25);
     }
 
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth; scroll-padding-top: var(--topbar-h)}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";background:var(--bg);color:var(--text)}
     .container{max-width:1120px;margin-inline:auto;padding-inline:12px}
 
-    header.sticky{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);background:linear-gradient(to bottom,rgba(79,70,229,.10),transparent);border-bottom:1px solid var(--border)}
-    .row{display:grid;gap:12px}
-    h1{font-size:clamp(20px,2.5vw,28px);font-weight:800;margin:0;color:var(--text)}
-
+    /* ---- Topbar (כותרת בלבד) ---- */
+    .topbar{background:var(--bg); border-bottom:1px solid var(--border);}
+    .topbar .row{display:grid;gap:12px; grid-template-columns:1fr auto; align-items:center; height:var(--topbar-h)}
+    .topbar h1{font-size:clamp(18px,2.0vw,24px);font-weight:800;margin:0;color:var(--text)}
     .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--chip-bg);color: var(--text);padding:8px 12px;border-radius:10px;font-size:14px;cursor:pointer}
-    .btn.primary{background:var(--brand-600);color:#fff;border-color:transparent}
     .btn.ghost{background:transparent;color:var(--btn-ghost)}
-    .btn:disabled{opacity:.6;cursor:not-allowed}
     .btn.sm{padding:4px 8px; font-size:12px}
 
-    .input,select{width:100%;background:var(--chip-bg);color:var(--text);border:1px solid var(--border);padding:10px 12px;border-radius:10px;outline:none}
+    /* Sticky רק בשולחן עבודה, לא בנייד כדי שלא יכסוך תוכן */
+    @media(min-width:900px){ .topbar{position:sticky; top:0; z-index:20; backdrop-filter:blur(8px)} }
+
+    /* ---- אזור החיפוש והמסננים: לא-דביק ---- */
+    .filters{border-bottom:1px solid var(--border); background:linear-gradient(180deg, rgba(79,70,229,.06), transparent 70%)}
+    .filters .wrap{display:grid; gap:12px; padding:12px 0}
+    .input,select{width:100%;background:var(--chip-bg);color:var(--text);border:1px solid var(--border);padding:10px 12px;border-radius:10px;outline:none; scroll-margin-top: calc(var(--topbar-h) + 8px)}
     .input::placeholder{color:var(--muted);opacity:.95}
-
-    .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--chip-border);background:var(--chip-bg);padding:6px 10px;border-radius:999px;font-size:12px;cursor:pointer;color:var(--text)}
-    .chip img{display:block}
-    .chip.active{outline:2px solid var(--brand-600);background:var(--chip-active)}
-
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    @media(min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    @media(min-width:768px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-    @media(min-width:1024px){.grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
-
-    .card{border:1px solid var(--border);background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06)}
-    .poster{width:100%;aspect-ratio:2/3;object-fit:cover;background:#e2e8f0}
-    .card .meta{display:flex;gap:8px;padding:10px;align-items:flex-start}
-
-    .fav{border:1px solid var(--chip-border);background:var(--chip-bg);border-radius:999px;padding:4px 8px;font-size:14px;cursor:pointer;color:var(--text)}
-
-    .muted{color:var(--muted);font-size:12px}
-    .section-title{font-size:12px;color:var(--muted);margin:4px 0}
 
     .toolbar{display:grid;gap:12px;grid-template-columns:1fr}
     @media(min-width:640px){.toolbar{grid-template-columns:1fr 1fr}}
     @media(min-width:1024px){.toolbar{grid-template-columns:1fr 1fr 1fr 1fr}}
+
+    .section-title{font-size:12px;color:var(--muted);margin:4px 0}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--chip-border);background:var(--chip-bg);padding:6px 10px;border-radius:999px;font-size:12px;cursor:pointer;color:var(--text)}
+    .chip.active{outline:2px solid var(--brand-600);background:var(--chip-active)}
+
+    /* ---- Hero עם טלוויזיה חמודה ---- */
+    .hero{border-bottom:1px solid var(--border)}
+    .hero .wrap{display:grid;gap:16px;grid-template-columns:1fr; align-items:center; padding:18px 0}
+    @media(min-width:900px){.hero .wrap{grid-template-columns:1.2fr .8fr}}
+    .hero h2{margin:0;font-weight:800;font-size:clamp(18px,2.2vw,26px)}
+    .hero p{margin:6px 0 0;color:var(--muted)}
+    .tv{max-width:320px; width:100%; height:auto; margin-inline:auto}
+
+    /* ---- גריד תוצאות ---- */
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px; padding:16px 0}
+    @media(min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media(min-width:768px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    @media(min-width:1024px){.grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+
+    .card{border:1px solid var(--border);background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 6px 20px var(--shadow)}
+    .poster{width:100%;aspect-ratio:2/3;object-fit:cover;background:#e2e8f0}
+    .card .meta{display:flex;gap:8px;padding:10px;align-items:flex-start}
+    .fav{border:1px solid var(--chip-border);background:var(--chip-bg);border-radius:999px;padding:4px 8px;font-size:14px;cursor:pointer;color:var(--text)}
+    .muted{color:var(--muted);font-size:12px}
 
     .toast{position:fixed;bottom:16px;inset-inline:0;display:flex;justify-content:center;z-index:100;pointer-events:none}
     .toast>div{pointer-events:auto;border:1px solid var(--border);background:var(--card);padding:10px 12px;border-radius:10px;color:var(--text)}
   </style>
 </head>
 <body>
-  <header class="sticky">
+  <!-- Topbar מצומצם (דביק רק בדסקטופ) -->
+  <header class="topbar">
     <div class="container">
-      <div class="row" style="grid-template-columns:1fr auto; align-items:center; padding:12px 0;">
+      <div class="row">
         <h1>המלצות לסרטים וסדרות</h1>
         <button id="themeBtn" class="btn ghost" aria-label="מצב כהה/בהיר">☀️ מצב בהיר</button>
       </div>
-      <div class="row" style="padding-bottom:12px;">
+    </div>
+  </header>
+
+  <!-- Hero חמוד -->
+  <section class="hero">
+    <div class="container">
+      <div class="wrap">
+        <div>
+          <h2>מצא/י במה לצפות בקליק 🎯</h2>
+          <p>סנן לפי ספקים, ז׳אנרים וחפש לפי שם—הכול מותאם לישראל.</p>
+        </div>
+        <div>
+          <svg class="tv" viewBox="0 0 480 360" role="img" aria-labelledby="tvTitle tvDesc">
+            <title id="tvTitle">איור טלוויזיה עם פרצוף שמח</title>
+            <desc id="tvDesc">טלוויזיה מצוירת עם מסך מחייך ואנטנות קטנות</desc>
+            <ellipse cx="240" cy="320" rx="160" ry="18" fill="var(--shadow)" />
+            <rect x="70" y="60" rx="18" ry="18" width="340" height="220" fill="var(--tv-body)" stroke="var(--border)" stroke-width="2"/>
+            <rect x="95" y="85" rx="14" ry="14" width="290" height="170" fill="var(--screen)"/>
+            <path d="M180 180 C 210 220, 270 220, 300 180" fill="none" stroke="var(--screen-deco)" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="190" cy="150" r="12" fill="#fff"/>
+            <circle cx="190" cy="150" r="6" fill="var(--screen-deco)"/>
+            <circle cx="290" cy="150" r="12" fill="#fff"/>
+            <circle cx="290" cy="150" r="6" fill="var(--screen-deco)"/>
+            <circle cx="385" cy="120" r="6" fill="var(--screen-deco)"/>
+            <circle cx="385" cy="140" r="6" fill="var(--screen-deco)"/>
+            <circle cx="385" cy="160" r="6" fill="var(--screen-deco)"/>
+            <rect x="120" y="280" width="40" height="10" rx="4" fill="var(--tv-body)"/>
+            <rect x="320" y="280" width="40" height="10" rx="4" fill="var(--tv-body)"/>
+            <line x1="140" y1="60" x2="110" y2="30" stroke="var(--border)" stroke-width="4" stroke-linecap="round"/>
+            <line x1="340" y1="60" x2="365" y2="30" stroke="var(--border)" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="110" cy="30" r="6" fill="var(--screen-deco)"/>
+            <circle cx="365" cy="30" r="6" fill="var(--screen-deco)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- אזור חיפוש + מסננים (לא דביק) כדי שלא יסתיר את התוכן באף מצב) -->
+  <section class="filters" id="filters">
+    <div class="container">
+      <div class="wrap">
         <input id="search" class="input" placeholder="חיפוש סרטים או סדרות…" aria-label="חיפוש" />
         <div class="toolbar">
           <div>
@@ -102,14 +141,14 @@
             </select>
           </div>
           <div>
-            <div class="row" style="grid-template-columns:1fr auto; align-items:center;">
-              <div class="section-title">ספקים: Netflix · Apple TV+ · Prime · HBO/Max · Disney+ · Hulu</div>
+            <div class="row" style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;">
+              <div class="section-title">ספקים (רב‑בחירה)</div>
               <button id="clearProviders" class="btn sm">נקה</button>
             </div>
             <div id="providers" class="chips"></div>
           </div>
           <div>
-            <div class="row" style="grid-template-columns:1fr auto; align-items:center;">
+            <div class="row" style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;">
               <div class="section-title">ז׳אנרים</div>
               <button id="clearGenres" class="btn sm">נקה</button>
             </div>
@@ -118,10 +157,10 @@
         </div>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main class="container" style="padding:16px 0 32px;">
-    <div id="status" class="muted" style="padding: 12px 0;">מוכן</div>
+  <main class="container">
+    <div id="status" class="muted" style="padding: 8px 0;">מוכן</div>
     <div id="grid" class="grid"></div>
     <div id="sentinel" style="height: 48px;"></div>
   </main>
@@ -136,23 +175,13 @@
     const state = { theme: localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), mediaType: localStorage.getItem('mediaType') || 'movie', sortBy: localStorage.getItem('sortBy') || 'popularity.desc', query: '', page: 1, totalPages: 1, genres: [], chosenGenres: new Set(JSON.parse(localStorage.getItem('genres') || '[]')), providers: [], chosenProviders: new Set(JSON.parse(localStorage.getItem('providers') || '[]')), favorites: new Set(JSON.parse(localStorage.getItem('favorites') || '[]')), loading: false, observer: null }
     const els = { themeBtn: document.getElementById('themeBtn'), search: document.getElementById('search'), typeChips: document.getElementById('typeChips'), sort: document.getElementById('sort'), providers: document.getElementById('providers'), clearProviders: document.getElementById('clearProviders'), genres: document.getElementById('genres'), clearGenres: document.getElementById('clearGenres'), grid: document.getElementById('grid'), sentinel: document.getElementById('sentinel'), status: document.getElementById('status'), toast: document.getElementById('toast'), toastMsg: document.getElementById('toastMsg') }
 
-    function applyTheme(){
-      document.documentElement.classList.toggle('dark', state.theme === 'dark')
-      els.themeBtn.textContent = state.theme === 'dark' ? '🌙 מצב כהה' : '☀️ מצב בהיר'
-    }
+    function applyTheme(){ document.documentElement.classList.toggle('dark', state.theme === 'dark'); els.themeBtn.textContent = state.theme === 'dark' ? '🌙 מצב כהה' : '☀️ מצב בהיר' }
     function toggleTheme(){ state.theme = state.theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', state.theme); applyTheme() }
 
     const TMDB = 'https://api.themoviedb.org/3'; const IMG = 'https://image.tmdb.org/t/p/'
-    async function tmdb(path, params={}){
-      const url = new URL(TMDB + path)
-      const sp = new URLSearchParams({ api_key: API_KEY, language: 'he-IL', watch_region: 'IL', include_adult: 'false', ...params })
-      url.search = sp.toString()
-      const res = await fetch(url.toString())
-      if(!res.ok){ const text = await res.text().catch(()=>res.statusText); throw new Error('TMDB ' + res.status + ': ' + text) }
-      return res.json()
-    }
+    async function tmdb(path, params={}){ const url = new URL(TMDB + path); const sp = new URLSearchParams({ api_key: API_KEY, language: 'he-IL', watch_region: 'IL', include_adult: 'false', ...params }); url.search = sp.toString(); const res = await fetch(url.toString()); if(!res.ok){ const text = await res.text().catch(()=>res.statusText); throw new Error('TMDB ' + res.status + ': ' + text) } return res.json() }
 
-    // --- אייקוני ברירת מחדל (SVG Data URI) לספקים ללא לוגו ---
+    // fallback icons
     function svgIcon(text, bg, fg='#fff'){
       const svg = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>
 <rect rx='10' ry='10' width='64' height='64' fill='${bg}'/>
@@ -160,95 +189,43 @@
 </svg>`)
       return `data:image/svg+xml;charset=utf-8,${svg}`
     }
-    const FALLBACK_ICONS = new Map([
-      [8,  svgIcon('N',   '#E50914')],
-      [9,  svgIcon('Prime','#00A8E1')],
-      [119,svgIcon('Prime','#00A8E1')],
-      [337,svgIcon('D+',  '#113CCF')],
-      [15, svgIcon('Hulu','#1CE783','#111')],
-      [384,svgIcon('Max', '#5B2BE0')],
-      [350,svgIcon('TV+', '#000000')],
-    ])
+    const FALLBACK_ICONS = new Map([[8,svgIcon('N','#E50914')],[9,svgIcon('Prime','#00A8E1')],[119,svgIcon('Prime','#00A8E1')],[337,svgIcon('D+','#113CCF')],[15,svgIcon('Hulu','#1CE783','#111')],[384,svgIcon('Max','#5B2BE0')],[350,svgIcon('TV+','#000')]])
 
-    // Stremio helpers
-    function mapTypeToStremio(t){ return t === 'tv' ? 'series' : 'movie' }
-    const imdbCache = new Map()
-    async function getImdbId(item){ if(imdbCache.has(item.id)) return imdbCache.get(item.id); const type = (item.media_type || state.mediaType); try{ const data = await tmdb(`/${type === 'tv' ? 'tv' : 'movie'}/${item.id}/external_ids`); const imdb = data && data.imdb_id ? data.imdb_id : null; imdbCache.set(item.id, imdb); return imdb }catch{ return null } }
-    async function openInStremio(item){ const type = mapTypeToStremio(item.media_type || state.mediaType); const imdb = await getImdbId(item); if(imdb && /^tt\d+$/i.test(imdb)){ window.location.href = (type==='movie'?`stremio://detail/${type}/${imdb}/${imdb}`:`stremio://detail/${type}/${imdb}`); setTimeout(()=>window.open(`https://web.stremio.com/#/detail/${type}/${imdb}`,'_blank','noopener'),600) } else { const q = encodeURIComponent(item.title || item.name || ''); window.location.href = `stremio://search?query=${q}`; setTimeout(()=>window.open(`https://web.stremio.com/#/search?query=${q}`,'_blank','noopener'),600) } }
+    // Providers (Whitelist + Force inject)
+    const WL_IDS = new Set([8, 9, 119, 337, 15, 384, 350])
+    const FORCED = [ { provider_id: 337, provider_name: 'Disney Plus', logo_path: '' }, { provider_id: 15, provider_name: 'Hulu', logo_path: '' }, { provider_id: 384, provider_name: 'Max', logo_path: '' } ]
 
+    // events
     els.themeBtn.addEventListener('click', toggleTheme)
+
     function renderTypeChips(){ els.typeChips.querySelectorAll('.chip').forEach(btn => { const t = btn.getAttribute('data-type'); btn.classList.toggle('active', t === state.mediaType); btn.onclick = () => { if(state.mediaType === t) return; state.mediaType = t; localStorage.setItem('mediaType', t); state.chosenGenres.clear(); localStorage.setItem('genres', JSON.stringify([])); renderTypeChips(); loadGenres(); loadProviders(); restartFeed() } }) }
 
     els.sort.value = state.sortBy
     els.sort.addEventListener('change', () => { state.sortBy = els.sort.value; localStorage.setItem('sortBy', state.sortBy); restartFeed() })
 
-    let searchTimer; els.search.addEventListener('input', (e)=>{ clearTimeout(searchTimer); searchTimer = setTimeout(()=>{ state.query = e.target.value.trim(); restartFeed() }, 400) })
+    let searchTimer; els.search.addEventListener('input', (e)=>{ clearTimeout(searchTimer); searchTimer = setTimeout(()=>{ state.query = e.target.value.trim(); // גלילה קלה לתחילת הגריד כדי לראות תוצאות
+      document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'}); restartFeed() }, 350) })
 
-    // Providers (Whitelist + Force inject)
-    const WL_IDS = new Set([8, 9, 119, 337, 15, 384, 350])
-    const FORCED = [
-      { provider_id: 337, provider_name: 'Disney Plus', logo_path: '' },
-      { provider_id: 15,  provider_name: 'Hulu',        logo_path: '' },
-      { provider_id: 384, provider_name: 'Max',         logo_path: '' },
-    ]
+    async function loadProviders(){ els.providers.innerHTML = '<span class="muted">טוען ספקים…</span>'; try{ const data = await tmdb(`/watch/providers/${state.mediaType}`, { watch_region: 'IL' }); const all = Array.isArray(data.results) ? data.results : []; let list = all.filter(p => WL_IDS.has(p.provider_id)); const byId = new Map(list.map(p => [p.provider_id, p])); FORCED.forEach(x => { if(!byId.has(x.provider_id)) list.push(x) }); const order = ['Netflix','Apple','Prime','HBO','Max','Disney','Hulu']; list.sort((a,b)=>{ const ia = order.findIndex(k => (a.provider_name||'').toLowerCase().includes(k.toLowerCase())); const ib = order.findIndex(k => (b.provider_name||'').toLowerCase().includes(k.toLowerCase())); return (ia<0?99:ia) - (ib<0?99:ib) }); state.providers = list; renderProviders() }catch{ els.providers.innerHTML = '<span class="muted">שגיאה בטעינת ספקים</span>' } }
 
-    async function loadProviders(){
-      els.providers.innerHTML = '<span class="muted">טוען ספקים…</span>'
-      try{
-        const data = await tmdb(`/watch/providers/${state.mediaType}`, { watch_region: 'IL' })
-        const all = Array.isArray(data.results) ? data.results : []
-        let list = all.filter(p => WL_IDS.has(p.provider_id))
-        const byId = new Map(list.map(p => [p.provider_id, p]))
-        FORCED.forEach(x => { if(!byId.has(x.provider_id)) list.push(x) })
-        const order = ['Netflix','Apple','Prime','HBO','Max','Disney','Hulu']
-        list.sort((a,b)=>{
-          const ia = order.findIndex(k => (a.provider_name||'').toLowerCase().includes(k.toLowerCase()))
-          const ib = order.findIndex(k => (b.provider_name||'').toLowerCase().includes(k.toLowerCase()))
-          return (ia<0?99:ia) - (ib<0?99:ib)
-        })
-        state.providers = list
-        renderProviders()
-      }catch{ els.providers.innerHTML = '<span class="muted">שגיאה בטעינת ספקים</span>' }
-    }
-
-    function renderProviders(){
-      els.providers.innerHTML = ''
-      state.providers.forEach(p => {
-        const btn = document.createElement('button')
-        btn.className = 'chip'
-        if(state.chosenProviders.has(p.provider_id)) btn.classList.add('active')
-        btn.title = p.provider_name
-        let imgSrc = ''
-        if(p.logo_path){
-          imgSrc = `${IMG}w45${p.logo_path}`
-        } else if(FALLBACK_ICONS.has(p.provider_id)){
-          imgSrc = FALLBACK_ICONS.get(p.provider_id)
-        }
-        const icon = imgSrc ? `<img alt="" src="${imgSrc}" style="width:20px;height:20px;object-fit:cover;border-radius:4px;" />` : ''
-        btn.innerHTML = `${icon}<span class="label">${p.provider_name}</span>`
-        btn.onclick = () => {
-          if(state.chosenProviders.has(p.provider_id)) state.chosenProviders.delete(p.provider_id)
-          else state.chosenProviders.add(p.provider_id)
-          localStorage.setItem('providers', JSON.stringify([...state.chosenProviders]))
-          btn.classList.toggle('active')
-          restartFeed()
-        }
-        els.providers.appendChild(btn)
-      })
-    }
-
+    function renderProviders(){ els.providers.innerHTML = ''; state.providers.forEach(p => { const btn = document.createElement('button'); btn.className = 'chip'; if(state.chosenProviders.has(p.provider_id)) btn.classList.add('active'); btn.title = p.provider_name; let imgSrc = p.logo_path ? `${IMG}w45${p.logo_path}` : (FALLBACK_ICONS.get(p.provider_id)||''); const icon = imgSrc ? `<img alt="" src="${imgSrc}" style="width:20px;height:20px;object-fit:cover;border-radius:4px;" />` : ''; btn.innerHTML = `${icon}<span class="label">${p.provider_name}</span>`; btn.onclick = () => { if(state.chosenProviders.has(p.provider_id)) state.chosenProviders.delete(p.provider_id); else state.chosenProviders.add(p.provider_id); localStorage.setItem('providers', JSON.stringify([...state.chosenProviders])); btn.classList.toggle('active'); restartFeed() }; els.providers.appendChild(btn) }); if(!state.providers.length){ const note = document.createElement('div'); note.className='muted'; note.textContent='אין ספקים זמינים באזור זה.'; els.providers.appendChild(note) } }
     els.clearProviders.addEventListener('click', () => { state.chosenProviders.clear(); localStorage.setItem('providers', JSON.stringify([])); renderProviders(); restartFeed() })
 
-    // Genres
     async function loadGenres(){ els.genres.innerHTML = '<span class="muted">טוען ז׳אנרים…</span>'; try{ const data = await tmdb(`/genre/${state.mediaType}/list`); state.genres = Array.isArray(data.genres) ? data.genres : []; renderGenres() }catch{ els.genres.innerHTML = '<span class="muted">שגיאה בטעינת ז׳אנרים</span>' } }
     function renderGenres(){ els.genres.innerHTML = ''; state.genres.forEach(g => { const btn = document.createElement('button'); btn.className='chip'; if(state.chosenGenres.has(g.id)) btn.classList.add('active'); btn.textContent=g.name; btn.onclick=()=>{ if(state.chosenGenres.has(g.id)) state.chosenGenres.delete(g.id); else state.chosenGenres.add(g.id); localStorage.setItem('genres', JSON.stringify([...state.chosenGenres])); btn.classList.toggle('active'); restartFeed() }; els.genres.appendChild(btn) }) }
     els.clearGenres.addEventListener('click', () => { state.chosenGenres.clear(); localStorage.setItem('genres', JSON.stringify([])); renderGenres(); restartFeed() })
 
     async function fetchPage(page){ const isSearch = !!state.query; const path = isSearch ? `/search/${state.mediaType}` : `/discover/${state.mediaType}`; const params = isSearch ? { query: state.query, page } : { sort_by: state.sortBy, with_genres: [...state.chosenGenres].join(','), with_watch_providers: [...state.chosenProviders].join('|'), watch_region: 'IL', page, 'vote_count.gte': '50' }; return tmdb(path, params) }
 
-    function card(item){ const title = item.title || item.name || '—'; const date = item.release_date || item.first_air_date || ''; const vote = (item.vote_average && item.vote_average.toFixed) ? item.vote_average.toFixed(1) : '—'; const id = item.id; const fav = state.favorites.has(id); const href = `https://www.themoviedb.org/${state.mediaType}/${id}`; const div = document.createElement('div'); div.className='card'; div.innerHTML = `${item.poster_path ? `<img class="poster" loading="lazy" alt="${title}" src="${IMG}w342${item.poster_path}">` : `<div class="poster"></div>`}<div class="meta"><button aria-label="מועדפים" class="fav" data-id="${id}">${fav ? '★' : '☆'}</button><div style="min-width:0;"><div style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${title}">${title}</div><div class="muted">${date} · ⭐ ${vote}</div><div style="margin-top:6px;"><button class="btn sm" data-action="stremio">פתח ב‑Stremio ⤴</button> <a href="${href}" target="_blank" rel="noopener" class="btn sm">TMDB ↗</a></div></div></div>`; const favBtn=div.querySelector('.fav'); favBtn.addEventListener('click', ()=>{ const id = Number(favBtn.getAttribute('data-id')); if(state.favorites.has(id)) state.favorites.delete(id); else state.favorites.add(id); localStorage.setItem('favorites', JSON.stringify([...state.favorites])); favBtn.textContent = state.favorites.has(id) ? '★' : '☆' }); div.querySelector('[data-action="stremio"]').addEventListener('click', (ev)=>{ ev.preventDefault(); openInStremio(item) }); const posterEl=div.querySelector('.poster'); posterEl.style.cursor='pointer'; posterEl.addEventListener('click', (ev)=>{ ev.preventDefault(); openInStremio(item) }); return div }
+    function card(item){ const title = item.title || item.name || '—'; const date = item.release_date || item.first_air_date || ''; const vote = (item.vote_average && item.vote_average.toFixed) ? item.vote_average.toFixed(1) : '—'; const id = item.id; const fav = state.favorites.has(id); const href = `https://www.themoviedb.org/${state.mediaType}/${id}`; const div = document.createElement('div'); div.className = 'card'; div.innerHTML = `${item.poster_path ? `<img class="poster" loading="lazy" alt="${title}" src="${IMG}w342${item.poster_path}">` : `<div class="poster"></div>`}<div class="meta"><button aria-label="מועדפים" class="fav" data-id="${id}">${fav ? '★' : '☆'}</button><div style="min-width:0;"><div style="font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${title}">${title}</div><div class="muted">${date} · ⭐ ${vote}</div><div style="margin-top:6px;"><button class="btn sm" data-action="stremio">פתח ב‑Stremio ⤴</button> <a href="${href}" target="_blank" rel="noopener" class="btn sm">TMDB ↗</a></div></div></div>`; const favBtn = div.querySelector('.fav'); favBtn.addEventListener('click', () => { const id = Number(favBtn.getAttribute('data-id')); if(state.favorites.has(id)) state.favorites.delete(id); else state.favorites.add(id); localStorage.setItem('favorites', JSON.stringify([...state.favorites])); favBtn.textContent = state.favorites.has(id) ? '★' : '☆' }); const stBtn = div.querySelector('[data-action="stremio"]'); stBtn.addEventListener('click', (ev)=>{ ev.preventDefault(); openInStremio(item) }); const posterEl = div.querySelector('.poster'); posterEl.style.cursor='pointer'; posterEl.addEventListener('click', (ev)=>{ ev.preventDefault(); openInStremio(item) }); return div }
 
-    async function loadMore(){ if(state.loading) return; if(state.page > state.totalPages) return; state.loading = true; els.status.textContent = `טוען עמוד ${state.page}…`; try{ const data = await fetchPage(state.page); state.totalPages = data.total_pages || 1; (data.results || []).forEach(it => els.grid.appendChild(card(it))); state.page += 1; els.status.textContent = state.page > state.totalPages ? 'הגעת לסוף 🎬' : 'מוכן' }catch(err){ console.error(err); els.status.textContent = 'שגיאה' } finally{ state.loading = false } }
+    // Stremio helpers
+    function mapTypeToStremio(t){ return t === 'tv' ? 'series' : 'movie' }
+    const imdbCache = new Map()
+    async function getImdbId(item){ if(!item || !item.id) return null; if(imdbCache.has(item.id)) return imdbCache.get(item.id); const type = (item.media_type || state.mediaType); try{ const data = await tmdb(`/${type === 'tv' ? 'tv' : 'movie'}/${item.id}/external_ids`); const imdb = (data && data.imdb_id) ? data.imdb_id : null; imdbCache.set(item.id, imdb); return imdb }catch(e){ return null } }
+    async function openInStremio(item){ const type = mapTypeToStremio(item.media_type || state.mediaType); const imdb = await getImdbId(item); if(imdb && /^tt\d+$/i.test(imdb)){ const deeplink = type === 'movie' ? `stremio://detail/${type}/${imdb}/${imdb}` : `stremio://detail/${type}/${imdb}`; window.location.href = deeplink; setTimeout(() => window.open(`https://web.stremio.com/#/detail/${type}/${imdb}`, '_blank','noopener'), 600) } else { const q = encodeURIComponent(item.title || item.name || ''); window.location.href = `stremio://search?query=${q}`; setTimeout(() => window.open(`https://web.stremio.com/#/search?query=${q}`, '_blank','noopener'), 600) } }
+
+    async function loadMore(){ if(state.loading) return; if(state.page > state.totalPages) return; state.loading = true; els.status.textContent = `טוען עמוד ${state.page}…`; try{ const data = await fetchPage(state.page); state.totalPages = data.total_pages || 1; (data.results || []).forEach(it => els.grid.appendChild(card(it))); state.page += 1; els.status.textContent = state.page > state.totalPages ? 'הגעת לסוף 🎬' : 'מוכן' } catch(err){ console.error(err); els.status.textContent = 'שגיאה' } finally{ state.loading = false } }
 
     function restartFeed(){ state.page = 1; state.totalPages = 1; els.grid.innerHTML = ''; loadMore() }
     function setupObserver(){ if(state.observer) state.observer.disconnect(); state.observer = new IntersectionObserver(entries => { for(const e of entries){ if(e.isIntersecting){ loadMore() } } }); state.observer.observe(els.sentinel) }
