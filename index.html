@@ -1657,7 +1657,10 @@
                 const ua = navigator.userAgent || navigator.vendor || ''; 
                 return { 
                     ios: /iPad|iPhone|iPod/i.test(ua), 
-                    android: /Android/i.test(ua) 
+                    android: /Android/i.test(ua),
+                    mac: /Macintosh/i.test(ua),
+                    windows: /Windows/i.test(ua),
+                    linux: /Linux/i.test(ua)
                 }; 
             }
 
@@ -1694,35 +1697,116 @@
                 return `intent://${pp}#Intent;scheme=stremio;package=com.stremio.one;S.browser_fallback_url=${encodeURIComponent(storeFallback)};end`; 
             }
 
-            function openWithFallback(deeplink, webUrl){ 
-                const { ios, android } = getPlatform(); 
-                let hidden = false; 
+            // Enhanced Stremio opener with full browser support
+            function openWithFallback(deeplink, webUrl) {
+                const { ios, android, mac, windows, linux } = getPlatform();
                 
-                const onHide = () => { 
-                    hidden = true; 
-                    cleanup(); 
-                }; 
+                // Check if we're already in Stremio web
+                const isInStremioWeb = window.location.hostname === 'web.stremio.com';
                 
-                document.addEventListener('visibilitychange', onHide, { once: true }); 
+                // iOS handling
+                if (ios) {
+                    // Try iframe method first (more reliable in iOS)
+                    try {
+                        const iframe = document.createElement('iframe');
+                        iframe.style.display = 'none';
+                        iframe.src = deeplink;
+                        document.body.appendChild(iframe);
+                        
+                        // Remove iframe after attempt
+                        setTimeout(() => {
+                            document.body.removeChild(iframe);
+                            // If still here, try direct navigation
+                            if (!document.hidden) {
+                                window.location.href = deeplink;
+                            }
+                        }, 500);
+                    } catch (e) {
+                        // Fallback to direct navigation
+                        window.location.href = deeplink;
+                    }
+                    return;
+                }
                 
-                const cleanup = () => { 
-                    clearTimeout(timer); 
-                    document.removeEventListener('visibilitychange', onHide); 
-                }; 
+                // Android handling
+                if (android) {
+                    const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.stremio.one';
+                    const intentUrl = androidIntentFromDeeplink(deeplink, playStoreUrl);
+                    
+                    // Try multiple methods
+                    try {
+                        // Method 1: Direct intent
+                        window.location.href = intentUrl;
+                        
+                        // Method 2: If that fails, try deeplink directly
+                        setTimeout(() => {
+                            if (!document.hidden) {
+                                window.location.href = deeplink;
+                            }
+                        }, 300);
+                        
+                        // Method 3: If all else fails, open Play Store
+                        setTimeout(() => {
+                            if (!document.hidden && webUrl) {
+                                window.open(playStoreUrl, '_blank', 'noopener');
+                            }
+                        }, 1000);
+                    } catch (e) {
+                        // Fallback to web version
+                        if (webUrl && !isInStremioWeb) {
+                            window.open(webUrl, '_blank', 'noopener');
+                        }
+                    }
+                    return;
+                }
                 
-                try { 
-                    if(android){ 
-                        const play = 'https://play.google.com/store/apps/details?id=com.stremio.one'; 
-                        window.location.href = androidIntentFromDeeplink(deeplink, play); 
-                    } else { 
-                        window.location.href = deeplink; 
-                    } 
-                } catch{} 
+                // Desktop handling
+                if (mac || windows || linux) {
+                    // Try to open the desktop app
+                    try {
+                        // Method 1: Direct deeplink
+                        const opened = window.open(deeplink, '_blank');
+                        
+                        // Method 2: If that fails, try location change
+                        setTimeout(() => {
+                            if (!opened || opened.closed) {
+                                window.location.href = deeplink;
+                            }
+                        }, 100);
+                        
+                        // Method 3: If still not opened, open web version
+                        setTimeout(() => {
+                            if (webUrl && !isInStremioWeb) {
+                                // Check if user has Stremio installed by trying to detect it
+                                const hasStremio = localStorage.getItem('hasStremio') === 'true';
+                                
+                                if (hasStremio) {
+                                    // User has Stremio, try one more time
+                                    window.location.href = deeplink;
+                                } else {
+                                    // Open web version
+                                    window.open(webUrl, '_blank', 'noopener');
+                                }
+                                
+                                // Remember that we tried to open Stremio
+                                setTimeout(() => {
+                                    localStorage.setItem('hasStremio', 'false');
+                                }, 2000);
+                            }
+                        }, 500);
+                    } catch (e) {
+                        // Fallback to web version
+                        if (webUrl && !isInStremioWeb) {
+                            window.open(webUrl, '_blank', 'noopener');
+                        }
+                    }
+                    return;
+                }
                 
-                const timer = setTimeout(() => { 
-                    if(hidden) return; 
-                    if(webUrl) window.open(webUrl, '_blank', 'noopener'); 
-                }, 900); 
+                // Fallback for any other platform
+                if (webUrl && !isInStremioWeb) {
+                    window.open(webUrl, '_blank', 'noopener');
+                }
             }
 
             // Addons Click Handler
