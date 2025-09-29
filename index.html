@@ -337,7 +337,7 @@
             font-size: 13px;
         }
         
-        /* Toast and Back to Top */
+        /* Toast */
         .toast { 
             position: fixed; 
             bottom: 24px; 
@@ -359,31 +359,6 @@
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        #backToTop { 
-            position: fixed; 
-            bottom: 24px; 
-            left: 24px;
-            background: var(--brand-600); 
-            color: #fff; 
-            border-radius: 50%; 
-            width: 48px; 
-            height: 48px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            opacity: 0; 
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px var(--shadow);
-            z-index: 100;
-            cursor: pointer;
-        }
-        #backToTop.visible { 
-            opacity: 1; 
-        }
-        #backToTop:hover {
-            background: var(--brand-700);
-            transform: scale(1.1);
         }
         
         /* Status Message */
@@ -476,9 +451,6 @@
                         <p>פוסטרים, תיאורים וחיפוש תכנים בעברית. <span class="kbd">Hebrew metadata</span></p>
                     </article>
                 </div>
-                <div class="muted" style="font-size:14px; margin-top:24px; padding:16px; background:var(--chip-bg); border-radius:12px;">
-                    <strong><i class="fas fa-lightbulb"></i> טיפ:</strong> אם לחיצה לא פותחת את האפליקציה, ייתכן שהדפדפן חוסם דיפ‑לינקים. באנדרואיד ננסה <span class="kbd">Android Intent</span> וניפול ל‑Web אם צריך. ב‑iOS (אייפון), השתמש בכפתור "העתק קישור" כדי להעתיק את כתובת ה‑HTTPS, ואז התקן דרך Stremio Web (web.stremio.com) או דסקטופ. Stremio Lite ב‑iOS עשוי להיות מוגבל בהתקנות מסוימות.
-                </div>
             </div>
         </div>
     </section>
@@ -486,10 +458,6 @@
     <div class="toast" hidden="" id="toast">
         <div id="toastMsg"></div>
     </div>
-    
-    <button id="backToTop" aria-label="חזור למעלה">
-        <i class="fas fa-arrow-up"></i>
-    </button>
     
     <script>
         ;(() => {
@@ -516,8 +484,7 @@
                 toast: document.getElementById('toast'), 
                 toastMsg: document.getElementById('toastMsg'), 
                 mainContent: document.getElementById('mainContent'), 
-                addonsSection: document.getElementById('addonsSection'),
-                backToTop: document.getElementById('backToTop')
+                addonsSection: document.getElementById('addonsSection')
             }
 
             // Theme Management
@@ -821,15 +788,6 @@
                     if (state.observer) state.observer.observe(els.sentinel);
                 }
             }
-
-            // Back to Top Button
-            window.addEventListener('scroll', () => { 
-                els.backToTop.classList.toggle('visible', window.scrollY > 300); 
-            }); 
-            
-            els.backToTop.addEventListener('click', () => { 
-                window.scrollTo({ top: 0, behavior: 'smooth' }); 
-            });
 
             // INIT
             applyTheme(); 
