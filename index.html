@@ -680,36 +680,6 @@
             width: 20px;
         }
         
-        /* Custom dropdown arrow */
-        .sort-wrapper::after {
-            content: '\f107';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 14px;
-            pointer-events: none;
-            transition: transform 0.3s ease;
-            z-index: 2;
-        }
-        
-        body.tablet .sort-wrapper::after {
-            left: 18px;
-            font-size: 15px;
-        }
-        
-        body.desktop .sort-wrapper::after {
-            left: 20px;
-            font-size: 16px;
-        }
-        
-        .sort-wrapper:hover::after {
-            transform: translateY(-50%) rotate(180deg);
-        }
-        
         /* Responsive Grid and Cards */
         .grid { 
             display: grid; 
@@ -1639,8 +1609,8 @@
                 let description = item.overview || '';
                 if (!description.trim()) {
                     description = state.mediaType === 'movie' 
-                        ? 'אין תיאור זמין לסרט זה.' 
-                        : 'אין תיאור זמין לסדרה זו.';
+                        ? 'תיאור אינו זמין לסרט זה.' 
+                        : 'תיאור אינו זמין לסדרה זו.';
                 }
                 
                 const div = document.createElement('div'); 
