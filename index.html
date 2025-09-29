@@ -89,6 +89,11 @@
             --text-gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --text-gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
             --text-gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --text-gradient-6: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --text-gradient-7: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            --text-gradient-8: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            --text-gradient-9: linear-gradient(135deg, #ff8a80 0%, #ea80fc 100%);
+            --text-gradient-10: linear-gradient(135deg, #8fd3f4 0%, #84fab0 100%);
         }
         .dark { 
             --bg: #121212; 
@@ -253,6 +258,51 @@
             animation: textGradient5 8s ease infinite;
         }
         
+        .gradient-text-6 {
+            background: var(--text-gradient-6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            animation: textGradient6 8s ease infinite;
+        }
+        
+        .gradient-text-7 {
+            background: var(--text-gradient-7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            animation: textGradient7 8s ease infinite;
+        }
+        
+        .gradient-text-8 {
+            background: var(--text-gradient-8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            animation: textGradient8 8s ease infinite;
+        }
+        
+        .gradient-text-9 {
+            background: var(--text-gradient-9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            animation: textGradient9 8s ease infinite;
+        }
+        
+        .gradient-text-10 {
+            background: var(--text-gradient-10);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            animation: textGradient10 8s ease infinite;
+        }
+        
         .text-shadow {
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(0,0,0,0.1);
         }
@@ -282,6 +332,31 @@
         }
         
         @keyframes textGradient5 {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textGradient6 {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textGradient7 {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textGradient8 {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textGradient9 {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textGradient10 {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
@@ -1829,7 +1904,7 @@
                 });
             });
 
-            // Card Creation
+            // Card Creation with Colorful Titles
             function card(item){ 
                 const title = item.title || item.name || '—'; 
                 const date = item.release_date || item.first_air_date || ''; 
@@ -1903,11 +1978,17 @@
                 const cardContent = document.createElement('div');
                 cardContent.className = 'card-content';
                 
-                // Card title
+                // Card title with random colorful gradient
                 const cardTitle = document.createElement('div');
                 cardTitle.className = 'card-title';
                 cardTitle.title = title;
                 cardTitle.textContent = title;
+                
+                // Apply random gradient class for colorful effect
+                const gradientClasses = ['gradient-text-2', 'gradient-text-3', 'gradient-text-4', 'gradient-text-5', 'gradient-text-6', 'gradient-text-7', 'gradient-text-8', 'gradient-text-9', 'gradient-text-10'];
+                const randomGradient = gradientClasses[Math.floor(Math.random() * gradientClasses.length)];
+                cardTitle.classList.remove('gradient-text-2'); // Remove default
+                cardTitle.classList.add(randomGradient);
                 
                 // Card meta
                 const cardMeta = document.createElement('div');
