@@ -337,30 +337,6 @@
             font-size: 13px;
         }
         
-        /* Toast */
-        .toast { 
-            position: fixed; 
-            bottom: 24px; 
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex; 
-            justify-content: center; 
-            z-index: 1000; 
-        }
-        .toast > div { 
-            background: var(--card); 
-            padding: 12px 20px; 
-            border-radius: 12px; 
-            color: var(--text); 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            border: 1px solid var(--border);
-            animation: slideUp 0.3s ease;
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         /* Status Message */
         #status {
             text-align: center;
@@ -455,10 +431,6 @@
         </div>
     </section>
     
-    <div class="toast" hidden="" id="toast">
-        <div id="toastMsg"></div>
-    </div>
-    
     <script>
         ;(() => {
             const API_KEY = '93f0d2ee2e3e60d061d14d91cbb47b46'
@@ -481,8 +453,6 @@
                 grid: document.getElementById('grid'), 
                 sentinel: document.getElementById('sentinel'), 
                 status: document.getElementById('status'), 
-                toast: document.getElementById('toast'), 
-                toastMsg: document.getElementById('toastMsg'), 
                 mainContent: document.getElementById('mainContent'), 
                 addonsSection: document.getElementById('addonsSection')
             }
@@ -595,15 +565,6 @@
                 }, 900); 
             }
 
-            // Toast Function
-            function showToast(msg) { 
-                els.toastMsg.textContent = msg; 
-                els.toast.hidden = false; 
-                setTimeout(() => { 
-                    els.toast.hidden = true; 
-                }, 3000); 
-            }
-
             // Addons Click Handler
             document.querySelectorAll('.addon').forEach(addon => {
                 addon.addEventListener('click', () => {
@@ -613,9 +574,9 @@
                     
                     if(ios){
                         navigator.clipboard.writeText(copyLink).then(() => {
-                            showToast('הקישור HTTPS הועתק ללוח! פתח Stremio Web/דסקטופ והדבק להתקנה.');
+                            // הסרתי את ההודעה כי המשתמש ביקש להסיר את ה-toast
                         }).catch(() => {
-                            showToast('לא ניתן להעתיק אוטומטית. נא להעתיק ידנית מהכפתור למטה.');
+                            // הסרתי את ההודעה כי המשתמש ביקש להסיר את ה-toast
                         });
                         return;
                     }
