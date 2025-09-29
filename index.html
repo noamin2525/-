@@ -14,6 +14,7 @@
             --muted: #6c757d; 
             --card: #ffffff; 
             --border: #dee2e6; 
+            /* Default color theme - Purple */
             --brand-600: #6f42c1; 
             --brand-700: #563d7c; 
             --chip-bg: #e9ecef; 
@@ -30,6 +31,11 @@
             --theme-btn-hover: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
             --theme-btn-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
             --theme-btn-hover-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            /* Color picker button colors */
+            --color-picker-bg: linear-gradient(135deg, #6f42c1 0%, #ff6b6b 100%);
+            --color-picker-hover: linear-gradient(135deg, #563d7c 0%, #ff5252 100%);
+            --color-picker-shadow: 0 4px 15px rgba(111, 66, 193, 0.4);
+            --color-picker-hover-shadow: 0 6px 20px rgba(111, 66, 193, 0.6);
         }
         .dark { 
             --bg: #121212; 
@@ -48,7 +54,49 @@
             --theme-btn-hover: linear-gradient(135deg, #ee82ee 0%, #ff6b6b 100%);
             --theme-btn-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
             --theme-btn-hover-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+            /* Dark color picker button colors */
+            --color-picker-bg: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --color-picker-hover: linear-gradient(135deg, #ee82ee 0%, #ff6b6b 100%);
+            --color-picker-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+            --color-picker-hover-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
         }
+        
+        /* Color Themes */
+        .theme-purple {
+            --brand-600: #6f42c1;
+            --brand-700: #563d7c;
+            --accent-color: #ff6b6b;
+            --secondary-accent: #4ecdc4;
+        }
+        
+        .theme-blue {
+            --brand-600: #3498db;
+            --brand-700: #2980b9;
+            --accent-color: #e74c3c;
+            --secondary-accent: #1abc9c;
+        }
+        
+        .theme-green {
+            --brand-600: #2ecc71;
+            --brand-700: #27ae60;
+            --accent-color: #e67e22;
+            --secondary-accent: #f1c40f;
+        }
+        
+        .theme-orange {
+            --brand-600: #e67e22;
+            --brand-700: #d35400;
+            --accent-color: #3498db;
+            --secondary-accent: #2ecc71;
+        }
+        
+        .theme-pink {
+            --brand-600: #e91e63;
+            --brand-700: #c2185b;
+            --accent-color: #00bcd4;
+            --secondary-accent: #8bc34a;
+        }
+        
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: var(--topbar-h); }
         body { margin: 0; font-family: 'Rubik', 'Assistant', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -79,6 +127,13 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+        
+        /* Topbar Controls */
+        .topbar-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
         
         /* Modern Theme Toggle Button */
@@ -134,6 +189,149 @@
         
         #themeBtn:hover i {
             transform: rotate(180deg);
+        }
+        
+        /* Color Picker Button */
+        #colorPickerBtn {
+            background: var(--color-picker-bg);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--color-picker-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Assistant', sans-serif;
+        }
+        
+        #colorPickerBtn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        #colorPickerBtn:hover::before {
+            left: 100%;
+        }
+        
+        #colorPickerBtn:hover {
+            background: var(--color-picker-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--color-picker-hover-shadow);
+        }
+        
+        #colorPickerBtn:active {
+            transform: translateY(0);
+            box-shadow: var(--color-picker-shadow);
+        }
+        
+        #colorPickerBtn i {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+        
+        #colorPickerBtn:hover i {
+            transform: rotate(180deg);
+        }
+        
+        /* Color Picker Popup */
+        .color-picker-popup {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px var(--shadow);
+            padding: 20px;
+            margin-top: 10px;
+            display: none;
+            z-index: 200;
+            min-width: 280px;
+        }
+        
+        .color-picker-popup.active {
+            display: block;
+        }
+        
+        .color-picker-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 15px 0;
+            text-align: center;
+            color: var(--text);
+        }
+        
+        .color-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .color-option.active {
+            border-color: white;
+            box-shadow: 0 0 0 2px var(--brand-600);
+        }
+        
+        .color-option.active::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* Color option backgrounds */
+        .color-purple {
+            background: linear-gradient(135deg, #6f42c1, #ff6b6b);
+        }
+        
+        .color-blue {
+            background: linear-gradient(135deg, #3498db, #e74c3c);
+        }
+        
+        .color-green {
+            background: linear-gradient(135deg, #2ecc71, #e67e22);
+        }
+        
+        .color-orange {
+            background: linear-gradient(135deg, #e67e22, #3498db);
+        }
+        
+        .color-pink {
+            background: linear-gradient(135deg, #e91e63, #00bcd4);
         }
         
         /* Icon transitions */
@@ -422,10 +620,26 @@
         <div class="container">
             <div class="row">
                 <h1><i class="fas fa-film"></i> גלה המלצות חמות לסרטים וסדרות <i class="fas fa-tv"></i></h1>
-                <button aria-label="מצב כהה/בהיר" id="themeBtn">
-                    <i class="fas fa-sun theme-icon"></i>
-                    <span>מצב בהיר</span>
-                </button>
+                <div class="topbar-controls">
+                    <button aria-label="בחר צבע" id="colorPickerBtn">
+                        <i class="fas fa-palette theme-icon"></i>
+                        <span>צבעים</span>
+                    </button>
+                    <button aria-label="מצב כהה/בהיר" id="themeBtn">
+                        <i class="fas fa-sun theme-icon"></i>
+                        <span>מצב בהיר</span>
+                    </button>
+                    <div class="color-picker-popup" id="colorPickerPopup">
+                        <h3 class="color-picker-title">בחר צבע לאתר</h3>
+                        <div class="color-options">
+                            <div class="color-option color-purple active" data-theme="purple" title="סגול"></div>
+                            <div class="color-option color-blue" data-theme="blue" title="כחול"></div>
+                            <div class="color-option color-green" data-theme="green" title="ירוק"></div>
+                            <div class="color-option color-orange" data-theme="orange" title="כתום"></div>
+                            <div class="color-option color-pink" data-theme="pink" title="ורוד"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -508,6 +722,7 @@
             const API_KEY = '93f0d2ee2e3e60d061d14d91cbb47b46'
             const state = { 
                 theme: localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), 
+                colorTheme: localStorage.getItem('colorTheme') || 'purple',
                 mediaType: localStorage.getItem('mediaType') || 'movie', 
                 sortBy: localStorage.getItem('sortBy') || 'popularity.desc', 
                 query: '', 
@@ -519,6 +734,8 @@
             
             const els = { 
                 themeBtn: document.getElementById('themeBtn'), 
+                colorPickerBtn: document.getElementById('colorPickerBtn'),
+                colorPickerPopup: document.getElementById('colorPickerPopup'),
                 search: document.getElementById('search'), 
                 typeChips: document.getElementById('typeChips'), 
                 sort: document.getElementById('sort'), 
@@ -527,6 +744,57 @@
                 status: document.getElementById('status'), 
                 mainContent: document.getElementById('mainContent'), 
                 addonsSection: document.getElementById('addonsSection')
+            }
+
+            // Color Theme Management
+            function applyColorTheme() {
+                // Remove all theme classes
+                document.body.classList.remove('theme-purple', 'theme-blue', 'theme-green', 'theme-orange', 'theme-pink');
+                
+                // Add the selected theme class
+                document.body.classList.add(`theme-${state.colorTheme}`);
+                
+                // Update active color option
+                document.querySelectorAll('.color-option').forEach(option => {
+                    option.classList.toggle('active', option.getAttribute('data-theme') === state.colorTheme);
+                });
+                
+                // Update color picker button gradient based on selected theme
+                updateColorPickerButtonGradient();
+            }
+            
+            function updateColorPickerButtonGradient() {
+                const root = document.documentElement;
+                const brand600 = getComputedStyle(root).getPropertyValue('--brand-600').trim();
+                const accentColor = getComputedStyle(root).getPropertyValue('--accent-color').trim();
+                
+                // Update CSS custom properties for the color picker button
+                root.style.setProperty('--color-picker-bg', `linear-gradient(135deg, ${brand600}, ${accentColor})`);
+                root.style.setProperty('--color-picker-hover', `linear-gradient(135deg, ${adjustColor(brand600, -20)}, ${adjustColor(accentColor, -20)})`);
+                
+                // Update shadow colors
+                if (state.theme === 'dark') {
+                    root.style.setProperty('--color-picker-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
+                    root.style.setProperty('--color-picker-hover-shadow', `0 6px 20px ${hexToRgba(brand600, 0.6)}`);
+                } else {
+                    root.style.setProperty('--color-picker-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
+                    root.style.setProperty('--color-picker-hover-shadow', `0 6px 20px ${hexToRgba(brand600, 0.6)}`);
+                }
+            }
+            
+            function hexToRgba(hex, alpha) {
+                const r = parseInt(hex.slice(1, 3), 16);
+                const g = parseInt(hex.slice(3, 5), 16);
+                const b = parseInt(hex.slice(5, 7), 16);
+                return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            }
+            
+            function adjustColor(color, amount) {
+                const num = parseInt(color.replace("#", ""), 16);
+                const r = Math.max(0, Math.min(255, (num >> 16) + amount));
+                const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + amount));
+                const b = Math.max(0, Math.min(255, (num & 0x0000FF) + amount));
+                return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
             }
 
             // Theme Management
@@ -541,6 +809,27 @@
                 } else {
                     icon.className = 'fas fa-sun theme-icon';
                     text.textContent = 'מצב בהיר';
+                }
+                
+                // Update theme button gradient
+                updateThemeButtonGradient();
+                // Update color picker button gradient
+                updateColorPickerButtonGradient();
+            }
+            
+            function updateThemeButtonGradient() {
+                const root = document.documentElement;
+                
+                if (state.theme === 'dark') {
+                    root.style.setProperty('--theme-btn-bg', 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)');
+                    root.style.setProperty('--theme-btn-hover', 'linear-gradient(135deg, #ee82ee 0%, #ff6b6b 100%)');
+                    root.style.setProperty('--theme-btn-shadow', '0 4px 15px rgba(240, 147, 251, 0.4)');
+                    root.style.setProperty('--theme-btn-hover-shadow', '0 6px 20px rgba(240, 147, 251, 0.6)');
+                } else {
+                    root.style.setProperty('--theme-btn-bg', 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)');
+                    root.style.setProperty('--theme-btn-hover', 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)');
+                    root.style.setProperty('--theme-btn-shadow', '0 4px 15px rgba(102, 126, 234, 0.4)');
+                    root.style.setProperty('--theme-btn-hover-shadow', '0 6px 20px rgba(102, 126, 234, 0.6)');
                 }
             }
             
@@ -830,10 +1119,35 @@
             }
 
             // INIT
+            applyColorTheme();
             applyTheme(); 
             
             // Theme Button
             els.themeBtn.addEventListener('click', toggleTheme); 
+            
+            // Color Picker Button
+            els.colorPickerBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                els.colorPickerPopup.classList.toggle('active');
+            });
+            
+            // Close color picker when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!els.colorPickerPopup.contains(e.target) && e.target !== els.colorPickerBtn) {
+                    els.colorPickerPopup.classList.remove('active');
+                }
+            });
+            
+            // Color Options
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const theme = option.getAttribute('data-theme');
+                    state.colorTheme = theme;
+                    localStorage.setItem('colorTheme', theme);
+                    applyColorTheme();
+                    els.colorPickerPopup.classList.remove('active');
+                });
+            });
             
             // Type Chips
             els.typeChips.querySelectorAll('.chip').forEach(btn => { 
