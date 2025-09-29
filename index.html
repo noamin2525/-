@@ -1,52 +1,90 @@
-
 <!DOCTYPE html>
-
 <html dir="rtl" lang="he">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>המלצות לסרטים וסדרות — Stremio (כפתור אחד + התקנת הרחבות)</title>
+<title>המלצות לסרטים וסדרות</title>
 <meta content="light dark" name="color-scheme"/>
 <style>
-    :root { --bg:#fff; --text:#0b1220; --muted:#334155; --card:#fff; --border:#d1d5db; --brand-600:#4f46e5; --brand-700:#4338ca; --chip-bg:#f8fafc; --chip-border:#cbd5e1; --chip-active:#eef2ff; --btn-ghost:#0b1220; --shadow: rgba(2,6,23,.08); --topbar-h:56px }
-    .dark { --bg:#0b1020; --text:#e5edf6; --muted:#94a3b8; --card:rgba(2,6,23,.88); --border:#334155; --chip-bg:rgba(2,6,23,.6); --chip-border:#475569; --chip-active:#1e293b; --btn-ghost:#e5edf6; --shadow: rgba(0,0,0,.25) }
-    html{scroll-behavior:smooth; scroll-padding-top: var(--topbar-h)} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Noto Sans,Helvetica,Arial; background:var(--bg);color:var(--text)}
-    .container{max-width:1120px;margin-inline:auto;padding-inline:12px}
-    .topbar{background:var(--bg); border-bottom:1px solid var(--border)} .topbar .row{display:grid;gap:12px; grid-template-columns:1fr auto; align-items:center; height:var(--topbar-h)} .topbar h1{font-size:clamp(18px,2.0vw,24px);font-weight:800;margin:0}
-    @media(min-width:900px){ .topbar{position:sticky; top:0; z-index:20; backdrop-filter:blur(8px)} }
-    .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--chip-bg);color: var(--text);padding:8px 12px;border-radius:10px;font-size:14px;cursor:pointer}
-    .btn.primary{background:var(--brand-600);color:#fff;border-color:transparent}
-    .btn.ghost{background:transparent;color:var(--btn-ghost)} .btn.sm{padding:4px 8px; font-size:12px}
-    .filters{border-bottom:1px solid var(--border); background:linear-gradient(180deg, rgba(79,70,229,.06), transparent 70%)} .filters .wrap{display:grid; gap:12px; padding:12px 0}
-    .input,select{width:100%;background:var(--chip-bg);color:var(--text);border:1px solid var(--border);padding:10px 12px;border-radius:10px;outline:none}
-    .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--chip-border);background:var(--chip-bg);padding:6px 10px;border-radius:999px;font-size:12px;cursor:pointer;color:var(--text)}
-    .chip.active{outline:2px solid var(--brand-600);background:var(--chip-active)}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px; padding:16px 0} @media(min-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}} @media(min-width:768px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}} @media(min-width:1024px){.grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
-    .card{border:1px solid var(--border);background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 6px 20px var(--shadow)} .poster{width:100%;aspect-ratio:2/3;object-fit:cover;background:#e2e8f0}
-    .card .meta{display:flex;gap:8px;padding:10px;align-items:flex-start}
-    .fav{border:1px solid var(--chip-border);background:var(--chip-bg);border-radius:999px;padding:4px 8px;font-size:14px;cursor:pointer;color:var(--text)}
-    .muted{color:var(--muted);font-size:12px}
-    .toast{position:fixed;bottom:16px;inset-inline:0;display:flex;justify-content:center;z-index:100;pointer-events:none}
-    .toast>div{pointer-events:auto;border:1px solid var(--border);background:var(--card);padding:10px 12px;border-radius:10px;color:var(--text)}
+    :root { 
+      --bg: #f8f9fa; /* Light background for inviting feel */
+      --text: #1a1a1a; 
+      --muted: #6c757d; 
+      --card: #ffffff; 
+      --border: #dee2e6; 
+      --brand-600: #6f42c1; /* Vibrant purple for Stremio theme */
+      --brand-700: #563d7c; 
+      --chip-bg: #e9ecef; 
+      --chip-border: #ced4da; 
+      --chip-active: #d1e7dd; /* Soft green for active */
+      --btn-ghost: #212529; 
+      --shadow: rgba(0, 0, 0, 0.1); 
+      --topbar-h: 64px; /* Slightly taller for modern look */
+      --accent-color: #ff6b6b; /* Colorful red accent */
+      --secondary-accent: #4ecdc4; /* Teal for variety */
+    }
+    .dark { 
+      --bg: #121212; 
+      --text: #e9ecef; 
+      --muted: #adb5bd; 
+      --card: #1e1e1e; 
+      --border: #343a40; 
+      --chip-bg: #2c2c2c; 
+      --chip-border: #495057; 
+      --chip-active: #2a9d8f; /* Dark mode active color */
+      --btn-ghost: #e9ecef; 
+      --shadow: rgba(0, 0, 0, 0.5); 
+    }
+    html{scroll-behavior:smooth; scroll-padding-top: var(--topbar-h)} 
+    body{margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:var(--bg); color:var(--text); line-height:1.5;}
+    .container{max-width:1200px; margin-inline:auto; padding-inline:16px;}
+    .topbar{background: linear-gradient(135deg, var(--brand-600), var(--brand-700)); /* Colorful gradient */ color: #fff; border-bottom:none; box-shadow: 0 2px 10px var(--shadow);} 
+    .topbar .row{display:flex; gap:16px; align-items:center; height:var(--topbar-h); justify-content:space-between;} 
+    .topbar h1{font-size:clamp(20px, 2.5vw, 28px); font-weight:700; margin:0; text-shadow: 0 1px 2px rgba(0,0,0,0.2);}
+    @media(min-width:900px){ .topbar{position:sticky; top:0; z-index:20; backdrop-filter:blur(12px);} }
+    .btn{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border); background:var(--chip-bg); color:var(--text); padding:10px 16px; border-radius:12px; font-size:15px; cursor:pointer; transition: all 0.3s ease; box-shadow: 0 2px 5px var(--shadow);}
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px var(--shadow); }
+    .btn.primary{background: linear-gradient(135deg, var(--brand-600), var(--accent-color)); color:#fff; border-color:transparent;}
+    .btn.ghost{background:transparent; color:#fff; border:none;} /* Updated for topbar */
+    .filters{background: linear-gradient(180deg, rgba(111,66,193,0.1), transparent 70%); padding:16px 0; border-bottom:1px solid var(--border);}
+    .filters .wrap{display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
+    .input,select{width:100%; background:var(--chip-bg); color:var(--text); border:1px solid var(--border); padding:12px 16px; border-radius:12px; outline:none; transition: border-color 0.3s;}
+    .input:focus, select:focus { border-color: var(--brand-600); }
+    .chips{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+    .chip{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--chip-border); background:var(--chip-bg); padding:8px 14px; border-radius:999px; font-size:14px; cursor:pointer; color:var(--text); transition: all 0.3s ease; box-shadow: 0 1px 3px var(--shadow);}
+    .chip:hover { background: var(--chip-active); transform: scale(1.05); }
+    .chip.active{outline:2px solid var(--brand-600); background:var(--chip-active); font-weight:bold;}
+    .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:16px; padding:20px 0;}
+    .card{border:1px solid var(--border); background:var(--card); border-radius:16px; overflow:hidden; box-shadow:0 4px 15px var(--shadow); transition: transform 0.3s ease, box-shadow 0.3s ease;}
+    .card:hover { transform: translateY(-5px); box-shadow:0 8px 25px var(--shadow); }
+    .poster{width:100%; aspect-ratio:2/3; object-fit:cover; background:linear-gradient(135deg, #e2e8f0, #ced4da);}
+    .card .meta{display:flex; gap:10px; padding:12px; align-items:flex-start; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.05));}
+    .fav{border:1px solid var(--chip-border); background:var(--chip-bg); border-radius:999px; padding:6px 10px; font-size:16px; cursor:pointer; color:var(--accent-color); transition: color 0.3s;}
+    .fav:hover { color: var(--secondary-accent); }
+    .muted{color:var(--muted); font-size:13px;}
+    .toast{position:fixed; bottom:20px; inset-inline:0; display:flex; justify-content:center; z-index:100; pointer-events:none;}
+    .toast>div{pointer-events:auto; border:1px solid var(--border); background:var(--card); padding:12px 16px; border-radius:12px; color:var(--text); box-shadow:0 4px 10px var(--shadow);}
 
     /* Addons block */
-    .addons{border-top:1px solid var(--border); background:linear-gradient(180deg, rgba(67,56,202,.08), transparent 90%)}
-    .addons .wrap{display:grid; gap:14px; padding:16px 0}
-    .addon-grid{display:grid; gap:12px}
-    @media(min-width:860px){.addon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    .addon{border:1px solid var(--border); background:var(--card); border-radius:14px; padding:12px; box-shadow:0 6px 20px var(--shadow)}
-    .addon h3{margin:0 0 4px; font-size:16px}
-    .addon p{margin:0; color:var(--muted); font-size:13px}
-    .addon .actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
-    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#00000010; padding:2px 6px; border-radius:6px}
+    .addons{border-top:1px solid var(--border); background:linear-gradient(180deg, rgba(78,205,196,0.1), transparent 90%); /* Colorful gradient */}
+    .addons .wrap{display:grid; gap:16px; padding:20px 0;}
+    .addon-grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));}
+    .addon{border:1px solid var(--border); background:var(--card); border-radius:16px; padding:16px; box-shadow:0 4px 15px var(--shadow); transition: transform 0.3s;}
+    .addon:hover { transform: translateY(-3px); }
+    .addon h3{margin:0 0 6px; font-size:18px; color: var(--brand-600);}
+    .addon p{margin:0; color:var(--muted); font-size:14px;}
+    .addon .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:rgba(0,0,0,0.1); padding:3px 7px; border-radius:6px; color: var(--secondary-accent);}
+
+    /* Hide addons by default */
+    .addons { display: none; }
   </style>
 </head>
 <body>
 <header class="topbar">
 <div class="container">
 <div class="row">
-<h1>המלצות לסרטים וסדרות — Stremio (כפתור אחד)</h1>
+<h1>המלצות לסרטים וסדרות</h1>
 <button aria-label="מצב כהה/בהיר" class="btn ghost" id="themeBtn">☀️ מצב בהיר</button>
 </div>
 </div>
@@ -59,6 +97,7 @@
 <div class="chips" id="typeChips">
 <button class="chip" data-type="movie">סרטים</button>
 <button class="chip" data-type="tv">סדרות</button>
+<button class="chip" data-type="addons">הרחבות להתקנה רשאונית</button>
 </div>
 </div>
 <div>
@@ -71,13 +110,13 @@
 </div>
 </div>
 </section>
-<main class="container">
+<main class="container" id="mainContent">
 <div class="muted" id="status" style="padding: 8px 0;">מוכן</div>
 <div class="grid" id="grid"></div>
 <div id="sentinel" style="height: 48px;"></div>
 </main>
 <!-- Addons Installer (נוסף בעדינות, לא הורס את הנראות) -->
-<section aria-labelledby="addonsTitle" class="addons">
+<section aria-labelledby="addonsTitle" class="addons" id="addonsSection">
 <div class="container">
 <div class="wrap">
 <h2 id="addonsTitle" style="margin:0; font-size:18px;">התקנת הרחבות (לחיצה אחת)</h2>
@@ -137,7 +176,7 @@
   ;(() => {
     const API_KEY = '93f0d2ee2e3e60d061d14d91cbb47b46'
     const state = { theme: localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), mediaType: localStorage.getItem('mediaType') || 'movie', sortBy: localStorage.getItem('sortBy') || 'popularity.desc', query: '', page: 1, totalPages: 1, favorites: new Set(JSON.parse(localStorage.getItem('favorites') || '[]')), loading: false, observer: null }
-    const els = { themeBtn: document.getElementById('themeBtn'), search: document.getElementById('search'), typeChips: document.getElementById('typeChips'), sort: document.getElementById('sort'), grid: document.getElementById('grid'), sentinel: document.getElementById('sentinel'), status: document.getElementById('status'), toast: document.getElementById('toast'), toastMsg: document.getElementById('toastMsg') }
+    const els = { themeBtn: document.getElementById('themeBtn'), search: document.getElementById('search'), typeChips: document.getElementById('typeChips'), sort: document.getElementById('sort'), grid: document.getElementById('grid'), sentinel: document.getElementById('sentinel'), status: document.getElementById('status'), toast: document.getElementById('toast'), toastMsg: document.getElementById('toastMsg'), mainContent: document.getElementById('mainContent'), addonsSection: document.getElementById('addonsSection') }
 
     function applyTheme(){ document.documentElement.classList.toggle('dark', state.theme === 'dark'); els.themeBtn.textContent = state.theme === 'dark' ? '🌙 מצב כהה' : '☀️ מצב בהיר' }
     function toggleTheme(){ state.theme = state.theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', state.theme); applyTheme() }
@@ -158,9 +197,11 @@
 
     function openWithFallback(deeplink, webUrl){ const { ios, android } = getPlatform(); let hidden = false; const onHide = () => { hidden = true; cleanup() }; document.addEventListener('visibilitychange', onHide, { once:true }); const cleanup = () => { clearTimeout(timer); document.removeEventListener('visibilitychange', onHide) }; try { if(android){ const play = 'https://play.google.com/store/apps/details?id=com.stremio.one'; window.location.href = androidIntentFromDeeplink(deeplink, play) } else { window.location.href = deeplink } } catch{} const timer = setTimeout(() => { if(hidden) return; if(webUrl) window.open(webUrl, '_blank','noopener') }, 900) }
 
+    // Toast function (added for iOS alerts and copies)
+    function showToast(msg) { els.toastMsg.textContent = msg; els.toast.hidden = false; setTimeout(() => els.toast.hidden = true, 3000); }
+
     // Addons buttons
-    document.querySelectorAll('[data-addon]').forEach(btn => { btn.addEventListener('click', e => { e.preventDefault(); const link = btn.getAttribute('data-addon'); const { ios } = getPlatform(); if(ios){ // ב‑iOS ייתכן ש‑Stremio Lite לא יתקין הרחבות — מציגים הודעה והעתק HTTPS
-          showToast('ב‑iOS ייתכן שהתקנת הרחבות מוגבלת. ניתן להעתיק HTTPS ולהתקין דרך Stremio Web/דסקטופ.'); return } window.location.href = link; }) })
+    document.querySelectorAll('[data-addon]').forEach(btn => { btn.addEventListener('click', e => { e.preventDefault(); const link = btn.getAttribute('data-addon'); const { ios } = getPlatform(); if(ios){ showToast('ב‑iOS ייתכן שהתקנת הרחבות מוגבלת. ניתן להעתיק HTTPS ולהתקין דרך Stremio Web/דסקטופ.'); return } window.location.href = link; }) })
     document.querySelectorAll('[data-copy]').forEach(btn => { btn.addEventListener('click', async () => { const url = btn.getAttribute('data-copy'); try{ await navigator.clipboard.writeText(url); showToast('הקישור הועתק ללוח') }catch{ showToast('לא ניתן להעתיק — נא להעתיק ידנית') } }) })
 
     // Recommendations: single "Open in Stremio" button
@@ -170,12 +211,57 @@
     async function loadMore(){ if(state.loading) return; if(state.page > state.totalPages) return; state.loading = true; els.status.textContent = `טוען עמוד ${state.page}…`; try{ const data = await fetchPage(state.page); state.totalPages = data.total_pages || 1; (data.results || []).forEach(it => els.grid.appendChild(card(it))); state.page += 1; els.status.textContent = state.page > state.totalPages ? 'הגעת לסוף 🎬' : 'מוכן' }catch(err){ console.error(err); els.status.textContent = 'שגיאה' } finally{ state.loading = false } }
     function restartFeed(){ state.page = 1; state.totalPages = 1; els.grid.innerHTML = ''; loadMore() }
 
+    // Function to switch tabs (movies/tv/addons)
+    function switchTab(type) {
+      state.mediaType = type;
+      localStorage.setItem('mediaType', type);
+      document.querySelectorAll('#typeChips .chip').forEach(x => x.classList.toggle('active', x.getAttribute('data-type') === type));
+      
+      if (type === 'addons') {
+        els.mainContent.style.display = 'none';
+        els.addonsSection.style.display = 'block';
+        if (state.observer) state.observer.disconnect(); // Stop infinite scroll
+      } else {
+        els.mainContent.style.display = 'block';
+        els.addonsSection.style.display = 'none';
+        restartFeed();
+        if (state.observer) state.observer.observe(els.sentinel); // Restart infinite scroll
+      }
+    }
+
     // INIT
-    applyTheme(); document.getElementById('themeBtn').addEventListener('click', toggleTheme); 
-    document.getElementById('typeChips').querySelectorAll('.chip').forEach(btn => { const t = btn.getAttribute('data-type'); btn.classList.toggle('active', t === state.mediaType); btn.onclick = () => { if(state.mediaType === t) return; state.mediaType = t; localStorage.setItem('mediaType', t); document.getElementById('typeChips').querySelectorAll('.chip').forEach(x=>x.classList.toggle('active', x===btn)); restartFeed() } });
-    els.sort.value = state.sortBy; els.sort.addEventListener('change', () => { state.sortBy = els.sort.value; localStorage.setItem('sortBy', state.sortBy); restartFeed() })
-    let searchTimer; els.search.addEventListener('input', (e)=>{ clearTimeout(searchTimer); searchTimer = setTimeout(()=>{ state.query = e.target.value.trim(); document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'}); restartFeed() }, 350) })
-    restartFeed()
+    applyTheme(); 
+    els.themeBtn.addEventListener('click', toggleTheme); 
+    els.typeChips.querySelectorAll('.chip').forEach(btn => { 
+      const t = btn.getAttribute('data-type'); 
+      btn.classList.toggle('active', t === state.mediaType); 
+      btn.onclick = () => { 
+        if (state.mediaType === t) return; 
+        switchTab(t); 
+      } 
+    });
+    els.sort.value = state.sortBy; 
+    els.sort.addEventListener('change', () => { 
+      state.sortBy = els.sort.value; 
+      localStorage.setItem('sortBy', state.sortBy); 
+      if (state.mediaType !== 'addons') restartFeed(); 
+    });
+    let searchTimer; 
+    els.search.addEventListener('input', (e)=>{ 
+      clearTimeout(searchTimer); 
+      searchTimer = setTimeout(()=>{ 
+        state.query = e.target.value.trim(); 
+        if (state.mediaType !== 'addons') { 
+          document.getElementById('grid').scrollIntoView({behavior:'smooth', block:'start'}); 
+          restartFeed(); 
+        } 
+      }, 350) 
+    });
+    switchTab(state.mediaType); // Initialize the correct tab
+
+    // Infinite scroll observer (only for movies/tv)
+    state.observer = new IntersectionObserver(entries => { if (entries[0].isIntersecting && state.mediaType !== 'addons') loadMore(); }, { threshold: 0.1 });
+    if (state.mediaType !== 'addons') state.observer.observe(els.sentinel);
   })()
   </script>
 </body>
