@@ -1755,11 +1755,11 @@
                 } 
             }
             
+            // FIXED: Correct Stremio detail URL format
             function stremioDetailURL(type, imdb){ 
                 const t = (type==='tv'?'series':'movie'); 
-                return t==='movie' 
-                    ? `stremio:///detail/${t}/${imdb}/${imdb}` 
-                    : `stremio:///detail/${t}/${imdb}`; 
+                // Fixed format - no duplicate ID for movies
+                return `stremio:///detail/${t}/${imdb}`;
             }
             
             function stremioWebURL(type, imdb){ 
