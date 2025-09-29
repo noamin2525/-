@@ -216,31 +216,9 @@
         }
         
         .card .meta { 
-            display: flex; 
-            gap: 10px; 
             padding: 16px; 
-            align-items: flex-start; 
             background: linear-gradient(180deg, transparent, rgba(0,0,0,0.05));
             flex-grow: 1;
-        }
-        .fav { 
-            border: 1px solid var(--chip-border); 
-            background: var(--chip-bg); 
-            border-radius: 50%; 
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            cursor: pointer; 
-            color: var(--accent-color); 
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-        .fav:hover { 
-            color: var(--secondary-accent);
-            transform: scale(1.1);
         }
         .muted { 
             color: var(--muted); 
@@ -546,7 +524,6 @@
                 query: '', 
                 page: 1, 
                 totalPages: 1, 
-                favorites: new Set(JSON.parse(localStorage.getItem('favorites') || '[]')), 
                 loading: false, 
                 observer: null 
             }
@@ -722,7 +699,6 @@
                 const date = item.release_date || item.first_air_date || ''; 
                 const vote = (item.vote_average && item.vote_average.toFixed) ? item.vote_average.toFixed(1) : '—'; 
                 const id = item.id; 
-                const fav = state.favorites.has(id); 
                 const href = `https://www.themoviedb.org/${state.mediaType}/${id}`; 
                 
                 // Get description with fallback
@@ -787,23 +763,6 @@
                 const meta = document.createElement('div');
                 meta.className = 'meta';
                 
-                // Favorite button
-                const favBtn = document.createElement('button');
-                favBtn.className = 'fav';
-                favBtn.setAttribute('data-id', id);
-                favBtn.textContent = fav ? '★' : '☆';
-                favBtn.addEventListener('click', () => { 
-                    const id = Number(favBtn.getAttribute('data-id')); 
-                    if(state.favorites.has(id)) { 
-                        state.favorites.delete(id); 
-                        favBtn.textContent = '☆'; 
-                    } else { 
-                        state.favorites.add(id); 
-                        favBtn.textContent = '★'; 
-                    }
-                    localStorage.setItem('favorites', JSON.stringify([...state.favorites])); 
-                });
-                
                 // Card content
                 const cardContent = document.createElement('div');
                 cardContent.className = 'card-content';
@@ -825,7 +784,6 @@
                 cardContent.appendChild(cardTitle);
                 cardContent.appendChild(cardMeta);
                 
-                meta.appendChild(favBtn);
                 meta.appendChild(cardContent);
                 
                 // Append everything to the card
