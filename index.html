@@ -3,14 +3,14 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>🎥 גלה המלצות חמות לסרטים וסדרות 📺</title>
+    <title>🎬 סרטים סדרות ומה שביניים</title>
     <meta content="light dark" name="color-scheme"/>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://yourwebsite.com/"/>
-    <meta property="og:title" content="🎥 גלה המלצות חמות לסרטים וסדרות 📺"/>
-    <meta property="og:description" content="גלה המלצות חמות לסרטים וסדרות - מצא את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
+    <meta property="og:title" content="🎬 סרטים סדרות ומה שביניים"/>
+    <meta property="og:description" content="סרטים סדרות ומה שביניים - גלה את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
     <meta property="og:image" content="https://i.imgur.com/8X9Vz4A.png"/>
     <meta property="og:image:width" content="1200"/>
     <meta property="og:image:height" content="630"/>
@@ -19,14 +19,14 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image"/>
     <meta property="twitter:url" content="https://yourwebsite.com/"/>
-    <meta property="twitter:title" content="🎥 גלה המלצות חמות לסרטים וסדרות 📺"/>
-    <meta property="twitter:description" content="גלה המלצות חמות לסרטים וסדרות - מצא את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
+    <meta property="twitter:title" content="🎬 סרטים סדרות ומה שביניים"/>
+    <meta property="twitter:description" content="סרטים סדרות ומה שביניים - גלה את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
     <meta property="twitter:image" content="https://i.imgur.com/8X9Vz4A.png"/>
     
     <!-- Additional meta tags for Google -->
-    <meta name="description" content="גלה המלצות חמות לסרטים וסדרות - מצא את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
-    <meta name="keywords" content="סרטים, סדרות, המלצות, דירוגים, ביקורות, קולנוע, טלוויזיה"/>
-    <meta name="author" content="גלה המלצות חמות"/>
+    <meta name="description" content="סרטים סדרות ומה שביניים - גלה את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
+    <meta name="keywords" content="סרטים, סדרות, מה שביניים, המלצות, דירוגים, ביקורות, קולנוע, טלוויזיה"/>
+    <meta name="author" content="סרטים סדרות ומה שביניים"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
     <!-- Favicon - Browser Tab Icon -->
@@ -34,7 +34,7 @@
     <link rel="shortcut icon" type="image/png" href="https://i.imgur.com/8X9Vz4A.png">
     <link rel="apple-touch-icon" href="https://i.imgur.com/8X9Vz4A.png">
     
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Assistant:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&family=Assistant:wght@400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { 
@@ -83,6 +83,12 @@
             --dropdown-item-hover: linear-gradient(135deg, var(--brand-600), var(--secondary-accent));
             --dropdown-item-text: var(--text);
             --dropdown-item-hover-text: white;
+            /* Text gradients */
+            --text-gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --text-gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --text-gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --text-gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
         }
         .dark { 
             --bg: #121212; 
@@ -201,6 +207,85 @@
             --card-padding: 16px;
         }
         
+        /* Animated Text Styles */
+        .gradient-text {
+            background: var(--text-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            animation: textGradient 8s ease infinite;
+        }
+        
+        .gradient-text-2 {
+            background: var(--text-gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            animation: textGradient2 8s ease infinite;
+        }
+        
+        .gradient-text-3 {
+            background: var(--text-gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            animation: textGradient3 8s ease infinite;
+        }
+        
+        .gradient-text-4 {
+            background: var(--text-gradient-4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            animation: textGradient4 8s ease infinite;
+        }
+        
+        .gradient-text-5 {
+            background: var(--text-gradient-5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            animation: textGradient5 8s ease infinite;
+        }
+        
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .text-shadow-light {
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5), 0 0 5px rgba(255,255,255,0.2);
+        }
+        
+        @keyframes textGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textGradient2 {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textGradient3 {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textGradient4 {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes textGradient5 {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
         /* Responsive Topbar */
         .topbar { 
             background: linear-gradient(135deg, var(--brand-600), var(--brand-700)); 
@@ -222,13 +307,23 @@
         
         .topbar h1 { 
             font-size: clamp(18px, 2.5vw, 28px); 
-            font-weight: 700; 
+            font-weight: 900; 
             margin: 0; 
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2); 
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 0 20px rgba(255,255,255,0.3); 
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
             gap: 8px;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
         
         /* Responsive Topbar Controls */
@@ -257,6 +352,7 @@
             overflow: hidden;
             font-family: 'Assistant', sans-serif;
             min-height: 36px;
+            font-weight: 800;
         }
         
         body.tablet #themeBtn, body.tablet #colorPickerBtn, body.tablet .sort-button {
@@ -370,6 +466,10 @@
             text-align: center;
             color: var(--text);
             letter-spacing: -0.3px;
+            background: var(--text-gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .color-options {
@@ -506,6 +606,7 @@
             transition: all 0.3s ease; 
             font-family: inherit;
             font-size: 14px;
+            font-weight: 600;
         }
         
         body.tablet .input, body.tablet select {
@@ -554,7 +655,7 @@
             color: var(--text); 
             transition: all 0.3s ease; 
             box-shadow: 0 1px 3px var(--shadow);
-            font-weight: 500;
+            font-weight: 600;
         }
         
         body.tablet .chip {
@@ -578,7 +679,8 @@
             outline: 2px solid var(--brand-600); 
             background: var(--brand-600); 
             color: white;
-            font-weight: 600;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(111,66,193,0.3);
         }
         
         /* Responsive Custom Sort Dropdown */
@@ -671,7 +773,7 @@
             background: var(--dropdown-item-bg);
             color: var(--dropdown-item-text);
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.2s ease;
             font-family: 'Assistant', sans-serif;
         }
@@ -809,6 +911,10 @@
             font-weight: 700;
             margin-bottom: 10px;
             text-align: center;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         body.tablet .poster-overlay-title {
@@ -849,6 +955,7 @@
         .muted { 
             color: var(--muted); 
             font-size: 11px;
+            font-weight: 600;
         }
         
         body.tablet .muted {
@@ -872,6 +979,10 @@
             text-overflow: ellipsis;
             margin-bottom: 3px;
             font-size: 14px;
+            background: var(--text-gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         body.tablet .card-title {
@@ -1027,6 +1138,11 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            background: var(--text-gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
         }
         
         body.tablet .addon h3 {
@@ -1046,6 +1162,7 @@
             color: var(--muted); 
             font-size: 13px;
             line-height: 1.5;
+            font-weight: 600;
         }
         
         body.tablet .addon p {
@@ -1105,6 +1222,7 @@
             font-family: 'Assistant', sans-serif;
             text-decoration: none;
             min-height: 40px;
+            font-weight: 800;
         }
         
         body.tablet #telegramBtn {
@@ -1170,6 +1288,7 @@
             padding: 14px 0;
             color: var(--muted);
             font-size: 13px;
+            font-weight: 600;
         }
         
         body.tablet #status {
@@ -1187,7 +1306,7 @@
     <header class="topbar">
         <div class="container">
             <div class="row">
-                <h1><i class="fas fa-film"></i> גלה המלצות חמות לסרטים וסדרות <i class="fas fa-tv"></i></h1>
+                <h1><i class="fas fa-film"></i> סרטים סדרות ומה שביניים <i class="fas fa-tv"></i></h1>
                 <div class="topbar-controls">
                     <button aria-label="בחר צבע" id="colorPickerBtn">
                         <i class="fas fa-palette theme-icon"></i>
