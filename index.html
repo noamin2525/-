@@ -46,6 +46,14 @@
             --sort-hover: linear-gradient(135deg, var(--brand-700), var(--accent-color));
             --sort-shadow: 0 4px 15px rgba(111, 66, 193, 0.4);
             --sort-hover-shadow: 0 6px 20px rgba(111, 66, 193, 0.6);
+            /* Custom dropdown colors */
+            --dropdown-bg: var(--card);
+            --dropdown-border: var(--border);
+            --dropdown-shadow: 0 15px 40px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.08);
+            --dropdown-item-bg: transparent;
+            --dropdown-item-hover: linear-gradient(135deg, var(--brand-600), var(--secondary-accent));
+            --dropdown-item-text: var(--text);
+            --dropdown-item-hover-text: white;
         }
         .dark { 
             --bg: #121212; 
@@ -79,6 +87,14 @@
             --sort-hover: linear-gradient(135deg, var(--brand-700), var(--accent-color));
             --sort-shadow: 0 4px 15px rgba(111, 66, 193, 0.4);
             --sort-hover-shadow: 0 6px 20px rgba(111, 66, 193, 0.6);
+            /* Dark custom dropdown colors */
+            --dropdown-bg: var(--card);
+            --dropdown-border: var(--border);
+            --dropdown-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 5px 15px rgba(0,0,0,0.15);
+            --dropdown-item-bg: transparent;
+            --dropdown-item-hover: linear-gradient(135deg, var(--brand-600), var(--secondary-accent));
+            --dropdown-item-text: var(--text);
+            --dropdown-item-hover-text: white;
         }
         
         /* Color Themes */
@@ -462,7 +478,7 @@
             font-weight: 600;
         }
         
-        /* Modern Sort Button */
+        /* Modern Custom Sort Dropdown */
         .sort-wrapper {
             position: relative;
         }
@@ -508,6 +524,56 @@
         #sort:active {
             transform: translateY(0);
             box-shadow: var(--sort-shadow);
+        }
+        
+        /* Custom dropdown menu */
+        .custom-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 8px;
+            background: var(--dropdown-bg);
+            border: 1px solid var(--dropdown-border);
+            border-radius: 16px;
+            box-shadow: var(--dropdown-shadow);
+            overflow: hidden;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .custom-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .custom-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            cursor: pointer;
+            background: var(--dropdown-item-bg);
+            color: var(--dropdown-item-text);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-family: 'Assistant', sans-serif;
+        }
+        
+        .custom-dropdown-item:hover {
+            background: var(--dropdown-item-hover);
+            color: var(--dropdown-item-hover-text);
+        }
+        
+        .custom-dropdown-item i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
         }
         
         /* Custom dropdown arrow */
@@ -858,6 +924,20 @@
                         <option value="vote_average.desc">מיון: דירוג</option>
                         <option value="primary_release_date.desc">מיון: תאריך יציאה</option>
                     </select>
+                    <div class="custom-dropdown" id="sortDropdown">
+                        <div class="custom-dropdown-item" data-value="popularity.desc">
+                            <i class="fas fa-fire"></i>
+                            <span>מיון: פופולריות</span>
+                        </div>
+                        <div class="custom-dropdown-item" data-value="vote_average.desc">
+                            <i class="fas fa-star"></i>
+                            <span>מיון: דירוג</span>
+                        </div>
+                        <div class="custom-dropdown-item" data-value="primary_release_date.desc">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>מיון: תאריך יציאה</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -937,7 +1017,8 @@
                 colorPickerPopup: document.getElementById('colorPickerPopup'),
                 search: document.getElementById('search'), 
                 typeChips: document.getElementById('typeChips'), 
-                sort: document.getElementById('sort'), 
+                sort: document.getElementById('sort'),
+                sortDropdown: document.getElementById('sortDropdown'),
                 grid: document.getElementById('grid'), 
                 sentinel: document.getElementById('sentinel'), 
                 status: document.getElementById('status'), 
@@ -1343,6 +1424,52 @@
                 }
             }
 
+            // Custom Sort Dropdown
+            function initCustomDropdown() {
+                const sortBtn = els.sort;
+                const dropdown = els.sortDropdown;
+                const dropdownItems = dropdown.querySelectorAll('.custom-dropdown-item');
+                
+                // Toggle dropdown
+                sortBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dropdown.classList.toggle('active');
+                });
+                
+                // Handle item selection
+                dropdownItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const value = item.getAttribute('data-value');
+                        
+                        // Update the hidden select
+                        els.sort.value = value;
+                        
+                        // Update state
+                        state.sortBy = value;
+                        localStorage.setItem('sortBy', value);
+                        
+                        // Close dropdown
+                        dropdown.classList.remove('active');
+                        
+                        // Restart feed if not in addons tab
+                        if (state.mediaType !== 'addons') {
+                            restartFeed();
+                        }
+                    });
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', () => {
+                    dropdown.classList.remove('active');
+                });
+                
+                // Prevent dropdown from closing when clicking inside
+                dropdown.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
+
             // INIT
             applyColorTheme();
             applyTheme(); 
@@ -1384,13 +1511,8 @@
                 }; 
             });
             
-            // Sort Select
-            els.sort.value = state.sortBy; 
-            els.sort.addEventListener('change', () => { 
-                state.sortBy = els.sort.value; 
-                localStorage.setItem('sortBy', state.sortBy); 
-                if (state.mediaType !== 'addons') restartFeed(); 
-            });
+            // Initialize custom dropdown
+            initCustomDropdown();
             
             // Search Input
             let searchTimer; 
