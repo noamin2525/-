@@ -262,7 +262,7 @@
         body.tablet .filters .wrap { gap: 14px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
         body.desktop .filters .wrap { gap: 16px; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
         
-        .input { width: 100%; background: var(--card); color: var(--text); border: 1px solid var(--border); padding: 12px 16px; border-radius: 12px; outline: none; transition: all 0.3s ease; font-family: inherit; font-size: 15px; font-weight: 600; }
+        .input { width: 100%; background: var(--card); color: var(--text); border: 1px solid var(--border); padding: 12px 16px; border-radius: 12px; outline: none; transition: all 0.3s ease; font-family: inherit; font-size: 15px; font-weight: 600; caret-color: currentColor; user-select: text; -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; -webkit-appearance: textfield; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
         .input:focus { border-color: var(--brand-600); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-600) 20%, transparent); }
         
         .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
@@ -443,7 +443,7 @@
         <div class="container">
             <div class="wrap">
                 <div style="display: flex; gap: 10px; align-items: center;">
-                    <input type="search" aria-label="חיפוש סרטים או סדרות" class="input" id="search" placeholder="חיפוש סרטים או סדרות…" style="flex: 1;"/>
+                    <input type="text" aria-label="חיפוש סרטים או סדרות" class="input" id="search" placeholder="חיפוש סרטים או סדרות…" style="flex: 1;"/>
                     <button class="clear-all-filters" id="clearAllFilters" title="נקה את כל הסינונים"><i class="fas fa-times-circle"></i><span>נקה הכל</span></button>
                 </div>
                 
@@ -1169,6 +1169,28 @@
                     state.query = e.target.value.trim(); 
                     if (state.mediaType !== 'addons') restartFeed(); 
                 }, 350); 
+            });
+            
+            // Initialize search input focus handling
+            els.search.addEventListener('focus', () => {
+                // Force selection to ensure cursor is visible
+                setTimeout(() => {
+                    // Move cursor to end of text
+                    const len = els.search.value.length;
+                    els.search.setSelectionRange(len, len);
+                }, 10);
+            });
+            
+            els.search.addEventListener('click', (e) => {
+                e.stopPropagation();
+                els.search.focus();
+            });
+            
+            // Prevent any parent elements from stealing focus
+            document.querySelector('.wrap').addEventListener('click', (e) => {
+                if (e.target.closest('#search')) {
+                    e.stopPropagation();
+                }
             });
             
             // Back to top & Scrolled header
