@@ -657,17 +657,17 @@
             display: grid; 
             gap: 12px; 
             grid-template-columns: 1fr; 
-            align-items: center;
+            align-items: start;
         }
         
         body.tablet .filters .wrap {
             gap: 14px;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
         
         body.desktop .filters .wrap {
             gap: 16px;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
         }
         
         .input, select { 
@@ -758,90 +758,119 @@
             box-shadow: 0 4px 15px rgba(111,66,193,0.3);
         }
         
-        /* Filter Sections */
+        /* Filter Sections - Vertical Layout */
         .filter-section {
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 8px var(--shadow);
         }
         
         body.tablet .filter-section {
-            margin-bottom: 14px;
+            margin-bottom: 18px;
+            padding: 14px;
+            border-radius: 14px;
         }
         
         body.desktop .filter-section {
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            padding: 16px;
+            border-radius: 16px;
         }
         
         .filter-label {
             font-size: 12px;
             font-weight: 600;
             color: var(--muted);
-            margin-bottom: 6px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 4px;
+            justify-content: space-between;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
         }
         
         body.tablet .filter-label {
             font-size: 13px;
-            margin-bottom: 7px;
-            gap: 5px;
+            margin-bottom: 12px;
+            padding-bottom: 9px;
         }
         
         body.desktop .filter-label {
             font-size: 14px;
-            margin-bottom: 8px;
-            gap: 6px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+        }
+        
+        .filter-label i {
+            font-size: 14px;
+            margin-left: 6px;
+        }
+        
+        body.tablet .filter-label i {
+            font-size: 15px;
+            margin-left: 7px;
+        }
+        
+        body.desktop .filter-label i {
+            font-size: 16px;
+            margin-left: 8px;
         }
         
         .filter-chips {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 6px;
-            padding: 2px;
+            max-height: none;
+            overflow-y: visible;
         }
         
         body.tablet .filter-chips {
             gap: 7px;
-            padding: 3px;
         }
         
         body.desktop .filter-chips {
             gap: 8px;
-            padding: 4px;
         }
         
         .filter-chip {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
             border: 1px solid var(--chip-border);
             background: var(--chip-bg);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 12px;
             cursor: pointer;
             color: var(--text);
             transition: all 0.3s ease;
-            box-shadow: 0 1px 2px var(--shadow);
+            box-shadow: 0 1px 3px var(--shadow);
             font-weight: 600;
-            white-space: nowrap;
+            width: 100%;
+            text-align: right;
         }
         
         body.tablet .filter-chip {
-            padding: 7px 13px;
-            font-size: 12px;
-            gap: 5px;
+            padding: 11px 15px;
+            font-size: 13px;
+            gap: 9px;
+            border-radius: 9px;
         }
         
         body.desktop .filter-chip {
-            padding: 8px 14px;
-            font-size: 13px;
-            gap: 6px;
+            padding: 12px 16px;
+            font-size: 14px;
+            gap: 10px;
+            border-radius: 10px;
         }
         
         .filter-chip:hover {
             background: var(--chip-active);
-            transform: scale(1.05);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px var(--shadow);
         }
         
         .filter-chip.active {
@@ -849,19 +878,28 @@
             background: var(--brand-600);
             color: white;
             font-weight: 800;
-            box-shadow: 0 3px 10px rgba(111,66,193,0.3);
+            box-shadow: 0 4px 12px rgba(111,66,193,0.3);
         }
         
         .filter-chip i {
-            font-size: 10px;
+            font-size: 12px;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
         }
         
         body.tablet .filter-chip i {
-            font-size: 11px;
+            font-size: 13px;
+            width: 22px;
         }
         
         body.desktop .filter-chip i {
-            font-size: 12px;
+            font-size: 14px;
+            width: 24px;
+        }
+        
+        .filter-chip span {
+            flex-grow: 1;
         }
         
         /* Clear Filters Button */
@@ -880,21 +918,18 @@
             box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
             transition: all 0.3s ease;
             font-family: 'Assistant', sans-serif;
-            margin-right: 8px;
         }
         
         body.tablet .clear-filters {
             padding: 7px 13px;
             font-size: 12px;
             gap: 5px;
-            margin-right: 9px;
         }
         
         body.desktop .clear-filters {
             padding: 8px 14px;
             font-size: 13px;
             gap: 6px;
-            margin-right: 10px;
         }
         
         .clear-filters:hover {
@@ -1573,8 +1608,10 @@
                 <!-- Genre Filters -->
                 <div class="filter-section">
                     <div class="filter-label">
-                        <i class="fas fa-theater-masks"></i>
-                        <span>סגנונות</span>
+                        <span>
+                            <i class="fas fa-theater-masks"></i>
+                            <span>סגנונות</span>
+                        </span>
                         <button class="clear-filters" id="clearGenres" style="display: none;">
                             <i class="fas fa-times"></i>
                             <span>נקה</span>
@@ -1659,8 +1696,10 @@
                 <!-- Provider Filters -->
                 <div class="filter-section">
                     <div class="filter-label">
-                        <i class="fas fa-tv"></i>
-                        <span>חברות שידור</span>
+                        <span>
+                            <i class="fas fa-tv"></i>
+                            <span>חברות שידור</span>
+                        </span>
                         <button class="clear-filters" id="clearProviders" style="display: none;">
                             <i class="fas fa-times"></i>
                             <span>נקה</span>
