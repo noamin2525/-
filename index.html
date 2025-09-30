@@ -42,7 +42,8 @@
             --text: #1a1a1a; 
             --muted: #6c757d; 
             --card: #ffffff; 
-            --border: #dee2e6; 
+            --border: #dee2e6;
+            --topbar-bg: rgba(255,255,255,0.85);
             /* Default color theme - Purple */
             --brand-600: #6f42c1; 
             --brand-700: #563d7c; 
@@ -101,6 +102,7 @@
             --muted: #adb5bd; 
             --card: #1e1e1e; 
             --border: #343a40; 
+            --topbar-bg: rgba(18,18,18,0.85);
             --chip-bg: #2c2c2c; 
             --chip-border: #495057; 
             --chip-active: #2a9d8f; 
@@ -138,1438 +140,218 @@
         }
         
         /* Color Themes */
-        .theme-purple {
-            --brand-600: #6f42c1;
-            --brand-700: #563d7c;
-            --accent-color: #ff6b6b;
-            --secondary-accent: #4ecdc4;
-        }
-        
-        .theme-blue {
-            --brand-600: #3498db;
-            --brand-700: #2980b9;
-            --accent-color: #e74c3c;
-            --secondary-accent: #1abc9c;
-        }
-        
-        .theme-green {
-            --brand-600: #2ecc71;
-            --brand-700: #27ae60;
-            --accent-color: #e67e22;
-            --secondary-accent: #f1c40f;
-        }
-        
-        .theme-orange {
-            --brand-600: #e67e22;
-            --brand-700: #d35400;
-            --accent-color: #3498db;
-            --secondary-accent: #2ecc71;
-        }
-        
-        .theme-pink {
-            --brand-600: #e91e63;
-            --brand-700: #c2185b;
-            --accent-color: #00bcd4;
-            --secondary-accent: #8bc34a;
-        }
+        .theme-purple { --brand-600: #6f42c1; --brand-700: #563d7c; --accent-color: #ff6b6b; --secondary-accent: #4ecdc4; }
+        .theme-blue { --brand-600: #3498db; --brand-700: #2980b9; --accent-color: #e74c3c; --secondary-accent: #1abc9c; }
+        .theme-green { --brand-600: #2ecc71; --brand-700: #27ae60; --accent-color: #e67e22; --secondary-accent: #f1c40f; }
+        .theme-orange { --brand-600: #e67e22; --brand-700: #d35400; --accent-color: #3498db; --secondary-accent: #2ecc71; }
+        .theme-pink { --brand-600: #e91e63; --brand-700: #c2185b; --accent-color: #00bcd4; --secondary-accent: #8bc34a; }
         
         * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: var(--topbar-h); }
-        body { 
-            margin: 0; 
-            font-family: 'Rubik', 'Assistant', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            line-height: 1.6; 
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 16px; 
-        }
+        html { scroll-behavior: smooth; scroll-padding-top: calc(var(--topbar-h) + 16px); }
+        body { margin: 0; font-family: 'Rubik', 'Assistant', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transition: background 0.3s ease, color 0.3s ease; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
         
         /* Device Detection Classes */
-        body.mobile {
-            --topbar-h: 56px;
-            --card-radius: 12px;
-            --grid-gap: 16px;
-            --card-padding: 12px;
-        }
-        
-        body.tablet {
-            --topbar-h: 60px;
-            --card-radius: 14px;
-            --grid-gap: 20px;
-            --card-padding: 14px;
-        }
-        
-        body.desktop {
-            --topbar-h: 64px;
-            --card-radius: 16px;
-            --grid-gap: 24px;
-            --card-padding: 16px;
-        }
+        body.mobile { --topbar-h: 56px; --card-radius: 12px; --grid-gap: 16px; --card-padding: 12px; }
+        body.tablet { --topbar-h: 60px; --card-radius: 14px; --grid-gap: 20px; --card-padding: 14px; }
+        body.desktop { --topbar-h: 64px; --card-radius: 16px; --grid-gap: 24px; --card-padding: 16px; }
         
         /* Animated Text Styles */
-        .gradient-text {
-            background: var(--text-gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 900;
-            animation: textGradient 8s ease infinite;
+        .gradient-text, .gradient-text-2, .gradient-text-3, .gradient-text-4, .gradient-text-5, .gradient-text-6, .gradient-text-7, .gradient-text-8, .gradient-text-9, .gradient-text-10 {
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; animation: textGradient 8s ease infinite; background-size: 200% 200%;
         }
-        
-        .gradient-text-2 {
-            background: var(--text-gradient-2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            animation: textGradient2 8s ease infinite;
-        }
-        
-        .gradient-text-3 {
-            background: var(--text-gradient-3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            animation: textGradient3 8s ease infinite;
-        }
-        
-        .gradient-text-4 {
-            background: var(--text-gradient-4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            animation: textGradient4 8s ease infinite;
-        }
-        
-        .gradient-text-5 {
-            background: var(--text-gradient-5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            animation: textGradient5 8s ease infinite;
-        }
-        
-        .gradient-text-6 {
-            background: var(--text-gradient-6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            animation: textGradient6 8s ease infinite;
-        }
-        
-        .gradient-text-7 {
-            background: var(--text-gradient-7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            animation: textGradient7 8s ease infinite;
-        }
-        
-        .gradient-text-8 {
-            background: var(--text-gradient-8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            animation: textGradient8 8s ease infinite;
-        }
-        
-        .gradient-text-9 {
-            background: var(--text-gradient-9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            animation: textGradient9 8s ease infinite;
-        }
-        
-        .gradient-text-10 {
-            background: var(--text-gradient-10);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-            animation: textGradient10 8s ease infinite;
-        }
-        
-        .text-shadow {
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(0,0,0,0.1);
-        }
-        
-        .text-shadow-light {
-            text-shadow: 1px 1px 2px rgba(255,255,255,0.5), 0 0 5px rgba(255,255,255,0.2);
-        }
-        
-        @keyframes textGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGradient2 {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGradient3 {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGradient4 {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGradient5 {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGradient6 {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGradient7 {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGradient8 {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGradient9 {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGradient10 {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
+        .gradient-text { background: var(--text-gradient-1); font-weight: 900; }
+        .gradient-text-2 { background: var(--text-gradient-2); }
+        .gradient-text-3 { background: var(--text-gradient-3); }
+        .gradient-text-4 { background: var(--text-gradient-4); }
+        .gradient-text-5 { background: var(--text-gradient-5); }
+        .gradient-text-6 { background: var(--text-gradient-6); }
+        .gradient-text-7 { background: var(--text-gradient-7); }
+        .gradient-text-8 { background: var(--text-gradient-8); }
+        .gradient-text-9 { background: var(--text-gradient-9); }
+        .gradient-text-10 { background: var(--text-gradient-10); }
+
+        @keyframes textGradient { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         
         /* Responsive Topbar */
-        .topbar { 
-            background: linear-gradient(135deg, var(--brand-600), var(--brand-700)); 
-            color: #fff; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15); 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            backdrop-filter: blur(10px);
-            height: var(--topbar-h);
-        }
+        .topbar { background: var(--topbar-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; height: var(--topbar-h); transition: box-shadow 0.3s ease, background 0.3s ease; }
+        .topbar.scrolled { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .dark .topbar.scrolled { box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+
+        .topbar .row { display: flex; align-items: center; height: var(--topbar-h); justify-content: space-between; }
         
-        .topbar .row { 
-            display: flex; 
-            align-items: center; 
-            height: var(--topbar-h); 
-            justify-content: space-between; 
-        }
+        .topbar h1 { font-size: clamp(18px, 2.5vw, 28px); font-weight: 900; margin: 0; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--brand-600), var(--brand-700)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 3s ease-in-out infinite; }
         
-        .topbar h1 { 
-            font-size: clamp(18px, 2.5vw, 28px); 
-            font-weight: 900; 
-            margin: 0; 
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2), 0 0 20px rgba(255,255,255,0.3); 
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: shimmer 3s ease-in-out infinite;
-        }
+        @keyframes shimmer { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
         
-        @keyframes shimmer {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        /* Responsive Topbar Controls */
-        .topbar-controls {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+        .topbar-controls { display: flex; gap: 8px; align-items: center; }
         
         /* Responsive Theme Toggle Button */
-        #themeBtn, #colorPickerBtn, .sort-button {
-            background: var(--theme-btn-bg);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            padding: 8px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: var(--theme-btn-shadow);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            font-family: 'Assistant', sans-serif;
-            min-height: 36px;
-            font-weight: 800;
-        }
+        #themeBtn, #colorPickerBtn, .sort-button { background: var(--theme-btn-bg); border: none; border-radius: 50px; color: white; padding: 8px 16px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: var(--theme-btn-shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; font-family: 'Assistant', sans-serif; min-height: 36px; font-weight: 800; }
+        body.tablet #themeBtn, body.tablet #colorPickerBtn, body.tablet .sort-button { padding: 9px 18px; font-size: 13px; min-height: 40px; }
+        body.desktop #themeBtn, body.desktop #colorPickerBtn, body.desktop .sort-button { padding: 10px 20px; font-size: 14px; min-height: 44px; }
         
-        body.tablet #themeBtn, body.tablet #colorPickerBtn, body.tablet .sort-button {
-            padding: 9px 18px;
-            font-size: 13px;
-            min-height: 40px;
-        }
+        #themeBtn::before, #colorPickerBtn::before, .sort-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
+        #themeBtn:hover::before, #colorPickerBtn:hover::before, .sort-button:hover::before { left: 100%; }
+        #themeBtn:hover, #colorPickerBtn:hover, .sort-button:hover { background: var(--theme-btn-hover); transform: translateY(-2px); box-shadow: var(--theme-btn-hover-shadow); }
+        #themeBtn:active, #colorPickerBtn:active, .sort-button:active { transform: translateY(0); box-shadow: var(--theme-btn-shadow); }
         
-        body.desktop #themeBtn, body.desktop #colorPickerBtn, body.desktop .sort-button {
-            padding: 10px 20px;
-            font-size: 14px;
-            min-height: 44px;
-        }
-        
-        #themeBtn::before, #colorPickerBtn::before, .sort-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        #themeBtn:hover::before, #colorPickerBtn:hover::before, .sort-button:hover::before {
-            left: 100%;
-        }
-        
-        #themeBtn:hover, #colorPickerBtn:hover, .sort-button:hover {
-            background: var(--theme-btn-hover);
-            transform: translateY(-2px);
-            box-shadow: var(--theme-btn-hover-shadow);
-        }
-        
-        #themeBtn:active, #colorPickerBtn:active, .sort-button:active {
-            transform: translateY(0);
-            box-shadow: var(--theme-btn-shadow);
-        }
-        
-        #themeBtn i, #colorPickerBtn i {
-            font-size: 14px;
-            transition: transform 0.3s ease;
-        }
-        
-        body.tablet #themeBtn i, body.tablet #colorPickerBtn i {
-            font-size: 15px;
-        }
-        
-        body.desktop #themeBtn i, body.desktop #colorPickerBtn i {
-            font-size: 16px;
-        }
-        
-        #themeBtn:hover i, #colorPickerBtn:hover i {
-            transform: rotate(180deg);
-        }
+        #themeBtn i, #colorPickerBtn i { font-size: 14px; transition: transform 0.3s ease; }
+        body.tablet #themeBtn i, body.tablet #colorPickerBtn i { font-size: 15px; }
+        body.desktop #themeBtn i, body.desktop #colorPickerBtn i { font-size: 16px; }
+        #themeBtn:hover i, #colorPickerBtn:hover i { transform: rotate(180deg); }
         
         /* Color Picker Button - Specific Styles */
-        #colorPickerBtn {
-            background: var(--color-picker-bg);
-        }
-        
-        #colorPickerBtn:hover {
-            background: var(--color-picker-hover);
-        }
+        #colorPickerBtn { background: var(--color-picker-bg); }
+        #colorPickerBtn:hover { background: var(--color-picker-hover); }
         
         /* Color Picker Popup - Modern Design */
-        .color-picker-popup {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.08);
-            padding: 25px;
-            margin-top: 15px;
+        .color-picker-popup { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--card); border: 1px solid var(--border); border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.08); padding: 25px; margin-top: 15px; display: none; z-index: 200; min-width: 280px; max-width: 90vw; backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.95); }
+        .dark .color-picker-popup { background: rgba(30, 30, 30, 0.95); }
+        .color-picker-popup.active { display: block; animation: popupFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @keyframes popupFadeIn { from { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.95); } to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); } }
+        .color-picker-title { font-size: 18px; font-weight: 600; margin: 0 0 20px 0; text-align: center; color: var(--text); letter-spacing: -0.3px; background: var(--text-gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .color-options { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+        .color-option { width: 100%; aspect-ratio: 1; border-radius: 12px; cursor: pointer; border: 3px solid transparent; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .color-option:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .color-option.active { border-color: white; box-shadow: 0 0 0 3px var(--brand-600); transform: scale(1.05); }
+        .color-option.active::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold; font-size: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        .color-option-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); color: white; padding: 4px 0; font-size: 10px; font-weight: 600; text-align: center; transform: translateY(100%); transition: transform 0.3s ease; }
+        .color-option:hover .color-option-label { transform: translateY(0); }
+        .color-purple { background: linear-gradient(135deg, #6f42c1, #ff6b6b); }
+        .color-blue { background: linear-gradient(135deg, #3498db, #e74c3c); }
+        .color-green { background: linear-gradient(135deg, #2ecc71, #e67e22); }
+        .color-orange { background: linear-gradient(135deg, #e67e22, #3498db); }
+        .color-pink { background: linear-gradient(135deg, #e91e63, #00bcd4); }
+        .theme-icon { transition: all 0.3s ease; display: inline-block; }
+        
+        /* *** MODIFIED: Main content transitions simplified to use display: none *** */
+        body.showing-addons #mainContent {
             display: none;
-            z-index: 200;
-            min-width: 280px;
-            max-width: 90vw;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
         }
-        
-        .dark .color-picker-popup {
-            background: rgba(30, 30, 30, 0.95);
+        body:not(.showing-addons) #addonsSection {
+            display: none;
         }
-        
-        .color-picker-popup.active {
-            display: block;
-            animation: popupFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        
-        @keyframes popupFadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateX(-50%) translateY(-10px) scale(0.95); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateX(-50%) translateY(0) scale(1); 
-            }
-        }
-        
-        .color-picker-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 0 0 20px 0;
-            text-align: center;
-            color: var(--text);
-            letter-spacing: -0.3px;
-            background: var(--text-gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .color-options {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-        }
-        
-        body.mobile .color-options {
-            gap: 8px;
-        }
-        
-        .color-option {
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 12px;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        
-        .color-option:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        
-        .color-option.active {
-            border-color: white;
-            box-shadow: 0 0 0 3px var(--brand-600);
-            transform: scale(1.05);
-        }
-        
-        .color-option.active::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .color-option-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 4px 0;
-            font-size: 10px;
-            font-weight: 600;
-            text-align: center;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .color-option:hover .color-option-label {
-            transform: translateY(0);
-        }
-        
-        /* Color option backgrounds */
-        .color-purple {
-            background: linear-gradient(135deg, #6f42c1, #ff6b6b);
-        }
-        
-        .color-blue {
-            background: linear-gradient(135deg, #3498db, #e74c3c);
-        }
-        
-        .color-green {
-            background: linear-gradient(135deg, #2ecc71, #e67e22);
-        }
-        
-        .color-orange {
-            background: linear-gradient(135deg, #e67e22, #3498db);
-        }
-        
-        .color-pink {
-            background: linear-gradient(135deg, #e91e63, #00bcd4);
-        }
-        
-        /* Icon transitions */
-        .theme-icon {
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
+
         /* Responsive Filters */
-        .filters { 
-            background: linear-gradient(180deg, rgba(111,66,193,0.1), transparent 70%); 
-            padding: 16px 0; 
-            border-bottom: 1px solid var(--border);
-        }
+        .filters { padding: 16px 0; border-bottom: 1px solid var(--border); }
+        body.tablet .filters { padding: 18px 0; }
+        body.desktop .filters { padding: 20px 0; }
+        .filters .wrap { display: grid; gap: 12px; grid-template-columns: 1fr; align-items: start; }
+        body.tablet .filters .wrap { gap: 14px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        body.desktop .filters .wrap { gap: 16px; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
         
-        body.tablet .filters {
-            padding: 18px 0;
-        }
+        .input { width: 100%; background: var(--card); color: var(--text); border: 1px solid var(--border); padding: 12px 16px; border-radius: 12px; outline: none; transition: all 0.3s ease; font-family: inherit; font-size: 15px; font-weight: 600; }
+        .input:focus { border-color: var(--brand-600); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-600) 20%, transparent); }
         
-        body.desktop .filters {
-            padding: 20px 0;
-        }
+        .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--chip-border); background: var(--chip-bg); padding: 10px 16px; border-radius: 999px; font-size: 14px; cursor: pointer; color: var(--text); transition: all 0.3s ease; box-shadow: 0 1px 3px var(--shadow); font-weight: 600; }
+        .chip:hover { background: var(--chip-active); transform: scale(1.05); }
+        .chip.active { outline: 2px solid var(--brand-600); background: var(--brand-600); color: white; font-weight: 800; box-shadow: 0 4px 15px color-mix(in srgb, var(--brand-600) 30%, transparent); }
         
-        .filters .wrap { 
-            display: grid; 
-            gap: 12px; 
-            grid-template-columns: 1fr; 
-            align-items: start;
-        }
+        /* Filter Sections - Accordion Style */
+        .filter-section { margin-bottom: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 2px 8px var(--shadow); overflow: hidden; transition: margin-bottom 0.3s ease; }
+        .filter-label { font-size: 14px; font-weight: 700; color: var(--text); padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+        .filter-label > span { display: flex; align-items: center; gap: 8px; }
+        .filter-label .chevron { transition: transform 0.3s ease; }
+        .filter-section.collapsed .chevron { transform: rotate(-90deg); }
+        .filter-label .filter-count { background: var(--brand-600); color: white; border-radius: 6px; padding: 2px 6px; font-size: 11px; font-weight: 700; display: none; }
+        .filter-section:not(.collapsed) { margin-bottom: 20px; }
+        .filter-chips-wrapper { max-height: 500px; padding: 0 16px 16px; transition: max-height 0.4s ease-out, padding 0.4s ease-out; }
+        .filter-section.collapsed .filter-chips-wrapper { max-height: 0; padding-top: 0; padding-bottom: 0; }
+
+        .filter-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+        .filter-chip { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--chip-border); background: var(--chip-bg); padding: 10px 14px; border-radius: 8px; font-size: 13px; cursor: pointer; color: var(--text); transition: all 0.3s ease; box-shadow: 0 1px 3px var(--shadow); font-weight: 600; text-align: right; }
+        .filter-chip:hover { background: var(--chip-active); transform: translateY(-1px); box-shadow: 0 3px 8px var(--shadow); }
+        .filter-chip.active { outline: 2px solid var(--brand-600); background: var(--brand-600); color: white; font-weight: 800; box-shadow: 0 4px 12px color-mix(in srgb, var(--brand-600) 30%, transparent); }
+        .filter-chip i { font-size: 13px; width: 22px; text-align: center; flex-shrink: 0; }
+        .filter-chip span { flex-grow: 1; }
         
-        body.tablet .filters .wrap {
-            gap: 14px;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-        
-        body.desktop .filters .wrap {
-            gap: 16px;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        }
-        
-        .input, select { 
-            width: 100%; 
-            background: var(--chip-bg); 
-            color: var(--text); 
-            border: 1px solid var(--border); 
-            padding: 10px 14px; 
-            border-radius: 10px; 
-            outline: none; 
-            transition: all 0.3s ease; 
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        body.tablet .input, body.tablet select {
-            padding: 11px 15px;
-            font-size: 14px;
-            border-radius: 11px;
-        }
-        
-        body.desktop .input, body.desktop select {
-            padding: 12px 16px;
-            font-size: 15px;
-            border-radius: 12px;
-        }
-        
-        .input:focus, select:focus { 
-            border-color: var(--brand-600); 
-            box-shadow: 0 0 0 3px rgba(111,66,193,0.2);
-            background: var(--card);
-        }
-        
-        .chips { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 8px; 
-            justify-content: center;
-        }
-        
-        body.tablet .chips {
-            gap: 9px;
-        }
-        
-        body.desktop .chips {
-            gap: 10px;
-        }
-        
-        .chip { 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 6px; 
-            border: 1px solid var(--chip-border); 
-            background: var(--chip-bg); 
-            padding: 8px 14px; 
-            border-radius: 999px; 
-            font-size: 12px; 
-            cursor: pointer; 
-            color: var(--text); 
-            transition: all 0.3s ease; 
-            box-shadow: 0 1px 3px var(--shadow);
-            font-weight: 600;
-        }
-        
-        body.tablet .chip {
-            padding: 9px 15px;
-            font-size: 13px;
-            gap: 7px;
-        }
-        
-        body.desktop .chip {
-            padding: 10px 16px;
-            font-size: 14px;
-            gap: 8px;
-        }
-        
-        .chip:hover { 
-            background: var(--chip-active); 
-            transform: scale(1.05); 
-        }
-        
-        .chip.active { 
-            outline: 2px solid var(--brand-600); 
-            background: var(--brand-600); 
-            color: white;
-            font-weight: 800;
-            box-shadow: 0 4px 15px rgba(111,66,193,0.3);
-        }
-        
-        /* Filter Sections - Vertical Layout */
-        .filter-section {
-            margin-bottom: 16px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-        
-        body.tablet .filter-section {
-            margin-bottom: 18px;
-            padding: 14px;
-            border-radius: 14px;
-        }
-        
-        body.desktop .filter-section {
-            margin-bottom: 20px;
-            padding: 16px;
-            border-radius: 16px;
-        }
-        
-        .filter-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--muted);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        body.tablet .filter-label {
-            font-size: 13px;
-            margin-bottom: 12px;
-            padding-bottom: 9px;
-        }
-        
-        body.desktop .filter-label {
-            font-size: 14px;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
-        }
-        
-        .filter-label i {
-            font-size: 14px;
-            margin-left: 6px;
-        }
-        
-        body.tablet .filter-label i {
-            font-size: 15px;
-            margin-left: 7px;
-        }
-        
-        body.desktop .filter-label i {
-            font-size: 16px;
-            margin-left: 8px;
-        }
-        
-        .filter-chips {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 16px;
-            row-gap: 12px;
-            align-content: flex-start;
-            max-height: 150px;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-        
-        body.tablet .filter-chips {
-            gap: 18px;
-            row-gap: 14px;
-            max-height: 180px;
-        }
-        
-        body.desktop .filter-chips {
-            gap: 20px;
-            row-gap: 16px;
-            max-height: 220px;
-        }
-        
-        .filter-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid var(--chip-border);
-            background: var(--chip-bg);
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
-            color: var(--text);
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 3px var(--shadow);
-            font-weight: 600;
-            text-align: right;
-        }
-        
-        body.tablet .filter-chip {
-            padding: 11px 15px;
-            font-size: 13px;
-            gap: 9px;
-            border-radius: 9px;
-        }
-        
-        body.desktop .filter-chip {
-            padding: 12px 16px;
-            font-size: 14px;
-            gap: 10px;
-            border-radius: 10px;
-        }
-        
-        .filter-chip:hover {
-            background: var(--chip-active);
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px var(--shadow);
-        }
-        
-        .filter-chip.active {
-            outline: 2px solid var(--brand-600);
-            background: var(--brand-600);
-            color: white;
-            font-weight: 800;
-            box-shadow: 0 4px 12px rgba(111,66,193,0.3);
-        }
-        
-        .filter-chip i {
-            font-size: 12px;
-            width: 20px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-        
-        body.tablet .filter-chip i {
-            font-size: 13px;
-            width: 22px;
-        }
-        
-        body.desktop .filter-chip i {
-            font-size: 14px;
-            width: 24px;
-        }
-        
-        .filter-chip span {
-            flex-grow: 1;
-        }
-        
-        /* Clear Filters Button */
-        .clear-filters {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            border: none;
-            border-radius: 20px;
-            color: white;
-            padding: 6px 12px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
-            transition: all 0.3s ease;
-            font-family: 'Assistant', sans-serif;
-        }
-        
-        body.tablet .clear-filters {
-            padding: 7px 13px;
-            font-size: 12px;
-            gap: 5px;
-        }
-        
-        body.desktop .clear-filters {
-            padding: 8px 14px;
-            font-size: 13px;
-            gap: 6px;
-        }
-        
-        .clear-filters:hover {
-            background: linear-gradient(135deg, #c0392b, #a93226);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
-        }
-        
-        .clear-filters:active {
-            transform: translateY(0);
-        }
+        .clear-filters { background: linear-gradient(135deg, #e74c3c, #c0392b); border: none; border-radius: 20px; color: white; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3); transition: all 0.3s ease; font-family: 'Assistant', sans-serif; }
+        .clear-filters:hover { background: linear-gradient(135deg, #c0392b, #a93226); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4); }
         
         /* Responsive Custom Sort Dropdown */
-        .sort-wrapper {
-            position: relative;
-        }
-        
-        /* Hide the native select */
-        #sort {
-            appearance: none;
-            background: var(--sort-bg);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 8px 40px 8px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: var(--sort-shadow);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            font-family: 'Assistant', sans-serif;
-            opacity: 0;
-            position: absolute;
-            pointer-events: none;
-            z-index: 1;
-            min-height: 36px;
-        }
-        
-        body.tablet #sort {
-            padding: 9px 40px 9px 18px;
-            font-size: 13px;
-            min-height: 40px;
-        }
-        
-        body.desktop #sort {
-            padding: 10px 40px 10px 20px;
-            font-size: 14px;
-            min-height: 44px;
-        }
-        
-        /* Custom sort button */
-        .sort-button {
-            background: var(--sort-bg);
-            text-align: right;
-        }
-        
-        /* Custom dropdown menu */
-        .custom-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            margin-top: 6px;
-            background: var(--dropdown-bg);
-            border: 1px solid var(--dropdown-border);
-            border-radius: 12px;
-            box-shadow: var(--dropdown-shadow);
-            overflow: hidden;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        body.tablet .custom-dropdown {
-            border-radius: 14px;
-            margin-top: 7px;
-        }
-        
-        body.desktop .custom-dropdown {
-            border-radius: 16px;
-            margin-top: 8px;
-        }
-        
-        .custom-dropdown.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .custom-dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 16px;
-            cursor: pointer;
-            background: var(--dropdown-item-bg);
-            color: var(--dropdown-item-text);
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            font-family: 'Assistant', sans-serif;
-        }
-        
-        body.tablet .custom-dropdown-item {
-            padding: 13px 18px;
-            font-size: 13px;
-            gap: 11px;
-        }
-        
-        body.desktop .custom-dropdown-item {
-            padding: 14px 20px;
-            font-size: 14px;
-            gap: 12px;
-        }
-        
-        .custom-dropdown-item:hover {
-            background: var(--dropdown-item-hover);
-            color: var(--dropdown-item-hover-text);
-        }
-        
-        .custom-dropdown-item i {
-            font-size: 14px;
-            width: 18px;
-            text-align: center;
-        }
-        
-        body.tablet .custom-dropdown-item i {
-            font-size: 15px;
-            width: 19px;
-        }
-        
-        body.desktop .custom-dropdown-item i {
-            font-size: 16px;
-            width: 20px;
-        }
+        .sort-wrapper { position: relative; }
+        #sort { appearance: none; opacity: 0; position: absolute; pointer-events: none; z-index: 1; }
+        .sort-button { background: var(--sort-bg); text-align: right; width: 100%; }
+        .custom-dropdown { position: absolute; top: 100%; left: 0; right: 0; margin-top: 8px; background: var(--dropdown-bg); border: 1px solid var(--dropdown-border); border-radius: 16px; box-shadow: var(--dropdown-shadow); overflow: hidden; z-index: 100; opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .custom-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .custom-dropdown-item { display: flex; align-items: center; gap: 12px; padding: 14px 20px; cursor: pointer; background: var(--dropdown-item-bg); color: var(--dropdown-item-text); font-size: 14px; font-weight: 600; transition: all 0.2s ease; font-family: 'Assistant', sans-serif; }
+        .custom-dropdown-item:hover { background: var(--dropdown-item-hover); color: var(--dropdown-item-hover-text); }
+        .custom-dropdown-item i { font-size: 16px; width: 20px; text-align: center; }
         
         /* Responsive Grid and Cards */
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-            gap: var(--grid-gap); 
-            padding: 16px 0;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--grid-gap); padding: 16px 0; }
+        body.tablet .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); padding: 20px 0; }
+        body.desktop .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); padding: 24px 0; }
         
-        body.tablet .grid {
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            padding: 20px 0;
-        }
+        .card { border: 1px solid var(--border); background: var(--card); border-radius: var(--card-radius); overflow: hidden; box-shadow: 0 4px 15px var(--shadow); transition: all 0.4s ease; position: relative; height: 100%; display: flex; flex-direction: column; cursor: pointer; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
         
-        body.desktop .grid {
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            padding: 24px 0;
-        }
+        .poster-container { position: relative; overflow: hidden; border-radius: var(--card-radius) var(--card-radius) 0 0; }
+        .poster { width: 100%; aspect-ratio: 2/3; object-fit: cover; background: linear-gradient(135deg, #e2e8f0, #ced4da); transition: transform 0.5s ease; display: block; }
+        .card:hover .poster { transform: scale(1.08); }
         
-        .card { 
-            border: 1px solid var(--border); 
-            background: var(--card); 
-            border-radius: var(--card-radius); 
-            overflow: hidden; 
-            box-shadow: 0 4px 15px var(--shadow); 
-            transition: all 0.4s ease;
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+        .poster-overlay { position: absolute;inset: 0; background: rgba(0, 0, 0, 0.85); color: white; padding: 16px; display: flex; flex-direction: column; justify-content: center; opacity: 0; transition: opacity 0.3s ease; overflow: hidden; }
+        .card:hover .poster-overlay { opacity: 1; }
+        .poster-overlay-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; text-align: center; background: linear-gradient(135deg, #ffffff, #f0f0f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .poster-overlay-description { font-size: 14px; line-height: 1.6; text-align: center; overflow-y: auto; max-height: 70%; padding: 0 4px; }
         
-        .card:hover { 
-            transform: translateY(-6px); 
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-        }
+        .card .meta { padding: var(--card-padding); flex-grow: 1; }
+        .muted { color: var(--muted); font-size: 13px; font-weight: 600; }
         
-        body.tablet .card:hover {
-            transform: translateY(-7px);
-        }
+        .card-content { flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; font-size: 16px; background: var(--text-gradient-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
         
-        body.desktop .card:hover {
-            transform: translateY(-8px);
-        }
-        
-        /* Poster Container with Hover Effect */
-        .poster-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: var(--card-radius) var(--card-radius) 0 0;
-            cursor: pointer;
-        }
-        
-        .poster { 
-            width: 100%; 
-            aspect-ratio: 2/3; 
-            object-fit: cover; 
-            background: linear-gradient(135deg, #e2e8f0, #ced4da);
-            transition: transform 0.5s ease;
-            display: block;
-        }
-        
-        .poster-container:hover .poster { 
-            transform: scale(1.08);
-        }
-        
-        /* Poster Overlay */
-        .poster-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            color: white;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            overflow: hidden;
-        }
-        
-        body.tablet .poster-overlay {
-            padding: 14px;
-        }
-        
-        body.desktop .poster-overlay {
-            padding: 16px;
-        }
-        
-        .poster-container:hover .poster-overlay {
-            opacity: 1;
-        }
-        
-        .poster-overlay-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-align: center;
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        body.tablet .poster-overlay-title {
-            font-size: 17px;
-            margin-bottom: 11px;
-        }
-        
-        body.desktop .poster-overlay-title {
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-        
-        .poster-overlay-description {
-            font-size: 12px;
-            line-height: 1.5;
-            text-align: center;
-            overflow-y: auto;
-            max-height: 70%;
-            padding: 0 4px;
-        }
-        
-        body.tablet .poster-overlay-description {
-            font-size: 13px;
-            line-height: 1.55;
-        }
-        
-        body.desktop .poster-overlay-description {
-            font-size: 14px;
-            line-height: 1.6;
-        }
-        
-        .card .meta { 
-            padding: var(--card-padding); 
-            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.05));
-            flex-grow: 1;
-        }
-        
-        .muted { 
-            color: var(--muted); 
-            font-size: 11px;
-            font-weight: 600;
-        }
-        
-        body.tablet .muted {
-            font-size: 12px;
-        }
-        
-        body.desktop .muted {
-            font-size: 13px;
-        }
-        
-        .card-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card-title {
-            font-weight: 700;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 3px;
-            font-size: 14px;
-            background: var(--text-gradient-2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        body.tablet .card-title {
-            font-size: 15px;
-            margin-bottom: 3px;
-        }
-        
-        body.desktop .card-title {
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-        
-        .card-meta {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-bottom: 6px;
-        }
-        
-        body.tablet .card-meta {
-            gap: 5px;
-            margin-bottom: 7px;
-        }
-        
-        body.desktop .card-meta {
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-        
-        /* Loading Spinner */
-        .loader-container {
-            display: flex;
-            justify-content: center;
-            padding: 16px 0;
-        }
-        
-        body.tablet .loader-container {
-            padding: 18px 0;
-        }
-        
-        body.desktop .loader-container {
-            padding: 20px 0;
-        }
-        
-        .loader { 
-            border: 3px solid var(--border); 
-            border-top: 3px solid var(--brand-600); 
-            border-radius: 50%; 
-            width: 30px; 
-            height: 30px; 
-            animation: spin 1s linear infinite; 
-        }
-        
-        body.tablet .loader {
-            width: 33px;
-            height: 33px;
-            border-width: 3.5px;
-        }
-        
-        body.desktop .loader {
-            width: 36px;
-            height: 36px;
-            border-width: 4px;
-        }
-        
-        @keyframes spin { 
-            0% { transform: rotate(0deg); } 
-            100% { transform: rotate(360deg); } 
-        }
+        /* Skeleton Loader */
+        .skeleton-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--card-radius); overflow: hidden; }
+        .skeleton-poster { aspect-ratio: 2/3; background: var(--chip-bg); }
+        .skeleton-meta { padding: var(--card-padding); }
+        .skeleton-text { height: 20px; background: var(--chip-bg); border-radius: 4px; margin-bottom: 8px; }
+        .skeleton-text.short { width: 60%; }
+        .skeleton-poster, .skeleton-text { animation: pulse 1.5s infinite ease-in-out; }
+        @keyframes pulse { 0% { background-color: var(--chip-bg); } 50% { background-color: var(--border); } 100% { background-color: var(--chip-bg); } }
+
+        /* Status and Loader */
+        #status { text-align: center; padding: 16px 0; color: var(--muted); font-size: 15px; font-weight: 600; }
+        .loader-container { display: flex; justify-content: center; padding: 20px 0; }
+        .loader { border: 4px solid var(--border); border-top: 4px solid var(--brand-600); border-radius: 50%; width: 36px; height: 36px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         /* Addons */
-        .addons { 
-            border-top: 1px solid var(--border); 
-            background: linear-gradient(180deg, rgba(78,205,196,0.1), transparent 90%); 
-            padding: 20px 0; 
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
+        .addons { padding: 24px 0; } 
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        body.tablet .addons {
-            padding: 22px 0;
-        }
+        .addon-grid { display: grid; gap: var(--grid-gap); grid-template-columns: 1fr; }
+        body.tablet .addon-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+        body.desktop .addon-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
         
-        body.desktop .addons {
-            padding: 24px 0;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .addon-grid { 
-            display: grid; 
-            gap: var(--grid-gap); 
-            grid-template-columns: 1fr;
-        }
-        
-        body.tablet .addon-grid {
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        }
-        
-        body.desktop .addon-grid {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-        
-        .addon { 
-            border: 1px solid var(--border); 
-            background: var(--card); 
-            border-radius: var(--card-radius); 
-            padding: var(--card-padding); 
-            box-shadow: 0 4px 15px var(--shadow); 
-            transition: all 0.3s ease;
-            height: 100%;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .addon:hover { 
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-        
-        body.tablet .addon:hover {
-            transform: translateY(-4px);
-        }
-        
-        body.desktop .addon:hover {
-            transform: translateY(-5px);
-        }
-        
-        .addon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--brand-600), var(--accent-color));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .addon:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .addon h3 { 
-            margin: 0 0 8px; 
-            font-size: 18px; 
-            color: var(--brand-600);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--text-gradient-3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-        
-        body.tablet .addon h3 {
-            font-size: 19px;
-            margin: 0 0 9px;
-            gap: 7px;
-        }
-        
-        body.desktop .addon h3 {
-            font-size: 20px;
-            margin: 0 0 10px;
-            gap: 8px;
-        }
-        
-        .addon p { 
-            margin: 0 0 14px; 
-            color: var(--muted); 
-            font-size: 13px;
-            line-height: 1.5;
-            font-weight: 600;
-        }
-        
-        body.tablet .addon p {
-            font-size: 14px;
-            margin: 0 0 15px;
-        }
-        
-        body.desktop .addon p {
-            font-size: 15px;
-            margin: 0 0 16px;
-        }
-        
-        .addon .actions { 
-            display: flex; 
-            gap: 8px; 
-            flex-wrap: wrap; 
-        }
-        
-        body.tablet .addon .actions {
-            gap: 9px;
-        }
-        
-        body.desktop .addon .actions {
-            gap: 10px;
-        }
+        .addon { border: 1px solid var(--border); background: var(--card); border-radius: var(--card-radius); padding: var(--card-padding); box-shadow: 0 4px 15px var(--shadow); transition: all 0.3s ease; height: 100%; cursor: pointer; position: relative; overflow: hidden; }
+        .addon:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+        .addon::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--brand-600), var(--accent-color)); transform-origin: left; transform: scaleX(0); transition: transform 0.4s ease; }
+        .addon:hover::before { transform: scaleX(1); }
+        .addon h3 { margin: 0 0 10px; font-size: 20px; display: flex; align-items: center; gap: 8px; background: var(--text-gradient-3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
+        .addon p { margin: 0 0 16px; color: var(--muted); font-size: 15px; line-height: 1.5; font-weight: 600; }
         
         /* Telegram Button */
-        .telegram-section {
-            margin-top: 30px;
-            text-align: center;
-        }
+        .telegram-section { margin-top: 40px; text-align: center; }
+        #telegramBtn { background: var(--telegram-bg); border: none; border-radius: 50px; color: white; padding: 14px 28px; font-size: 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; box-shadow: var(--telegram-shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; font-family: 'Assistant', sans-serif; text-decoration: none; min-height: 48px; font-weight: 800; }
+        #telegramBtn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
+        #telegramBtn:hover::before { left: 100%; }
+        #telegramBtn:hover { background: var(--telegram-hover); transform: translateY(-3px); box-shadow: var(--telegram-hover-shadow); }
+        #telegramBtn:active { transform: translateY(0); box-shadow: var(--telegram-shadow); }
+        #telegramBtn i { font-size: 18px; transition: transform 0.3s ease; }
+        #telegramBtn:hover i { transform: scale(1.1); }
         
-        body.tablet .telegram-section {
-            margin-top: 35px;
-        }
-        
-        body.desktop .telegram-section {
-            margin-top: 40px;
-        }
-        
-        #telegramBtn {
-            background: var(--telegram-bg);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: var(--telegram-shadow);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            font-family: 'Assistant', sans-serif;
-            text-decoration: none;
-            min-height: 40px;
-            font-weight: 800;
-        }
-        
-        body.tablet #telegramBtn {
-            padding: 13px 26px;
-            font-size: 15px;
-            gap: 9px;
-            min-height: 44px;
-        }
-        
-        body.desktop #telegramBtn {
-            padding: 14px 28px;
-            font-size: 16px;
-            gap: 10px;
-            min-height: 48px;
-        }
-        
-        #telegramBtn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        #telegramBtn:hover::before {
-            left: 100%;
-        }
-        
-        #telegramBtn:hover {
-            background: var(--telegram-hover);
-            transform: translateY(-3px);
-            box-shadow: var(--telegram-hover-shadow);
-        }
-        
-        #telegramBtn:active {
-            transform: translateY(0);
-            box-shadow: var(--telegram-shadow);
-        }
-        
-        #telegramBtn i {
-            font-size: 16px;
-            transition: transform 0.3s ease;
-        }
-        
-        body.tablet #telegramBtn i {
-            font-size: 17px;
-        }
-        
-        body.desktop #telegramBtn i {
-            font-size: 18px;
-        }
-        
-        #telegramBtn:hover i {
-            transform: scale(1.1);
-        }
-        
-        /* Status Message */
-        #status {
-            text-align: center;
-            padding: 14px 0;
-            color: var(--muted);
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
-        body.tablet #status {
-            padding: 15px 0;
-            font-size: 14px;
-        }
-        
-        body.desktop #status {
-            padding: 16px 0;
-            font-size: 15px;
-        }
+        /* Back to Top Button */
+        #backToTopBtn { position: fixed; bottom: 20px; left: 20px; z-index: 99; border: none; outline: none; background: var(--brand-600); color: white; cursor: pointer; padding: 0; width: 48px; height: 48px; border-radius: 50%; font-size: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: opacity 0.3s, visibility 0.3s, transform 0.3s; opacity: 0; visibility: hidden; transform: translateY(20px); }
+        #backToTopBtn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTopBtn:hover { background: var(--brand-700); }
     </style>
 </head>
 <body>
-    <header class="topbar">
+    <header class="topbar" id="topbar">
         <div class="container">
             <div class="row">
                 <h1><i class="fas fa-film"></i> סרטים סדרות ומה שביניים <i class="fas fa-tv"></i></h1>
@@ -1585,21 +367,11 @@
                     <div class="color-picker-popup" id="colorPickerPopup">
                         <h3 class="color-picker-title">בחר צבע לאתר</h3>
                         <div class="color-options">
-                            <div class="color-option color-purple active" data-theme="purple" title="סגול">
-                                <div class="color-option-label">סגול</div>
-                            </div>
-                            <div class="color-option color-blue" data-theme="blue" title="כחול">
-                                <div class="color-option-label">כחול</div>
-                            </div>
-                            <div class="color-option color-green" data-theme="green" title="ירוק">
-                                <div class="color-option-label">ירוק</div>
-                            </div>
-                            <div class="color-option color-orange" data-theme="orange" title="כתום">
-                                <div class="color-option-label">כתום</div>
-                            </div>
-                            <div class="color-option color-pink" data-theme="pink" title="ורוד">
-                                <div class="color-option-label">ורוד</div>
-                            </div>
+                            <div class="color-option color-purple active" data-theme="purple" title="סגול"><div class="color-option-label">סגול</div></div>
+                            <div class="color-option color-blue" data-theme="blue" title="כחול"><div class="color-option-label">כחול</div></div>
+                            <div class="color-option color-green" data-theme="green" title="ירוק"><div class="color-option-label">ירוק</div></div>
+                            <div class="color-option color-orange" data-theme="orange" title="כתום"><div class="color-option-label">כתום</div></div>
+                            <div class="color-option color-pink" data-theme="pink" title="ורוד"><div class="color-option-label">ורוד</div></div>
                         </div>
                     </div>
                 </div>
@@ -1607,166 +379,82 @@
         </div>
     </header>
     
-    <section class="filters">
+    <section class="filters" id="filters">
         <div class="container">
             <div class="wrap">
                 <input aria-label="חיפוש" class="input" id="search" placeholder="חיפוש סרטים או סדרות…"/>
                 
                 <!-- Genre Filters -->
-                <div class="filter-section">
-                    <div class="filter-label">
+                <div class="filter-section collapsed" id="genreFilterSection">
+                    <div class="filter-label" id="genreFilterToggle">
                         <span>
                             <i class="fas fa-theater-masks"></i>
                             <span>סגנונות</span>
+                            <span class="filter-count" id="genreCount"></span>
                         </span>
-                        <button class="clear-filters" id="clearGenres" style="display: none;">
-                            <i class="fas fa-times"></i>
-                            <span>נקה</span>
-                        </button>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                           <button class="clear-filters" id="clearGenres" style="display: none;"><i class="fas fa-times"></i><span>נקה</span></button>
+                           <i class="fas fa-chevron-right chevron"></i>
+                        </div>
                     </div>
-                    <div class="filter-chips" id="genreFilters">
-                        <div class="filter-chip" data-genre="28">
-                            <i class="fas fa-fist-raised"></i>
-                            <span>אקשן</span>
-                        </div>
-                        <div class="filter-chip" data-genre="12">
-                            <i class="fas fa-magic"></i>
-                            <span>הרפתקה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="16">
-                            <i class="fas fa-film"></i>
-                            <span>אנימציה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="35">
-                            <i class="fas fa-laugh"></i>
-                            <span>קומדיה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="80">
-                            <i class="fas fa-user-secret"></i>
-                            <span>פשע</span>
-                        </div>
-                        <div class="filter-chip" data-genre="99">
-                            <i class="fas fa-video"></i>
-                            <span>דוקומנטרי</span>
-                        </div>
-                        <div class="filter-chip" data-genre="18">
-                            <i class="fas fa-heart"></i>
-                            <span>דרמה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="10751">
-                            <i class="fas fa-child"></i>
-                            <span>משפחה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="14">
-                            <i class="fas fa-dragon"></i>
-                            <span>פנטזיה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="36">
-                            <i class="fas fa-landmark"></i>
-                            <span>היסטוריה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="27">
-                            <i class="fas fa-ghost"></i>
-                            <span>אימה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="10402">
-                            <i class="fas fa-music"></i>
-                            <span>מוזיקה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="9648">
-                            <i class="fas fa-user-tie"></i>
-                            <span>מסתורין</span>
-                        </div>
-                        <div class="filter-chip" data-genre="10749">
-                            <i class="fas fa-heart-broken"></i>
-                            <span>רומנטיקה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="878">
-                            <i class="fas fa-rocket"></i>
-                            <span>מד"ב</span>
-                        </div>
-                        <div class="filter-chip" data-genre="53">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <span>מותחן</span>
-                        </div>
-                        <div class="filter-chip" data-genre="10752">
-                            <i class="fas fa-flag"></i>
-                            <span>מלחמה</span>
-                        </div>
-                        <div class="filter-chip" data-genre="37">
-                            <i class="fas fa-hat-cowboy"></i>
-                            <span>מערבון</span>
-                        </div>
+                    <div class="filter-chips-wrapper">
+                      <div class="filter-chips" id="genreFilters">
+                        <div class="filter-chip" data-genre="28"><i class="fas fa-fist-raised"></i><span>אקשן</span></div>
+                        <div class="filter-chip" data-genre="12"><i class="fas fa-magic"></i><span>הרפתקה</span></div>
+                        <div class="filter-chip" data-genre="16"><i class="fas fa-film"></i><span>אנימציה</span></div>
+                        <div class="filter-chip" data-genre="35"><i class="fas fa-laugh"></i><span>קומדיה</span></div>
+                        <div class="filter-chip" data-genre="80"><i class="fas fa-user-secret"></i><span>פשע</span></div>
+                        <div class="filter-chip" data-genre="99"><i class="fas fa-video"></i><span>דוקומנטרי</span></div>
+                        <div class="filter-chip" data-genre="18"><i class="fas fa-heart"></i><span>דרמה</span></div>
+                        <div class="filter-chip" data-genre="10751"><i class="fas fa-child"></i><span>משפחה</span></div>
+                        <div class="filter-chip" data-genre="14"><i class="fas fa-dragon"></i><span>פנטזיה</span></div>
+                        <div class="filter-chip" data-genre="36"><i class="fas fa-landmark"></i><span>היסטוריה</span></div>
+                        <div class="filter-chip" data-genre="27"><i class="fas fa-ghost"></i><span>אימה</span></div>
+                        <div class="filter-chip" data-genre="10402"><i class="fas fa-music"></i><span>מוזיקה</span></div>
+                        <div class="filter-chip" data-genre="9648"><i class="fas fa-user-tie"></i><span>מסתורין</span></div>
+                        <div class="filter-chip" data-genre="10749"><i class="fas fa-heart-broken"></i><span>רומנטיקה</span></div>
+                        <div class="filter-chip" data-genre="878"><i class="fas fa-rocket"></i><span>מד"ב</span></div>
+                        <div class="filter-chip" data-genre="53"><i class="fas fa-exclamation-triangle"></i><span>מותחן</span></div>
+                        <div class="filter-chip" data-genre="10752"><i class="fas fa-flag"></i><span>מלחמה</span></div>
+                        <div class="filter-chip" data-genre="37"><i class="fas fa-hat-cowboy"></i><span>מערבון</span></div>
+                      </div>
                     </div>
                 </div>
                 
                 <!-- Provider Filters -->
-                <div class="filter-section">
-                    <div class="filter-label">
-                        <span>
+                <div class="filter-section collapsed" id="providerFilterSection">
+                    <div class="filter-label" id="providerFilterToggle">
+                         <span>
                             <i class="fas fa-tv"></i>
                             <span>חברות שידור</span>
+                            <span class="filter-count" id="providerCount"></span>
                         </span>
-                        <button class="clear-filters" id="clearProviders" style="display: none;">
-                            <i class="fas fa-times"></i>
-                            <span>נקה</span>
-                        </button>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                           <button class="clear-filters" id="clearProviders" style="display: none;"><i class="fas fa-times"></i><span>נקה</span></button>
+                           <i class="fas fa-chevron-right chevron"></i>
+                        </div>
                     </div>
-                    <div class="filter-chips" id="providerFilters">
-                        <div class="filter-chip" data-provider="8">
-                            <i class="fas fa-play"></i>
-                            <span>Netflix</span>
-                        </div>
-                        <div class="filter-chip" data-provider="337">
-                            <i class="fas fa-play"></i>
-                            <span>Disney+</span>
-                        </div>
-                        <div class="filter-chip" data-provider="1899">
-                            <i class="fas fa-play"></i>
-                            <span>Amazon Prime</span>
-                        </div>
-                        <div class="filter-chip" data-provider="384">
-                            <i class="fas fa-play"></i>
-                            <span>HBO Max</span>
-                        </div>
-                        <div class="filter-chip" data-provider="15">
-                            <i class="fas fa-play"></i>
-                            <span>Hulu</span>
-                        </div>
-                        <div class="filter-chip" data-provider="350">
-                            <i class="fas fa-play"></i>
-                            <span>Apple TV+</span>
-                        </div>
-                        <div class="filter-chip" data-provider="531">
-                            <i class="fas fa-play"></i>
-                            <span>Paramount+</span>
-                        </div>
-                        <div class="filter-chip" data-provider="2">
-                            <i class="fas fa-play"></i>
-                            <span>Apple iTunes</span>
-                        </div>
-                        <div class="filter-chip" data-provider="3">
-                            <i class="fas fa-play"></i>
-                            <span>Google Play</span>
-                        </div>
-                        <div class="filter-chip" data-provider="7">
-                            <i class="fas fa-play"></i>
-                            <span>VUDU</span>
-                        </div>
+                    <div class="filter-chips-wrapper">
+                      <div class="filter-chips" id="providerFilters">
+                        <div class="filter-chip" data-provider="8"><i class="fas fa-play"></i><span>Netflix</span></div>
+                        <div class="filter-chip" data-provider="337"><i class="fas fa-play"></i><span>Disney+</span></div>
+                        <div class="filter-chip" data-provider="1899"><i class="fas fa-play"></i><span>Amazon Prime</span></div>
+                        <div class="filter-chip" data-provider="384"><i class="fas fa-play"></i><span>HBO Max</span></div>
+                        <div class="filter-chip" data-provider="15"><i class="fas fa-play"></i><span>Hulu</span></div>
+                        <div class="filter-chip" data-provider="350"><i class="fas fa-play"></i><span>Apple TV+</span></div>
+                        <div class="filter-chip" data-provider="531"><i class="fas fa-play"></i><span>Paramount+</span></div>
+                        <div class="filter-chip" data-provider="2"><i class="fas fa-play"></i><span>Apple iTunes</span></div>
+                        <div class="filter-chip" data-provider="3"><i class="fas fa-play"></i><span>Google Play</span></div>
+                        <div class="filter-chip" data-provider="7"><i class="fas fa-play"></i><span>VUDU</span></div>
+                      </div>
                     </div>
                 </div>
                 
                 <div>
                     <div class="chips" id="typeChips">
-                        <button class="chip" data-type="movie">
-                            <i class="fas fa-film"></i> סרטים
-                        </button>
-                        <button class="chip" data-type="tv">
-                            <i class="fas fa-tv"></i> סדרות
-                        </button>
-                        <button class="chip" data-type="addons">
-                            <i class="fas fa-puzzle-piece"></i> הרחבות
-                        </button>
+                        <button class="chip" data-type="movie"><i class="fas fa-film"></i> סרטים</button>
+                        <button class="chip" data-type="tv"><i class="fas fa-tv"></i> סדרות</button>
+                        <button class="chip" data-type="addons"><i class="fas fa-puzzle-piece"></i> התקנות Stremio</button>
                     </div>
                 </div>
                 <div class="sort-wrapper">
@@ -1775,33 +463,16 @@
                         <option value="vote_average.desc">מיון: דירוג</option>
                         <option value="primary_release_date.desc">מיון: תאריך יציאה</option>
                     </select>
-                    <button class="sort-button" id="sortButton">
-                        מיון: פופולריות
-                    </button>
+                    <button class="sort-button" id="sortButton">מיון: פופולריות</button>
                     <div class="custom-dropdown" id="sortDropdown">
-                        <div class="custom-dropdown-item" data-value="popularity.desc">
-                            <i class="fas fa-fire"></i>
-                            <span>מיון: פופולריות</span>
-                        </div>
-                        <div class="custom-dropdown-item" data-value="vote_average.desc">
-                            <i class="fas fa-star"></i>
-                            <span>מיון: דירוג</span>
-                        </div>
-                        <div class="custom-dropdown-item" data-value="primary_release_date.desc">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>מיון: תאריך יציאה</span>
-                        </div>
+                        <div class="custom-dropdown-item" data-value="popularity.desc"><i class="fas fa-fire"></i><span>מיון: פופולריות</span></div>
+                        <div class="custom-dropdown-item" data-value="vote_average.desc"><i class="fas fa-star"></i><span>מיון: דירוג</span></div>
+                        <div class="custom-dropdown-item" data-value="primary_release_date.desc"><i class="fas fa-calendar-alt"></i><span>מיון: תאריך יציאה</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <main class="container" id="mainContent">
-        <div id="status">מוכן</div>
-        <div class="grid" id="grid"></div>
-        <div id="sentinel" style="height: 40px;"></div>
-    </main>
     
     <section aria-labelledby="addonsTitle" class="addons" id="addonsSection">
         <div class="container">
@@ -1817,29 +488,24 @@
                         <h3><i class="fas fa-download"></i> Torrentio + Debrid</h3>
                         <p>מקורות לסרטים וסדרות</p>
                     </article>
-                    
                     <article class="addon" data-addon="stremio://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json" data-copy="https://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json">
                         <h3><i class="fas fa-closed-captioning"></i> Ktuvit (כתוביות)</h3>
                         <p>כתוביות בעברית מ‑Ktuvit.</p>
                     </article>
-                    
                     <article class="addon" data-addon="stremio://4b139a4b7f94-wizdom-stremio-v2.baby-beamup.club/manifest.json" data-copy="https://4b139a4b7f94-wizdom-stremio-v2.baby-beamup.club/manifest.json">
                         <h3><i class="fas fa-closed-captioning"></i> Wizdom (כתוביות)</h3>
                         <p>מנוע כתוביות בעברית</p>
                     </article>
-                    
                     <article class="addon" data-addon="stremio://stremio7rd-movies-online-dates.vercel.app/manifest.json" data-copy="https://stremio7rd-movies-online-dates.vercel.app/manifest.json">
                         <h3><i class="fas fa-calendar-alt"></i> סרטים שמגיעים לרשת</h3>
                         <p>קטלוג המציג מתי סרטים מגיעים לרשת באיכות טובה.</p>
                     </article>
-                    
                     <article class="addon" data-addon="stremio://94c8cb9f702d-tmdb-addon.baby-beamup.club/N4IgNghgdg5grhGBTEAuEALJBaAkgGRABoQBnAFwCckIBbAS1jQG0BdEgYwnIjAHsYpFqHoATNCHK1RAIwB05PgAdikgJ5KU6WnwBu9FCSh0tIAArK4kSqtIY+Ad1xQAEn1paqcJAF8iI8XQpWQVlVXINU1IkSgMhIxMJCyUrCBsSO0dnNw80L19-EDEJYPk1GnT1TQkdfUMQY1z0AE0K23snV3dPSm8-AJLpMraSCOr0aNikeIbElpGyDuzuvN6CgaChuUhYBGRwyJq9A1VG03xoeER6zM6cnr7C4s2Qnav90cOJmLjTuZALrtru0sl0mvl+kVApItlQkFBRIwYAdxiBaicEk0QAAVagIpEgu4rVAQp7Q0oKPGIpifVGTX6Y0y4+HU5EZJZgh6+dggLgUADCfDgUHIaAArD4gA/manifest.json" data-copy="https://94c8cb9f702d-tmdb-addon.baby-beamup.club/N4IgNghgdg5grhGBTEAuEALJBaAkgGRABoQBnAFwCckIBbAS1jQG0BdEgYwnIjAHsYpFqHoATNCHK1RAIwB05PgAdikgJ5KU6WnwBu9FCSh0tIAArK4kSqtIY+Ad1xQAEn1paqcJAF8iI8XQpWQVlVXINU1IkSgMhIxMJCyUrCBsSO0dnNw80L19-EDEJYPk1GnT1TQkdfUMQY1z0AE0K23snV3dPSm8-AJLpMraSCOr0aNikeIbElpGyDuzuvN6CgaChuUhYBGRwyJq9A1VG03xoeER6zM6cnr7C4s2Qnav90cOJmLjTuZALrtru0sl0mvl+kVApItlQkFBRIwYAdxiBaicEk0QAAVagIpEgu4rVAQp7Q0oKPGIpifVGTX6Y0y4+HU5EZJZgh6+dggLgUADCfDgUHIaAArD4gA/manifest.json">
                         <h3><i class="fas fa-info-circle"></i> מידע בעברית (TMDB‑IL)</h3>
                         <p>פוסטרים, תיאורים וחיפוש תכנים בעברית.</p>
                     </article>
                 </div>
                 
-                <!-- Telegram Button Section -->
                 <div class="telegram-section">
                     <a href="https://t.me/coolstaffil25" target="_blank" rel="noopener noreferrer" id="telegramBtn">
                         <i class="fab fa-telegram-plane"></i>
@@ -1850,6 +516,14 @@
         </div>
     </section>
     
+    <main class="container" id="mainContent">
+        <div id="status">מוכן</div>
+        <div class="grid" id="grid"></div>
+        <div id="sentinel" style="height: 40px;"></div>
+    </main>
+    
+    <button id="backToTopBtn" title="חזרה למעלה"><i class="fas fa-arrow-up"></i></button>
+
     <script>
         ;(() => {
             const API_KEY = '93f0d2ee2e3e60d061d14d91cbb47b46'
@@ -1863,7 +537,6 @@
                 totalPages: 1, 
                 loading: false, 
                 observer: null,
-                // Filter states
                 selectedGenres: JSON.parse(localStorage.getItem('selectedGenres') || '[]'),
                 selectedProviders: JSON.parse(localStorage.getItem('selectedProviders') || '[]')
             }
@@ -1885,162 +558,71 @@
                 genreFilters: document.getElementById('genreFilters'),
                 providerFilters: document.getElementById('providerFilters'),
                 clearGenres: document.getElementById('clearGenres'),
-                clearProviders: document.getElementById('clearProviders')
+                clearProviders: document.getElementById('clearProviders'),
+                genreFilterSection: document.getElementById('genreFilterSection'),
+                providerFilterSection: document.getElementById('providerFilterSection'),
+                genreFilterToggle: document.getElementById('genreFilterToggle'),
+                providerFilterToggle: document.getElementById('providerFilterToggle'),
+                genreCount: document.getElementById('genreCount'),
+                providerCount: document.getElementById('providerCount'),
+                backToTopBtn: document.getElementById('backToTopBtn'),
+                topbar: document.getElementById('topbar'),
+                filters: document.getElementById('filters')
             }
 
-            // Device Detection
             function detectDevice() {
-                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
                 const width = window.innerWidth;
-                
-                // Check if it's a mobile device
-                if (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase())) {
-                    // Check if it's specifically a phone (not tablet)
-                    if (/iphone|ipod|android.*mobile|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase()) || width < 768) {
-                        return 'mobile';
-                    }
-                    // Otherwise it's a tablet
-                    return 'tablet';
-                }
-                
-                // If not mobile, check screen width for tablet vs desktop
-                if (width >= 768 && width < 1024) {
-                    return 'tablet';
-                }
-                
-                // Default to desktop
+                if (width < 768) return 'mobile';
+                if (width >= 768 && width < 1024) return 'tablet';
                 return 'desktop';
             }
             
-            // Apply device class to body
             function applyDeviceClass() {
                 const device = detectDevice();
                 document.body.classList.remove('mobile', 'tablet', 'desktop');
                 document.body.classList.add(device);
-                
-                // Update viewport for better mobile experience
-                if (device === 'mobile') {
-                    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
-                } else {
-                    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1');
-                }
             }
             
-            // Listen for orientation changes and window resize
             window.addEventListener('resize', applyDeviceClass);
             window.addEventListener('orientationchange', applyDeviceClass);
 
-            // Color Theme Management
             function applyColorTheme() {
-                // Remove all theme classes
-                document.body.classList.remove('theme-purple', 'theme-blue', 'theme-green', 'theme-orange', 'theme-pink');
-                
-                // Add the selected theme class
+                document.body.className = document.body.className.replace(/theme-[\w-]+/g, '');
                 document.body.classList.add(`theme-${state.colorTheme}`);
                 
-                // Update active color option
                 document.querySelectorAll('.color-option').forEach(option => {
                     option.classList.toggle('active', option.getAttribute('data-theme') === state.colorTheme);
                 });
                 
-                // Update color picker button gradient based on selected theme
-                updateColorPickerButtonGradient();
-                
-                // Update sort button gradient based on selected theme
-                updateSortButtonGradient();
+                updateButtonGradients();
             }
             
-            function updateColorPickerButtonGradient() {
+            function updateButtonGradients() {
                 const root = document.documentElement;
-                const brand600 = getComputedStyle(root).getPropertyValue('--brand-600').trim();
-                const accentColor = getComputedStyle(root).getPropertyValue('--accent-color').trim();
+                const cs = getComputedStyle(root);
+                const brand600 = cs.getPropertyValue('--brand-600').trim();
+                const brand700 = cs.getPropertyValue('--brand-700').trim();
+                const accentColor = cs.getPropertyValue('--accent-color').trim();
+                const secondaryAccent = cs.getPropertyValue('--secondary-accent').trim();
+
+                const hexToRgba = (hex, alpha) => {
+                    const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+                    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                };
                 
-                // Update CSS custom properties for the color picker button
                 root.style.setProperty('--color-picker-bg', `linear-gradient(135deg, ${brand600}, ${accentColor})`);
-                root.style.setProperty('--color-picker-hover', `linear-gradient(135deg, ${adjustColor(brand600, -20)}, ${adjustColor(accentColor, -20)})`);
+                root.style.setProperty('--color-picker-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
                 
-                // Update shadow colors
-                if (state.theme === 'dark') {
-                    root.style.setProperty('--color-picker-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
-                    root.style.setProperty('--color-picker-hover-shadow', `0 6px 20px ${hexToRgba(brand600, 0.6)}`);
-                } else {
-                    root.style.setProperty('--color-picker-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
-                    root.style.setProperty('--color-picker-hover-shadow', `0 6px 20px ${hexToRgba(brand600, 0.6)}`);
-                }
-            }
-            
-            function updateSortButtonGradient() {
-                const root = document.documentElement;
-                const brand600 = getComputedStyle(root).getPropertyValue('--brand-600').trim();
-                const secondaryAccent = getComputedStyle(root).getPropertyValue('--secondary-accent').trim();
-                const brand700 = getComputedStyle(root).getPropertyValue('--brand-700').trim();
-                const accentColor = getComputedStyle(root).getPropertyValue('--accent-color').trim();
-                
-                // Update CSS custom properties for the sort button
                 root.style.setProperty('--sort-bg', `linear-gradient(135deg, ${brand600}, ${secondaryAccent})`);
                 root.style.setProperty('--sort-hover', `linear-gradient(135deg, ${brand700}, ${accentColor})`);
-                
-                // Update shadow colors
-                if (state.theme === 'dark') {
-                    root.style.setProperty('--sort-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
-                    root.style.setProperty('--sort-hover-shadow', `0 6px 20px ${hexToRgba(brand600, 0.6)}`);
-                } else {
-                    root.style.setProperty('--sort-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
-                    root.style.setProperty('--sort-hover-shadow', `0 6px 20px ${hexToRgba(brand600, 0.6)}`);
-                }
-            }
-            
-            function hexToRgba(hex, alpha) {
-                const r = parseInt(hex.slice(1, 3), 16);
-                const g = parseInt(hex.slice(3, 5), 16);
-                const b = parseInt(hex.slice(5, 7), 16);
-                return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-            }
-            
-            function adjustColor(color, amount) {
-                const num = parseInt(color.replace("#", ""), 16);
-                const r = Math.max(0, Math.min(255, (num >> 16) + amount));
-                const g = Math.max(0, Math.min(255, ((num >> 8) & 0x00FF) + amount));
-                const b = Math.max(0, Math.min(255, (num & 0x0000FF) + amount));
-                return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
+                root.style.setProperty('--sort-shadow', `0 4px 15px ${hexToRgba(brand600, 0.4)}`);
             }
 
-            // Theme Management
             function applyTheme(){ 
                 document.documentElement.classList.toggle('dark', state.theme === 'dark'); 
-                const icon = els.themeBtn.querySelector('i');
-                const text = els.themeBtn.querySelector('span');
-                
-                if (state.theme === 'dark') {
-                    icon.className = 'fas fa-moon theme-icon';
-                    text.textContent = 'מצב כהה';
-                } else {
-                    icon.className = 'fas fa-sun theme-icon';
-                    text.textContent = 'מצב בהיר';
-                }
-                
-                // Update theme button gradient
-                updateThemeButtonGradient();
-                // Update color picker button gradient
-                updateColorPickerButtonGradient();
-                // Update sort button gradient
-                updateSortButtonGradient();
-            }
-            
-            function updateThemeButtonGradient() {
-                const root = document.documentElement;
-                
-                if (state.theme === 'dark') {
-                    root.style.setProperty('--theme-btn-bg', 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)');
-                    root.style.setProperty('--theme-btn-hover', 'linear-gradient(135deg, #ee82ee 0%, #ff6b6b 100%)');
-                    root.style.setProperty('--theme-btn-shadow', '0 4px 15px rgba(240, 147, 251, 0.4)');
-                    root.style.setProperty('--theme-btn-hover-shadow', '0 6px 20px rgba(240, 147, 251, 0.6)');
-                } else {
-                    root.style.setProperty('--theme-btn-bg', 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)');
-                    root.style.setProperty('--theme-btn-hover', 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)');
-                    root.style.setProperty('--theme-btn-shadow', '0 4px 15px rgba(102, 126, 234, 0.4)');
-                    root.style.setProperty('--theme-btn-hover-shadow', '0 6px 20px rgba(102, 126, 234, 0.6)');
-                }
+                els.themeBtn.querySelector('i').className = `fas ${state.theme === 'dark' ? 'fa-moon' : 'fa-sun'} theme-icon`;
+                els.themeBtn.querySelector('span').textContent = state.theme === 'dark' ? 'מצב כהה' : 'מצב בהיר';
+                updateButtonGradients();
             }
             
             function toggleTheme(){ 
@@ -2049,356 +631,151 @@
                 applyTheme(); 
             }
 
-            // API Functions
             const TMDB = 'https://api.themoviedb.org/3'; 
-            const IMG = 'https://image.tmdb.org/t/p/'
+            const IMG = 'https://image.tmdb.org/t/p/';
             
             async function tmdb(path, params = {}){ 
                 const url = new URL(TMDB + path); 
-                const sp = new URLSearchParams({ 
-                    api_key: API_KEY, 
-                    language: 'he-IL', 
-                    include_adult: 'false', 
-                    ...params 
-                }); 
-                url.search = sp.toString(); 
+                url.search = new URLSearchParams({ api_key: API_KEY, language: 'he-IL', include_adult: 'false', ...params }).toString();
                 const res = await fetch(url.toString()); 
-                if(!res.ok){ 
-                    const text = await res.text().catch(() => res.statusText); 
-                    throw new Error('TMDB ' + res.status + ': ' + text); 
-                } 
+                if(!res.ok) throw new Error(`TMDB Error ${res.status}: ${await res.text()}`);
                 return res.json(); 
             }
 
-            // Platform Detection
             function getPlatform(){ 
                 const ua = navigator.userAgent || navigator.vendor || ''; 
                 return { 
                     ios: /iPad|iPhone|iPod/i.test(ua), 
-                    android: /Android/i.test(ua),
-                    mac: /Macintosh/i.test(ua),
-                    windows: /Windows/i.test(ua),
-                    linux: /Linux/i.test(ua)
+                    android: /Android/i.test(ua)
                 }; 
             }
 
-            // IMDb Cache + Deep-link Builders
-            const imdbCache = new Map()
-            
+            const imdbCache = new Map();
             async function getImdbId(item){ 
                 if(imdbCache.has(item.id)) return imdbCache.get(item.id); 
-                const type = (item.media_type || state.mediaType); 
+                const type = item.media_type || state.mediaType; 
                 try{ 
-                    const data = await tmdb(`/${type==='tv'?'tv':'movie'}/${item.id}/external_ids`); 
-                    const imdb = data && data.imdb_id ? data.imdb_id : null; 
-                    imdbCache.set(item.id, imdb); 
+                    const data = await tmdb(`/${type}/${item.id}/external_ids`); 
+                    const imdb = data?.imdb_id; 
+                    if(imdb) imdbCache.set(item.id, imdb); 
                     return imdb; 
-                } catch { 
-                    return null; 
-                } 
+                } catch { return null; } 
             }
             
-            // FIXED: Correct Stremio detail URL format
-            function stremioDetailURL(type, imdb){ 
-                const t = (type==='tv'?'series':'movie'); 
-                // Fixed format - no duplicate ID
-                return `stremio:///detail/${t}/${imdb}`;
-            }
-            
-            function stremioWebURL(type, imdb){ 
-                const t = (type==='tv'?'series':'movie'); 
-                return `https://web.stremio.com/#/detail/${t}/${imdb}`; 
+            function stremioURL(type, imdb){ 
+                const t = type === 'tv' ? 'series' : 'movie';
+                return {
+                    detail: `stremio:///detail/${t}/${imdb}`,
+                    web: `https://web.stremio.com/#/detail/${t}/${imdb}`
+                };
             }
 
-            function androidIntentFromDeeplink(deeplink, storeFallback){ 
-                const pp = deeplink.replace('stremio:///', '').replace('stremio://', ''); 
-                return `intent://${pp}#Intent;scheme=stremio;package=com.stremio.one;S.browser_fallback_url=${encodeURIComponent(storeFallback)};end`; 
-            }
-
-            // Enhanced Stremio opener with full browser support
             function openWithFallback(deeplink, webUrl) {
-                const { ios, android, mac, windows, linux } = getPlatform();
-                
-                // Check if we're already in Stremio web
-                const isInStremioWeb = window.location.hostname === 'web.stremio.com';
-                
-                // iOS handling
-                if (ios) {
-                    // Try iframe method first (more reliable in iOS)
-                    try {
-                        const iframe = document.createElement('iframe');
-                        iframe.style.display = 'none';
-                        iframe.src = deeplink;
-                        document.body.appendChild(iframe);
-                        
-                        // Remove iframe after attempt
-                        setTimeout(() => {
-                            document.body.removeChild(iframe);
-                            // If still here, try direct navigation
-                            if (!document.hidden) {
-                                window.location.href = deeplink;
-                            }
-                        }, 500);
-                    } catch (e) {
-                        // Fallback to direct navigation
-                        window.location.href = deeplink;
-                    }
+                if (getPlatform().ios) { window.location.href = deeplink; return; }
+                if (getPlatform().android) {
+                    const intentUrl = `intent://${deeplink.substring(10)}#Intent;scheme=stremio;package=com.stremio.one;S.browser_fallback_url=${encodeURIComponent('https://play.google.com/store/apps/details?id=com.stremio.one')};end`;
+                    window.location.href = intentUrl;
                     return;
                 }
-                
-                // Android handling
-                if (android) {
-                    const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.stremio.one';
-                    const intentUrl = androidIntentFromDeeplink(deeplink, playStoreUrl);
-                    
-                    // Try multiple methods
-                    try {
-                        // Method 1: Direct intent
-                        window.location.href = intentUrl;
-                        
-                        // Method 2: If that fails, try deeplink directly
-                        setTimeout(() => {
-                            if (!document.hidden) {
-                                window.location.href = deeplink;
-                            }
-                        }, 300);
-                        
-                        // Method 3: If all else fails, open Play Store
-                        setTimeout(() => {
-                            if (!document.hidden && webUrl) {
-                                window.open(playStoreUrl, '_blank', 'noopener');
-                            }
-                        }, 1000);
-                    } catch (e) {
-                        // Fallback to web version
-                        if (webUrl && !isInStremioWeb) {
-                            window.open(webUrl, '_blank', 'noopener');
-                        }
-                    }
-                    return;
-                }
-                
-                // Desktop handling
-                if (mac || windows || linux) {
-                    // Try to open the desktop app
-                    try {
-                        // Method 1: Direct deeplink
-                        const opened = window.open(deeplink, '_blank');
-                        
-                        // Method 2: If that fails, try location change
-                        setTimeout(() => {
-                            if (!opened || opened.closed) {
-                                window.location.href = deeplink;
-                            }
-                        }, 100);
-                        
-                        // Method 3: If still not opened, open web version
-                        setTimeout(() => {
-                            if (webUrl && !isInStremioWeb) {
-                                // Check if user has Stremio installed by trying to detect it
-                                const hasStremio = localStorage.getItem('hasStremio') === 'true';
-                                
-                                if (hasStremio) {
-                                    // User has Stremio, try one more time
-                                    window.location.href = deeplink;
-                                } else {
-                                    // Open web version
-                                    window.open(webUrl, '_blank', 'noopener');
-                                }
-                                
-                                // Remember that we tried to open Stremio
-                                setTimeout(() => {
-                                    localStorage.setItem('hasStremio', 'false');
-                                }, 2000);
-                            }
-                        }, 500);
-                    } catch (e) {
-                        // Fallback to web version
-                        if (webUrl && !isInStremioWeb) {
-                            window.open(webUrl, '_blank', 'noopener');
-                        }
-                    }
-                    return;
-                }
-                
-                // Fallback for any other platform
-                if (webUrl && !isInStremioWeb) {
-                    window.open(webUrl, '_blank', 'noopener');
-                }
+                window.location.href = deeplink;
+                setTimeout(() => { if (!document.hidden && webUrl) window.open(webUrl, '_blank'); }, 1000);
             }
 
-            // Addons Click Handler
             document.querySelectorAll('.addon').forEach(addon => {
                 addon.addEventListener('click', () => {
                     const link = addon.getAttribute('data-addon');
                     const copyLink = addon.getAttribute('data-copy');
-                    const { ios } = getPlatform();
-                    
-                    if(ios){
-                        navigator.clipboard.writeText(copyLink).then(() => {
-                            // הסרתי את ההודעה כי המשתמש ביקש להסיר את ה-toast
-                        }).catch(() => {
-                            // הסרתי את ההודעה כי המשתמש ביקש להסיר את ה-toast
-                        });
+                    if(getPlatform().ios){
+                        navigator.clipboard.writeText(copyLink).catch(()=>{});
                         return;
                     }
-                    
                     openWithFallback(link);
                 });
             });
 
-            // Card Creation with Colorful Titles
+            function createSkeletonCard() {
+                const div = document.createElement('div');
+                div.className = 'skeleton-card';
+                div.innerHTML = `
+                    <div class="skeleton-poster"></div>
+                    <div class="skeleton-meta">
+                        <div class="skeleton-text"></div>
+                        <div class="skeleton-text short"></div>
+                    </div>
+                `;
+                return div;
+            }
+
             function card(item){ 
                 const title = item.title || item.name || '—'; 
-                const date = item.release_date || item.first_air_date || ''; 
-                const vote = (item.vote_average && item.vote_average.toFixed) ? item.vote_average.toFixed(1) : '—'; 
-                const id = item.id; 
-                const href = `https://www.themoviedb.org/${state.mediaType}/${id}`; 
-                
-                // Get description with fallback
-                let description = item.overview || '';
-                if (!description.trim()) {
-                    description = state.mediaType === 'movie' 
-                        ? 'תיאור אינו זמין לסרט זה.' 
-                        : 'תיאור אינו זמין לסדרה זו.';
-                }
+                const date = (item.release_date || item.first_air_date || '').split('-')[0] || ''; 
+                const vote = item.vote_average?.toFixed(1) || '—'; 
+                let description = item.overview || (state.mediaType === 'movie' ? 'תיאור אינו זמין לסרט זה.' : 'תיאור אינו זמין לסדרה זו.');
                 
                 const div = document.createElement('div'); 
                 div.className = 'card'; 
-                
-                // Create poster container with overlay
-                const posterContainer = document.createElement('div');
-                posterContainer.className = 'poster-container';
-                
-                // Create poster image
-                const poster = document.createElement('img');
-                poster.className = 'poster';
-                poster.loading = 'lazy';
-                poster.alt = title;
-                if (item.poster_path) {
-                    poster.src = IMG + 'w342' + item.poster_path;
-                } else {
-                    // Placeholder for missing poster
-                    poster.style.background = 'linear-gradient(135deg, #e2e8f0, #ced4da)';
-                }
-                
-                // Create overlay
-                const overlay = document.createElement('div');
-                overlay.className = 'poster-overlay';
-                
-                // Overlay content
-                const overlayTitle = document.createElement('div');
-                overlayTitle.className = 'poster-overlay-title';
-                overlayTitle.textContent = title;
-                
-                const overlayDescription = document.createElement('div');
-                overlayDescription.className = 'poster-overlay-description';
-                overlayDescription.textContent = description;
-                
-                overlay.appendChild(overlayTitle);
-                overlay.appendChild(overlayDescription);
-                
-                posterContainer.appendChild(poster);
-                posterContainer.appendChild(overlay);
-                
-                // Add click event to poster container
-                posterContainer.addEventListener('click', async () => {
+                div.onclick = async () => {
                     const imdb = await getImdbId(item);
                     if (!imdb) {
-                        const q = encodeURIComponent(item.title || item.name || '');
+                        const q = encodeURIComponent(title);
                         openWithFallback(`stremio:///search?query=${q}`, `https://web.stremio.com/#/search?query=${q}`);
                         return;
                     }
-                    const type = (item.media_type || state.mediaType);
-                    openWithFallback(stremioDetailURL(type, imdb), stremioWebURL(type, imdb));
-                });
-                
-                // Create meta section
-                const meta = document.createElement('div');
-                meta.className = 'meta';
-                
-                // Card content
-                const cardContent = document.createElement('div');
-                cardContent.className = 'card-content';
-                
-                // Card title with random colorful gradient
-                const cardTitle = document.createElement('div');
-                cardTitle.className = 'card-title';
-                cardTitle.title = title;
-                cardTitle.textContent = title;
-                
-                // Apply random gradient class for colorful effect
-                const gradientClasses = ['gradient-text-2', 'gradient-text-3', 'gradient-text-4', 'gradient-text-5', 'gradient-text-6', 'gradient-text-7', 'gradient-text-8', 'gradient-text-9', 'gradient-text-10'];
-                const randomGradient = gradientClasses[Math.floor(Math.random() * gradientClasses.length)];
-                cardTitle.classList.remove('gradient-text-2'); // Remove default
-                cardTitle.classList.add(randomGradient);
-                
-                // Card meta
-                const cardMeta = document.createElement('div');
-                cardMeta.className = 'card-meta';
-                cardMeta.innerHTML = `
-                    <span class="muted">${date}</span>
-                    <span class="muted">⭐ ${vote}</span>
+                    const { detail, web } = stremioURL(item.media_type || state.mediaType, imdb);
+                    openWithFallback(detail, web);
+                };
+
+                const gradientClass = `gradient-text-${2 + Math.floor(Math.random() * 9)}`;
+
+                div.innerHTML = `
+                    <div class="poster-container">
+                        <img class="poster" loading="lazy" alt="${title}" src="${item.poster_path ? IMG + 'w342' + item.poster_path : ''}">
+                        <div class="poster-overlay">
+                            <div class="poster-overlay-title">${title}</div>
+                            <div class="poster-overlay-description">${description}</div>
+                        </div>
+                    </div>
+                    <div class="meta">
+                        <div class="card-content">
+                            <div class="card-title ${gradientClass}" title="${title}">${title}</div>
+                            <div class="card-meta">
+                                <span class="muted">${date}</span>
+                                <span class="muted">⭐ ${vote}</span>
+                            </div>
+                        </div>
+                    </div>
                 `;
-                
-                cardContent.appendChild(cardTitle);
-                cardContent.appendChild(cardMeta);
-                
-                meta.appendChild(cardContent);
-                
-                // Append everything to the card
-                div.appendChild(posterContainer);
-                div.appendChild(meta);
-                
                 return div; 
             }
 
-            // Data Loading
             async function fetchPage(page){ 
-                const isSearch = !!state.query; 
-                const path = isSearch ? `/search/${state.mediaType}` : `/discover/${state.mediaType}`; 
-                
-                // Build parameters
-                const params = isSearch 
-                    ? { query: state.query, page } 
-                    : { 
-                        sort_by: state.sortBy, 
-                        page, 
-                        'vote_count.gte': '50'
-                    };
-                
-                // Add genre filters
-                if (state.selectedGenres.length > 0) {
-                    params.with_genres = state.selectedGenres.join(',');
-                }
-                
-                // Add provider filters (watch region: IL)
-                if (state.selectedProviders.length > 0) {
-                    params.watch_region = 'IL';
-                    params.with_watch_providers = state.selectedProviders.join('|');
-                }
-                
+                const path = state.query ? `/search/${state.mediaType}` : `/discover/${state.mediaType}`; 
+                const params = state.query ? { query: state.query, page } : { sort_by: state.sortBy, page, 'vote_count.gte': '50' };
+                if (state.selectedGenres.length > 0) params.with_genres = state.selectedGenres.join(',');
+                if (state.selectedProviders.length > 0) { params.watch_region = 'IL'; params.with_watch_providers = state.selectedProviders.join('|'); }
                 return tmdb(path, params); 
             }
             
             async function loadMore(){ 
-                if(state.loading) return; 
-                if(state.page > state.totalPages) return; 
-                
+                if(state.loading || state.page > state.totalPages) return; 
                 state.loading = true; 
                 els.status.innerHTML = '<div class="loader-container"><div class="loader"></div></div>';
                 
                 try{ 
                     const data = await fetchPage(state.page); 
+                    
+                    if (state.page === 1) { // On first load, clear skeletons
+                        els.grid.innerHTML = '';
+                    }
+
+                    if (data.results.length === 0 && state.page === 1) {
+                         els.status.textContent = 'לא נמצאו תוצאות התואמות את החיפוש והסינון שלך.';
+                         return;
+                    }
+
                     state.totalPages = data.total_pages || 1; 
-                    
-                    (data.results || []).forEach((it, idx) => { 
-                        const c = card(it); 
-                        c.style.animationDelay = `${idx * 0.05}s`; 
-                        els.grid.appendChild(c); 
-                    }); 
-                    
-                    state.page += 1; 
+                    data.results.forEach(it => els.grid.appendChild(card(it))); 
+                    state.page++; 
                     els.status.textContent = state.page > state.totalPages ? 'הגעת לסוף 🎬' : ''; 
                 } catch(err){ 
                     console.error(err); 
@@ -2412,269 +789,178 @@
                 state.page = 1; 
                 state.totalPages = 1; 
                 els.grid.innerHTML = ''; 
+                
+                // Add skeleton loaders
+                for (let i = 0; i < 12; i++) {
+                    els.grid.appendChild(createSkeletonCard());
+                }
+
                 loadMore(); 
             }
 
-            // Filter Management
-            function initGenreFilters() {
-                // Set initial active states
-                state.selectedGenres.forEach(genreId => {
-                    const chip = els.genreFilters.querySelector(`[data-genre="${genreId}"]`);
-                    if (chip) chip.classList.add('active');
-                });
-                
-                // Show/hide clear button
-                els.clearGenres.style.display = state.selectedGenres.length > 0 ? 'inline-flex' : 'none';
-                
-                // Add click handlers
-                els.genreFilters.querySelectorAll('.filter-chip').forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        const genreId = chip.getAttribute('data-genre');
-                        
-                        if (chip.classList.contains('active')) {
-                            // Remove from selection
-                            state.selectedGenres = state.selectedGenres.filter(id => id !== genreId);
-                            chip.classList.remove('active');
-                        } else {
-                            // Add to selection
-                            state.selectedGenres.push(genreId);
-                            chip.classList.add('active');
-                        }
-                        
-                        // Update UI
-                        els.clearGenres.style.display = state.selectedGenres.length > 0 ? 'inline-flex' : 'none';
-                        
-                        // Save to localStorage
-                        localStorage.setItem('selectedGenres', JSON.stringify(state.selectedGenres));
-                        
-                        // Restart feed if not in addons tab
-                        if (state.mediaType !== 'addons') {
-                            restartFeed();
-                        }
-                    });
-                });
-                
-                // Clear button handler
-                els.clearGenres.addEventListener('click', () => {
-                    state.selectedGenres = [];
-                    els.genreFilters.querySelectorAll('.filter-chip').forEach(chip => {
-                        chip.classList.remove('active');
-                    });
-                    els.clearGenres.style.display = 'none';
-                    localStorage.setItem('selectedGenres', JSON.stringify(state.selectedGenres));
-                    
-                    if (state.mediaType !== 'addons') {
-                        restartFeed();
-                    }
-                });
-            }
-            
-            function initProviderFilters() {
-                // Set initial active states
-                state.selectedProviders.forEach(providerId => {
-                    const chip = els.providerFilters.querySelector(`[data-provider="${providerId}"]`);
-                    if (chip) chip.classList.add('active');
-                });
-                
-                // Show/hide clear button
-                els.clearProviders.style.display = state.selectedProviders.length > 0 ? 'inline-flex' : 'none';
-                
-                // Add click handlers
-                els.providerFilters.querySelectorAll('.filter-chip').forEach(chip => {
-                    chip.addEventListener('click', () => {
-                        const providerId = chip.getAttribute('data-provider');
-                        
-                        if (chip.classList.contains('active')) {
-                            // Remove from selection
-                            state.selectedProviders = state.selectedProviders.filter(id => id !== providerId);
-                            chip.classList.remove('active');
-                        } else {
-                            // Add to selection
-                            state.selectedProviders.push(providerId);
-                            chip.classList.add('active');
-                        }
-                        
-                        // Update UI
-                        els.clearProviders.style.display = state.selectedProviders.length > 0 ? 'inline-flex' : 'none';
-                        
-                        // Save to localStorage
-                        localStorage.setItem('selectedProviders', JSON.stringify(state.selectedProviders));
-                        
-                        // Restart feed if not in addons tab
-                        if (state.mediaType !== 'addons') {
-                            restartFeed();
-                        }
-                    });
-                });
-                
-                // Clear button handler
-                els.clearProviders.addEventListener('click', () => {
-                    state.selectedProviders = [];
-                    els.providerFilters.querySelectorAll('.filter-chip').forEach(chip => {
-                        chip.classList.remove('active');
-                    });
-                    els.clearProviders.style.display = 'none';
-                    localStorage.setItem('selectedProviders', JSON.stringify(state.selectedProviders));
-                    
-                    if (state.mediaType !== 'addons') {
-                        restartFeed();
-                    }
-                });
+            function updateFilterCount(type) {
+                const count = type === 'genres' ? state.selectedGenres.length : state.selectedProviders.length;
+                const countEl = type === 'genres' ? els.genreCount : els.providerCount;
+                const clearBtn = type === 'genres' ? els.clearGenres : els.clearProviders;
+
+                if (count > 0) {
+                    countEl.textContent = count;
+                    countEl.style.display = 'inline-block';
+                    clearBtn.style.display = 'inline-flex';
+                } else {
+                    countEl.style.display = 'none';
+                    clearBtn.style.display = 'none';
+                }
             }
 
-            // Tab Switching
+            function initFilterSection(type, filtersEl, clearBtn, updateFn) {
+                filtersEl.querySelectorAll('.filter-chip').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        const id = chip.dataset[type === 'genres' ? 'genre' : 'provider'];
+                        const selectedArray = type === 'genres' ? state.selectedGenres : state.selectedProviders;
+                        
+                        const index = selectedArray.indexOf(id);
+                        if (index > -1) {
+                            selectedArray.splice(index, 1);
+                            chip.classList.remove('active');
+                        } else {
+                            selectedArray.push(id);
+                            chip.classList.add('active');
+                        }
+                        
+                        localStorage.setItem(type === 'genres' ? 'selectedGenres' : 'selectedProviders', JSON.stringify(selectedArray));
+                        updateFn();
+                        if (state.mediaType !== 'addons') restartFeed();
+                    });
+                });
+
+                clearBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (type === 'genres') state.selectedGenres = []; else state.selectedProviders = [];
+                    localStorage.setItem(type === 'genres' ? 'selectedGenres' : 'selectedProviders', '[]');
+                    
+                    filtersEl.querySelectorAll('.filter-chip.active').forEach(chip => chip.classList.remove('active'));
+                    updateFn();
+                    if (state.mediaType !== 'addons') restartFeed();
+                });
+
+                 // Set initial state from localStorage
+                const selectedArray = type === 'genres' ? state.selectedGenres : state.selectedProviders;
+                selectedArray.forEach(id => {
+                    const chip = filtersEl.querySelector(`[data-${type === 'genres' ? 'genre' : 'provider'}="${id}"]`);
+                    if (chip) chip.classList.add('active');
+                });
+                updateFn();
+            }
+
             function switchTab(type) {
                 state.mediaType = type;
                 localStorage.setItem('mediaType', type);
                 
-                document.querySelectorAll('#typeChips .chip').forEach(x => { 
-                    x.classList.toggle('active', x.getAttribute('data-type') === type); 
-                });
+                document.querySelectorAll('#typeChips .chip').forEach(x => x.classList.toggle('active', x.getAttribute('data-type') === type)); 
                 
-                if (type === 'addons') {
-                    els.mainContent.style.display = 'none';
-                    els.addonsSection.style.display = 'block';
-                    if (state.observer) state.observer.disconnect();
-                } else {
-                    els.mainContent.style.display = 'block';
-                    els.addonsSection.style.display = 'none';
+                document.body.classList.toggle('showing-addons', type === 'addons');
+                
+                if (type !== 'addons') {
                     restartFeed();
                     if (state.observer) state.observer.observe(els.sentinel);
+                } else {
+                    if (state.observer) state.observer.disconnect();
                 }
+
+                els.filters.scrollIntoView();
             }
 
-            // Custom Sort Dropdown
             function initCustomDropdown() {
-                const sortBtn = els.sortButton;
-                const dropdown = els.sortDropdown;
-                const dropdownItems = dropdown.querySelectorAll('.custom-dropdown-item');
+                const updateSortButtonText = () => {
+                    const selectedOption = els.sort.options[els.sort.selectedIndex];
+                    els.sortButton.innerHTML = `<i class="fas fa-${selectedOption.value.includes('pop') ? 'fire' : (selectedOption.value.includes('vote') ? 'star' : 'calendar-alt')}"></i> <span>${selectedOption.text}</span>`;
+                };
+
+                els.sortButton.addEventListener('click', (e) => { e.stopPropagation(); els.sortDropdown.classList.toggle('active'); });
                 
-                // Set initial button text based on selected value
-                updateSortButtonText();
-                
-                // Toggle dropdown
-                sortBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    dropdown.classList.toggle('active');
-                });
-                
-                // Handle item selection
-                dropdownItems.forEach(item => {
+                els.sortDropdown.querySelectorAll('.custom-dropdown-item').forEach(item => {
                     item.addEventListener('click', (e) => {
                         e.stopPropagation();
-                        const value = item.getAttribute('data-value');
-                        
-                        // Update the hidden select
-                        els.sort.value = value;
-                        
-                        // Update state
-                        state.sortBy = value;
-                        localStorage.setItem('sortBy', value);
-                        
-                        // Update button text
+                        els.sort.value = item.dataset.value;
+                        state.sortBy = item.dataset.value;
+                        localStorage.setItem('sortBy', state.sortBy);
                         updateSortButtonText();
-                        
-                        // Close dropdown
-                        dropdown.classList.remove('active');
-                        
-                        // Restart feed if not in addons tab
-                        if (state.mediaType !== 'addons') {
-                            restartFeed();
-                        }
+                        els.sortDropdown.classList.remove('active');
+                        if (state.mediaType !== 'addons') restartFeed();
                     });
                 });
                 
-                // Close dropdown when clicking outside
-                document.addEventListener('click', () => {
-                    dropdown.classList.remove('active');
-                });
-                
-                // Prevent dropdown from closing when clicking inside
-                dropdown.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                });
-            }
-            
-            function updateSortButtonText() {
-                const sortValue = els.sort.value;
-                const sortText = els.sort.options[els.sort.selectedIndex].text;
-                els.sortButton.textContent = sortText;
+                document.addEventListener('click', () => els.sortDropdown.classList.remove('active'));
+                updateSortButtonText();
             }
 
             // INIT
-            // First detect device and apply class
             applyDeviceClass();
-            
-            // Then apply themes
             applyColorTheme();
             applyTheme(); 
             
-            // Theme Button
             els.themeBtn.addEventListener('click', toggleTheme); 
+            els.colorPickerBtn.addEventListener('click', (e) => { e.stopPropagation(); els.colorPickerPopup.classList.toggle('active'); });
+            document.addEventListener('click', (e) => { if (!els.colorPickerPopup.contains(e.target) && e.target !== els.colorPickerBtn) els.colorPickerPopup.classList.remove('active'); });
             
-            // Color Picker Button
-            els.colorPickerBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                els.colorPickerPopup.classList.toggle('active');
-            });
-            
-            // Close color picker when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!els.colorPickerPopup.contains(e.target) && e.target !== els.colorPickerBtn) {
-                    els.colorPickerPopup.classList.remove('active');
-                }
-            });
-            
-            // Color Options
             document.querySelectorAll('.color-option').forEach(option => {
                 option.addEventListener('click', () => {
-                    const theme = option.getAttribute('data-theme');
-                    state.colorTheme = theme;
-                    localStorage.setItem('colorTheme', theme);
+                    state.colorTheme = option.dataset.theme;
+                    localStorage.setItem('colorTheme', state.colorTheme);
                     applyColorTheme();
                     els.colorPickerPopup.classList.remove('active');
                 });
             });
             
-            // Type Chips
             els.typeChips.querySelectorAll('.chip').forEach(btn => { 
-                const t = btn.getAttribute('data-type'); 
-                btn.classList.toggle('active', t === state.mediaType); 
-                btn.onclick = () => { 
-                    if (state.mediaType === t) return; 
-                    switchTab(t); 
-                }; 
+                btn.onclick = () => { if (state.mediaType !== btn.dataset.type) switchTab(btn.dataset.type); };
             });
             
-            // Initialize filters
-            initGenreFilters();
-            initProviderFilters();
-            
-            // Initialize custom dropdown
+            // Accordion Toggles
+            els.genreFilterToggle.addEventListener('click', () => els.genreFilterSection.classList.toggle('collapsed'));
+            els.providerFilterToggle.addEventListener('click', () => els.providerFilterSection.classList.toggle('collapsed'));
+
+            initFilterSection('genres', els.genreFilters, els.clearGenres, () => updateFilterCount('genres'));
+            initFilterSection('providers', els.providerFilters, els.clearProviders, () => updateFilterCount('providers'));
             initCustomDropdown();
             
-            // Search Input
             let searchTimer; 
             els.search.addEventListener('input', (e) => { 
                 clearTimeout(searchTimer); 
                 searchTimer = setTimeout(() => { 
                     state.query = e.target.value.trim(); 
-                    if (state.mediaType !== 'addons') { 
-                        restartFeed(); 
-                    } 
+                    if (state.mediaType !== 'addons') restartFeed(); 
                 }, 350); 
             });
+
+            // Back to top & Scrolled header
+            window.onscroll = () => {
+                const isScrolled = document.body.scrollTop > 20 || document.documentElement.scrollTop > 20;
+                els.backToTopBtn.classList.toggle('show', isScrolled);
+                els.topbar.classList.toggle('scrolled', isScrolled);
+            };
+            els.backToTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Initial Tab Load
+            // Set the correct class on body based on initial state
+            document.body.classList.toggle('showing-addons', state.mediaType === 'addons');
+            // Then call switchTab to load content correctly (without scrolling on first load)
+            if (state.mediaType === 'addons') {
+                if (state.observer) state.observer.disconnect();
+            } else {
+                restartFeed();
+                if (state.observer) state.observer.observe(els.sentinel);
+            }
+            document.querySelectorAll('#typeChips .chip').forEach(x => x.classList.toggle('active', x.getAttribute('data-type') === state.mediaType));
             
-            // Initialize
-            switchTab(state.mediaType);
-            
-            // Infinite Scroll Observer
+            // Intersection Observer
             state.observer = new IntersectionObserver(entries => { 
                 if (entries[0].isIntersecting && state.mediaType !== 'addons') loadMore(); 
             }, { threshold: 0.1 }); 
             
-            if (state.mediaType !== 'addons') { 
-                state.observer.observe(els.sentinel); 
+            if (state.mediaType !== 'addons') {
+                state.observer.observe(els.sentinel);
             }
         })();
     </script>
