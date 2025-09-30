@@ -34,7 +34,7 @@
     <link rel="shortcut icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-size='52'%3E%F0%9F%8E%AC%3C/text%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgZmlsbD0iIzZmNDJjMSIvPjxjaXJjbGUgY3g9IjkwIiBjeT0iOTAiIHI9IjgwIiBmaWxsPSJ3aGl0ZSIvPjxwYXRoIGQ9Ik02MCA2MGw2MCAwIDAgNjAtNjAgMHoiIGZpbGw9IiM2ZjQyYzEiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI2IiBmaWxsPSJ3aGl0ZSIvPjxjaXJjbGUgY3g9IjEyMCIgY3k9IjYwIiByPSI2IiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==">
     
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&family=Assistant:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&family=Assistant:wght@400;500;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root { 
@@ -225,13 +225,8 @@
         .color-pink { background: linear-gradient(135deg, #e91e63, #00bcd4); }
         .theme-icon { transition: all 0.3s ease; display: inline-block; }
         
-        /* *** MODIFIED: Main content transitions simplified to use display: none *** */
-        body.showing-addons #mainContent {
-            display: none;
-        }
-        body:not(.showing-addons) #addonsSection {
-            display: none;
-        }
+        body.showing-addons #mainContent { display: none; }
+        body:not(.showing-addons) #addonsSection { display: none; }
 
         /* Responsive Filters */
         .filters { padding: 16px 0; border-bottom: 1px solid var(--border); }
@@ -292,10 +287,21 @@
         .poster { width: 100%; aspect-ratio: 2/3; object-fit: cover; background: linear-gradient(135deg, #e2e8f0, #ced4da); transition: transform 0.5s ease; display: block; }
         .card:hover .poster { transform: scale(1.08); }
         
-        .poster-overlay { position: absolute;inset: 0; background: rgba(0, 0, 0, 0.85); color: white; padding: 16px; display: flex; flex-direction: column; justify-content: center; opacity: 0; transition: opacity 0.3s ease; overflow: hidden; }
+        .poster-overlay { position: absolute;inset: 0; background: rgba(0, 0, 0, 0.85); color: #fff; padding: 16px; display: flex; flex-direction: column; justify-content: center; opacity: 0; transition: opacity 0.3s ease; overflow: hidden; }
         .card:hover .poster-overlay { opacity: 1; }
         .poster-overlay-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; text-align: center; background: linear-gradient(135deg, #ffffff, #f0f0f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .poster-overlay-description { font-size: 14px; line-height: 1.6; text-align: center; overflow-y: auto; max-height: 70%; padding: 0 4px; }
+        
+        /* *** MODIFIED: Glowing description in poster overlay *** */
+        .poster-overlay-description { 
+            font-size: 14px; 
+            line-height: 1.6; 
+            text-align: center; 
+            overflow-y: auto; 
+            max-height: 70%; 
+            padding: 0 4px;
+            font-weight: 500;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
         
         .card .meta { padding: var(--card-padding); flex-grow: 1; }
         .muted { color: var(--muted); font-size: 13px; font-weight: 600; }
@@ -332,7 +338,15 @@
         .addon::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--brand-600), var(--accent-color)); transform-origin: left; transform: scaleX(0); transition: transform 0.4s ease; }
         .addon:hover::before { transform: scaleX(1); }
         .addon h3 { margin: 0 0 10px; font-size: 20px; display: flex; align-items: center; gap: 8px; background: var(--text-gradient-3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
-        .addon p { margin: 0 0 16px; color: var(--muted); font-size: 15px; line-height: 1.5; font-weight: 600; }
+        
+        /* *** MODIFIED: Addon description color changed *** */
+        .addon p { 
+            margin: 0 0 16px; 
+            color: var(--text); /* Changed from --muted */
+            font-size: 15px; 
+            line-height: 1.5; 
+            font-weight: 500; /* Slightly bolder */
+        }
         
         /* Telegram Button */
         .telegram-section { margin-top: 40px; text-align: center; }
@@ -868,7 +882,7 @@
                     if (state.observer) state.observer.disconnect();
                 }
 
-                els.filters.scrollIntoView();
+                els.filters.scrollIntoView({ behavior: 'smooth' });
             }
 
             function initCustomDropdown() {
@@ -943,14 +957,11 @@
             els.backToTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
             // Initial Tab Load
-            // Set the correct class on body based on initial state
             document.body.classList.toggle('showing-addons', state.mediaType === 'addons');
-            // Then call switchTab to load content correctly (without scrolling on first load)
             if (state.mediaType === 'addons') {
                 if (state.observer) state.observer.disconnect();
             } else {
                 restartFeed();
-                if (state.observer) state.observer.observe(els.sentinel);
             }
             document.querySelectorAll('#typeChips .chip').forEach(x => x.classList.toggle('active', x.getAttribute('data-type') === state.mediaType));
             
