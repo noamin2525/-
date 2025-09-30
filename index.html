@@ -3,14 +3,14 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title> סרטים סדרות ומה שבינהם </title>
+    <title>🎬 סרטים סדרות ומה שביניהם</title>
     <meta content="light dark" name="color-scheme"/>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://yourwebsite.com/"/>
-    <meta property="og:title" content="🎬 סרטים סדרות ומה שבינהם"/>
-    <meta property="og:description" content="סרטים סדרות ומה שבינהם - גלה את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
+    <meta property="og:title" content="🎬 סרטים סדרות ומה שביניהם"/>
+    <meta property="og:description" content="סרטים סדרות ומה שביניהם - גלה את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
     <!-- Simplified placeholder image for reduced HTML weight -->
     <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%236f42c1'/%3E%3Ctext x='50' y='50' text-anchor='middle' dominant-baseline='central' font-size='52'%3E🎬%3C/text%3E%3C/svg%3E"/>
     <meta property="og:image:width" content="1200"/>
@@ -20,14 +20,14 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image"/>
     <meta property="twitter:url" content="https://yourwebsite.com/"/>
-    <meta property="twitter:title" content="🎬 סרטים סדרות ומה שבינהם"/>
-    <meta property="twitter:description" content="סרטים סדרות ומה שבינהם - גלה את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
+    <meta property="twitter:title" content="🎬 סרטים סדרות ומה שביניהם"/>
+    <meta property="twitter:description" content="סרטים סדרות ומה שביניהם - גלה את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
     <meta property="twitter:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%236f42c1'/%3E%3Ctext x='50' y='50' text-anchor='middle' dominant-baseline='central' font-size='52'%3E🎬%3C/text%3E%3C/svg%3E"/>
     
     <!-- Additional meta tags for Google -->
-    <meta name="description" content="סרטים סדרות ומה שביניים - גלה את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
-    <meta name="keywords" content="סרטים, סדרות, מה שביניים, המלצות, דירוגים, ביקורות, קולנוע, טלוויזיה"/>
-    <meta name="author" content="סרטים סדרות ומה שבינהם"/>
+    <meta name="description" content="סרטים סדרות ומה שביניהם - גלה את הסרטים והסדרות הכי טובים עם דירוגים ותיאורים מפורטים"/>
+    <meta name="keywords" content="סרטים, סדרות, ומה שביניהם, המלצות, דירוגים, ביקורות, קולנוע, טלוויזיה"/>
+    <meta name="author" content="סרטים סדרות ומה שביניהם"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
     <!-- Favicon - Browser Tab Icon -->
@@ -155,10 +155,6 @@
         body { margin: 0; font-family: 'Rubik', 'Assistant', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transition: background 0.3s ease, color 0.3s ease; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
         
-        /* Skip to content link for accessibility */
-        .skip-link { position: absolute; top: -40px; left: 0; background: var(--brand-600); color: white; padding: 8px 16px; text-decoration: none; z-index: 200; border-radius: 0 0 4px 0; font-weight: 600; }
-        .skip-link:focus { top: 0; }
-        
         /* Focus-visible styles for accessibility */
         *:focus-visible { outline: 3px solid var(--brand-600); outline-offset: 2px; }
         .dark *:focus-visible { outline-color: var(--brand-600); }
@@ -180,7 +176,6 @@
         @keyframes toastSlideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes toastSlideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(400px); opacity: 0; } }
         .toast.hiding { animation: toastSlideOut 0.3s ease; }
-        
         
         /* Device Detection Classes */
         body.mobile { --topbar-h: 56px; --card-radius: 12px; --grid-gap: 16px; --card-padding: 12px; }
@@ -218,18 +213,18 @@
         .topbar-controls { display: flex; gap: 8px; align-items: center; }
         
         /* Responsive Theme Toggle Button */
-        #themeBtn, #colorPickerBtn, .sort-button { background: var(--theme-btn-bg); border: none; border-radius: 50px; color: white; padding: 8px 16px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: var(--theme-btn-shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; font-family: 'Assistant', sans-serif; min-height: 36px; font-weight: 800; }
-        body.tablet #themeBtn, body.tablet #colorPickerBtn, body.tablet .sort-button { padding: 9px 18px; font-size: 13px; min-height: 40px; }
-        body.desktop #themeBtn, body.desktop #colorPickerBtn, body.desktop .sort-button { padding: 10px 20px; font-size: 14px; min-height: 44px; }
+        #themeBtn, #colorPickerBtn, .sort-button, .auth-button { background: var(--theme-btn-bg); border: none; border-radius: 50px; color: white; padding: 8px 16px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: var(--theme-btn-shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; font-family: 'Assistant', sans-serif; min-height: 36px; font-weight: 800; }
+        body.tablet #themeBtn, body.tablet #colorPickerBtn, body.tablet .sort-button, body.tablet .auth-button { padding: 9px 18px; font-size: 13px; min-height: 40px; }
+        body.desktop #themeBtn, body.desktop #colorPickerBtn, body.desktop .sort-button, body.desktop .auth-button { padding: 10px 20px; font-size: 14px; min-height: 44px; }
         
-        #themeBtn::before, #colorPickerBtn::before, .sort-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
-        #themeBtn:hover::before, #colorPickerBtn:hover::before, .sort-button:hover::before { left: 100%; }
-        #themeBtn:hover, #colorPickerBtn:hover, .sort-button:hover { background: var(--theme-btn-hover); transform: translateY(-2px); box-shadow: var(--theme-btn-hover-shadow); }
-        #themeBtn:active, #colorPickerBtn:active, .sort-button:active { transform: translateY(0); box-shadow: var(--theme-btn-shadow); }
+        #themeBtn::before, #colorPickerBtn::before, .sort-button::before, .auth-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
+        #themeBtn:hover::before, #colorPickerBtn:hover::before, .sort-button:hover::before, .auth-button:hover::before { left: 100%; }
+        #themeBtn:hover, #colorPickerBtn:hover, .sort-button:hover, .auth-button:hover { background: var(--theme-btn-hover); transform: translateY(-2px); box-shadow: var(--theme-btn-hover-shadow); }
+        #themeBtn:active, #colorPickerBtn:active, .sort-button:active, .auth-button:active { transform: translateY(0); box-shadow: var(--theme-btn-shadow); }
         
-        #themeBtn i, #colorPickerBtn i { font-size: 14px; transition: transform 0.3s ease; }
-        body.tablet #themeBtn i, body.tablet #colorPickerBtn i { font-size: 15px; }
-        body.desktop #themeBtn i, body.desktop #colorPickerBtn i { font-size: 16px; }
+        #themeBtn i, #colorPickerBtn i, .auth-button i { font-size: 14px; transition: transform 0.3s ease; }
+        body.tablet #themeBtn i, body.tablet #colorPickerBtn i, body.tablet .auth-button i { font-size: 15px; }
+        body.desktop #themeBtn i, body.desktop #colorPickerBtn i, body.desktop .auth-button i { font-size: 16px; }
         #themeBtn:hover i, #colorPickerBtn:hover i { transform: rotate(180deg); }
         
         /* Color Picker Button - Specific Styles */
@@ -397,15 +392,25 @@
         .clear-all-filters { background: linear-gradient(135deg, #e74c3c, #c0392b); border: none; border-radius: 20px; color: white; padding: 10px 16px; font-size: 13px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3); transition: all 0.3s ease; font-family: 'Assistant', sans-serif; }
         .clear-all-filters:hover { background: linear-gradient(135deg, #c0392b, #a93226); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4); }
         .clear-all-filters i { font-size: 14px; }
+        
+        /* User Profile */
+        .user-profile { display: flex; align-items: center; gap: 10px; position: relative; }
+        .user-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-600), var(--accent-color)); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px; cursor: pointer; }
+        .user-name { font-weight: 600; font-size: 14px; cursor: pointer; }
+        .user-menu { position: absolute; top: 100%; left: 0; background: var(--card); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--dropdown-shadow); padding: 10px 0; margin-top: 10px; min-width: 180px; z-index: 100; display: none; }
+        .user-menu.active { display: block; }
+        .user-menu-item { padding: 10px 20px; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; gap: 10px; }
+        .user-menu-item:hover { background: var(--chip-bg); }
+        .user-menu-item i { width: 20px; text-align: center; }
     </style>
 </head>
 <body>
-    <a href="#mainContent" class="skip-link">דלג לתוכן הראשי</a>
     <div class="toast-container" id="toastContainer"></div>
+    
     <header class="topbar" id="topbar">
         <div class="container">
             <div class="row">
-                <h1><i class="fas fa-film"></i> סרטים סדרות ומה שביניים <i class="fas fa-tv"></i></h1>
+                <h1><i class="fas fa-film"></i> סרטים סדרות ומה שביניהם <i class="fas fa-tv"></i></h1>
                 <div class="topbar-controls">
                     <button aria-label="בחר צבע" id="colorPickerBtn">
                         <i class="fas fa-palette theme-icon"></i>
@@ -415,6 +420,9 @@
                         <i class="fas fa-sun theme-icon"></i>
                         <span>מצב בהיר</span>
                     </button>
+                    
+
+                    
                     <div class="color-picker-popup" id="colorPickerPopup">
                         <h3 class="color-picker-title">בחר צבע לאתר</h3>
                         <div class="color-options">
@@ -430,6 +438,7 @@
         </div>
     </header>
     
+    <!-- Rest of the HTML content remains the same -->
     <section class="filters" id="filters">
         <div class="container">
             <div class="wrap">
@@ -540,7 +549,7 @@
                 <div class="addon-grid">
                     <article class="addon" data-addon="stremio://torrentio.strem.fun/easydebrid=n3cgfuzhg9ptzbss/manifest.json" data-copy="https://torrentio.strem.fun/easydebrid=n3cgfuzhg9ptzbss/manifest.json">
                         <h3><i class="fas fa-download"></i> Torrentio + Debrid</h3>
-                        <p>מקורות לסרטים וסדרות</p>
+                        <p>סרטים סדרות ומה שביניהם</p>
                     </article>
                     <article class="addon" data-addon="stremio://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json" data-copy="https://4b139a4b7f94-ktuvit-stremio.baby-beamup.club/manifest.json">
                         <h3><i class="fas fa-closed-captioning"></i> Ktuvit (כתוביות)</h3>
@@ -592,7 +601,10 @@
                 loading: false, 
                 observer: null,
                 selectedGenres: JSON.parse(localStorage.getItem('selectedGenres') || '[]'),
-                selectedProviders: JSON.parse(localStorage.getItem('selectedProviders') || '[]')
+                selectedProviders: JSON.parse(localStorage.getItem('selectedProviders') || '[]'),
+                user: JSON.parse(localStorage.getItem('user') || 'null'),
+                otpCode: '',
+                otpEmail: ''
             }
             
             const els = { 
@@ -623,7 +635,43 @@
                 topbar: document.getElementById('topbar'),
                 filters: document.getElementById('filters'),
                 toastContainer: document.getElementById('toastContainer'),
-                clearAllFilters: document.getElementById('clearAllFilters')
+                clearAllFilters: document.getElementById('clearAllFilters'),
+                // Auth elements
+                authModal: document.getElementById('authModal'),
+                authModalClose: document.getElementById('authModalClose'),
+                authModalTitle: document.getElementById('authModalTitle'),
+                authButton: document.getElementById('authButton'),
+                userSection: document.getElementById('userSection'),
+                userProfile: document.getElementById('userProfile'),
+                userAvatar: document.getElementById('userAvatar'),
+                userName: document.getElementById('userName'),
+                userMenu: document.getElementById('userMenu'),
+                userProfileLink: document.getElementById('userProfileLink'),
+                userLogout: document.getElementById('userLogout'),
+                // Forms
+                loginForm: document.getElementById('loginForm'),
+                registerForm: document.getElementById('registerForm'),
+                otpVerification: document.getElementById('otpVerification'),
+                authSuccess: document.getElementById('authSuccess'),
+                // Login form
+                loginEmail: document.getElementById('loginEmail'),
+                loginPassword: document.getElementById('loginPassword'),
+                loginSubmit: document.getElementById('loginSubmit'),
+                switchToRegister: document.getElementById('switchToRegister'),
+                // Register form
+                registerName: document.getElementById('registerName'),
+                registerEmail: document.getElementById('registerEmail'),
+                registerPassword: document.getElementById('registerPassword'),
+                registerConfirmPassword: document.getElementById('registerConfirmPassword'),
+                registerSubmit: document.getElementById('registerSubmit'),
+                switchToLogin: document.getElementById('switchToLogin'),
+                // OTP verification
+                otpEmailDisplay: document.getElementById('otpEmailDisplay'),
+                verifyOtp: document.getElementById('verifyOtp'),
+                resendOtp: document.getElementById('resendOtp'),
+                resendTimer: document.getElementById('resendTimer'),
+                // Success
+                successLogin: document.getElementById('successLogin')
             }
             
             const gradientClasses = ['gradient-text-2', 'gradient-text-3', 'gradient-text-4', 'gradient-text-5', 'gradient-text-6', 'gradient-text-7', 'gradient-text-8', 'gradient-text-9', 'gradient-text-10'];
@@ -640,6 +688,12 @@
                     toast.classList.add('hiding');
                     setTimeout(() => toast.remove(), 300);
                 }, 3000);
+            }
+
+            // Authentication functionality removed
+
+            function initAuth() {
+                // Authentication functionality removed
             }
 
             function detectDevice() {
@@ -1041,6 +1095,9 @@
             applyDeviceClass();
             applyColorTheme();
             applyTheme(); 
+            
+            // Initialize authentication system
+            initAuth();
             
             els.themeBtn.addEventListener('click', toggleTheme); 
             els.colorPickerBtn.addEventListener('click', (e) => { e.stopPropagation(); els.colorPickerPopup.classList.toggle('active'); });
