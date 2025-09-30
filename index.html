@@ -291,7 +291,6 @@
         .card:hover .poster-overlay { opacity: 1; }
         .poster-overlay-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; text-align: center; background: linear-gradient(135deg, #ffffff, #f0f0f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         
-        /* *** MODIFIED: Colorful description in poster overlay *** */
         .poster-overlay-description { 
             font-size: 14px; 
             line-height: 1.6; 
@@ -299,7 +298,9 @@
             overflow-y: auto; 
             max-height: 70%; 
             padding: 0 4px;
-            font-weight: 600; /* Bolder for better gradient visibility */
+            font-weight: 500;
+            color: #f0f0f0;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
         }
         
         .card .meta { padding: var(--card-padding); flex-grow: 1; }
@@ -338,12 +339,12 @@
         .addon:hover::before { transform: scaleX(1); }
         .addon h3 { margin: 0 0 10px; font-size: 20px; display: flex; align-items: center; gap: 8px; background: var(--text-gradient-3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 800; }
         
-        /* *** MODIFIED: Addon description color changed *** */
         .addon p { 
             margin: 0 0 16px; 
+            color: var(--text);
             font-size: 15px; 
             line-height: 1.5; 
-            font-weight: 600; /* Bolder for better gradient visibility */
+            font-weight: 500;
         }
         
         /* Telegram Button */
@@ -582,7 +583,6 @@
                 filters: document.getElementById('filters')
             }
             
-            // *** NEW: Central list of gradient classes ***
             const gradientClasses = ['gradient-text-2', 'gradient-text-3', 'gradient-text-4', 'gradient-text-5', 'gradient-text-6', 'gradient-text-7', 'gradient-text-8', 'gradient-text-9', 'gradient-text-10'];
             const getRandomGradient = () => gradientClasses[Math.floor(Math.random() * gradientClasses.length)];
 
@@ -741,16 +741,14 @@
                     openWithFallback(detail, web);
                 };
                 
-                // *** MODIFIED: Get random gradients for title and description ***
                 const titleGradientClass = getRandomGradient();
-                const descGradientClass = getRandomGradient();
 
                 div.innerHTML = `
                     <div class="poster-container">
                         <img class="poster" loading="lazy" alt="${title}" src="${item.poster_path ? IMG + 'w342' + item.poster_path : ''}">
                         <div class="poster-overlay">
                             <div class="poster-overlay-title">${title}</div>
-                            <div class="poster-overlay-description ${descGradientClass}">${description}</div>
+                            <div class="poster-overlay-description">${description}</div>
                         </div>
                     </div>
                     <div class="meta">
@@ -952,11 +950,6 @@
                 }, 350); 
             });
             
-            // *** NEW: Apply random gradients to static addon descriptions ***
-            document.querySelectorAll('.addon p').forEach(p => {
-                p.classList.add(getRandomGradient());
-            });
-
             // Back to top & Scrolled header
             window.onscroll = () => {
                 const isScrolled = document.body.scrollTop > 20 || document.documentElement.scrollTop > 20;
