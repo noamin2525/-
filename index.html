@@ -1191,7 +1191,7 @@
             }
         }
 
-        // Get IMDB ID with caching and fallback
+        // Get IMDB ID with improved caching and multiple fallbacks
         async function getImdbId(tmdbId, type) {
             const cacheKey = `${type}_${tmdbId}`;
             
@@ -1200,16 +1200,40 @@
             }
             
             try {
+                // Try to get IMDB ID from TMDB
                 const endpoint = type === 'movie' ? `/movie/${tmdbId}/external_ids` : `/tv/${tmdbId}/external_ids`;
                 const data = await fetchFromTMDB(`${endpoint}?api_key=${API_KEY}`, false, true);
                 
-                const imdbId = data?.imdb_id || `tt${tmdbId.toString().padStart(7, '0')}`;
-                imdbCache[cacheKey] = imdbId;
+                let imdbId = data?.imdb_id;
                 
+                // If no IMDB ID found, try alternative methods
+                if (!imdbId) {
+                    console.log(`No IMDB ID found for ${type} ${tmdbId}, trying alternatives...`);
+                    
+                    // Try to get from main details endpoint
+                    const details = await fetchFromTMDB(`/${type}/${tmdbId}?api_key=${API_KEY}`, false, true);
+                    
+                    // Check if there's an IMDB ID in the response
+                    if (details?.imdb_id) {
+                        imdbId = details.imdb_id;
+                    }
+                }
+                
+                // Generate fallback IMDB ID if still not found
+                if (!imdbId) {
+                    imdbId = `tt${tmdbId.toString().padStart(7, '0')}`;
+                    console.log(`Generated fallback IMDB ID: ${imdbId}`);
+                }
+                
+                imdbCache[cacheKey] = imdbId;
                 return imdbId;
+                
             } catch (error) {
                 console.error('Error fetching IMDB ID:', error);
-                return `tt${tmdbId.toString().padStart(7, '0')}`;
+                // Always return a fallback
+                const fallbackId = `tt${tmdbId.toString().padStart(7, '0')}`;
+                imdbCache[cacheKey] = fallbackId;
+                return fallbackId;
             }
         }
 
@@ -1479,44 +1503,84 @@
         async function openInStremio(event, tmdbId, type, title) {
             event.stopPropagation();
             
-            showNotification('פותח בסטרימיו...', 'info');
+            showNotification('מחפש את התוכן בסטרימיו...', 'info');
             
             try {
                 const imdbId = await getImdbId(tmdbId, type);
                 const stremioType = type === 'tv' ? 'series' : type;
                 
-                // Mobile: Try to open app directly, fallback to web
+                console.log('Opening in Stremio:', { tmdbId, imdbId, type, stremioType, title });
+                
+                // Multiple URL formats to try
+                const urls = [
+                    // Format 1: Standard Stremio deep link
+                    `stremio://detail/${stremioType}/${imdbId}`,
+                    // Format 2: Alternative Stremio format
+                    `stremio://${stremioType}/${imdbId}`,
+                    // Format 3: With TMDB ID as fallback
+                    `stremio://detail/${stremioType}/tt${tmdbId}`,
+                    // Format 4: Web version with IMDB
+                    `https://web.stremio.com/#/detail/${stremioType}/${imdbId}/${imdbId}`,
+                    // Format 5: Web version with TMDB ID
+                    `https://web.stremio.com/#/detail/${stremioType}/tt${tmdbId}/tt${tmdbId}`,
+                    // Format 6: Direct search
+                    `https://web.stremio.com/#/search?query=${encodeURIComponent(title)}`
+                ];
+                
+                // Mobile: Try app first, then web
                 if (isMobile) {
-                    // Fixed deep link format for Stremio
-                    const appUrl = `stremio://detail/${stremioType}/${imdbId}`;
-                    const webUrl = `https://web.stremio.com/#/detail/${stremioType}/${imdbId}/${imdbId}`;
+                    // Try all app URL formats
+                    for (let i = 0; i < 3; i++) {
+                        try {
+                            const iframe = document.createElement('iframe');
+                            iframe.style.display = 'none';
+                            iframe.src = urls[i];
+                            document.body.appendChild(iframe);
+                            
+                            setTimeout(() => {
+                                if (document.body.contains(iframe)) {
+                                    document.body.removeChild(iframe);
+                                }
+                            }, 500);
+                            
+                            // Small delay between attempts
+                            await new Promise(resolve => setTimeout(resolve, 200));
+                        } catch (e) {
+                            console.log(`Failed with URL format ${i + 1}:`, e);
+                        }
+                    }
                     
-                    // Create an invisible iframe to try opening the app
-                    const iframe = document.createElement('iframe');
-                    iframe.style.display = 'none';
-                    iframe.src = appUrl;
-                    document.body.appendChild(iframe);
-                    
-                    // Remove iframe after a short time
+                    // Fallback to web versions
                     setTimeout(() => {
-                        document.body.removeChild(iframe);
+                        // Try web version with IMDB first
+                        window.open(urls[3], '_blank');
+                        
+                        // If that fails, try search after 2 seconds
+                        setTimeout(() => {
+                            window.open(urls[5], '_blank');
+                        }, 2000);
                     }, 1000);
                     
-                    // Fallback to web after a short delay
-                    setTimeout(() => {
-                        window.open(webUrl, '_blank');
-                    }, 1500);
                 } else {
-                    // Desktop: Open web version
-                    const webUrl = `https://web.stremio.com/#/detail/${stremioType}/${imdbId}/${imdbId}`;
-                    window.open(webUrl, '_blank');
+                    // Desktop: Open web versions in new tabs
+                    window.open(urls[3], '_blank');
+                    
+                    // Also open search as backup
+                    setTimeout(() => {
+                        window.open(urls[5], '_blank');
+                    }, 1000);
                 }
                 
-                showNotification('הועבר לסטרימיו בהצלחה!', 'success');
+                showNotification('התוכן נפתח בסטרימיו!', 'success');
                 
             } catch (error) {
                 console.error('Error opening Stremio:', error);
-                showNotification('אירעה שגיאה בפתיחת סטרימיו', 'error');
+                
+                // Last resort: open search page
+                const searchUrl = `https://web.stremio.com/#/search?query=${encodeURIComponent(title)}`;
+                window.open(searchUrl, '_blank');
+                
+                showNotification('פתח חיפוש בסטרימיו - חפש את התוכן ידנית', 'info');
             }
         }
 
@@ -1935,4 +1999,3 @@
     </script>
 </body>
 </html>
-
